@@ -16,5 +16,11 @@ namespace WhoScored.Controllers
             return View();
         }
 
+        public void Migrate()
+        {
+            //return null;
+        }
+
+
     }
 }
