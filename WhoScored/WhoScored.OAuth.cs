@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -17,15 +18,15 @@ namespace WhoScored
         {
             X509Certificate2 certificate = TestCertificates.OAuthTestCertificate();
 
-            string requestUrl = "https://chpp.hattrick.org/oauth/request_token.ashx";
-            string userAuthorizeUrl = "https://chpp.hattrick.org/oauth/authorize.aspx";
-            string accessUrl = "https://chpp.hattrick.org/oauth/access_token.ashx";
-            string callBackUrl = "http://www.mysite.com/callback";
+            string requestUrl = ConfigurationManager.AppSettings["requestUrl"];
+            string userAuthorizeUrl = ConfigurationManager.AppSettings["userAuthorizeUrl"];
+            string accessUrl = ConfigurationManager.AppSettings["accessUrl"];
+            string callBackUrl = ConfigurationManager.AppSettings["callBackUrl"];
 
             var consumerContext = new OAuthConsumerContext
 			{
-				ConsumerKey = "yn6RurDptfhQo8Kt3HBsQq",
-                ConsumerSecret = "",
+                ConsumerKey = ConfigurationManager.AppSettings["consumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["consumerSecret"],
 				SignatureMethod = SignatureMethod.HmacSha1,
 				Key = certificate.PrivateKey
 			};
