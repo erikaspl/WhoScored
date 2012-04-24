@@ -18,7 +18,8 @@ namespace WhoScored.Controllers
 
         public void Migrate()
         {
-            //return null;
+            WhoScoredOAuth oAuth = new WhoScoredOAuth();
+            oAuth.WhoScoredConsumer();
         }
 
 
