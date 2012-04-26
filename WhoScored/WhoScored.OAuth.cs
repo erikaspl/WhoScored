@@ -27,7 +27,7 @@ namespace WhoScored
 			{
                 ConsumerKey = ConfigurationManager.AppSettings["consumerKey"],
                 ConsumerSecret = ConfigurationManager.AppSettings["consumerSecret"],
-				SignatureMethod = SignatureMethod.HmacSha1,
+				SignatureMethod = SignatureMethod.HmacSha1,                
 				Key = certificate.PrivateKey
 			};
 
@@ -35,16 +35,22 @@ namespace WhoScored
 				//.WithQueryParameters(new { scope = "http://chpp.hattrick.org/" });
 
 			// get a request token from the provider
-			IToken requestToken = session.GetRequestToken();
+			//IToken requestToken = session.GetRequestToken();
 
 			// generate a user authorize url for this token (which you can use in a redirect from the current site)
-			string authorizationLink = session.GetUserAuthorizationUrlForToken(requestToken, callBackUrl);
+			//string authorizationLink = session.GetUserAuthorizationUrlForToken(requestToken, callBackUrl);
 
+            const string Verifier = "8yeydIESPsinquIQ";
 			// exchange a request token for an access token
-			IToken accessToken = session.ExchangeRequestTokenForAccessToken(requestToken);
+			//IToken accessToken = session.ExchangeRequestTokenForAccessToken(requestToken, Verifier);
+            session.AccessToken = new TokenBase();
+            session.AccessToken.Token = ConfigurationManager.AppSettings["accessTokenKey"];
+            session.AccessToken.TokenSecret = ConfigurationManager.AppSettings["accessTokenSecret"];
 
 			// make a request for a protected resource
-			string responseText = session.Request().Get().ForUrl("http://chpp.hattrick.org/chppxml.ashx").ToString();        
+            string matchesArchive = "?file=matchesarchive&version=1.1";
+
+			string responseText = session.Request().Get().ForUrl(string.Format("http://chpp.hattrick.org/chppxml.ashx{0}", matchesArchive)).ToString();        
         }
     }
 
