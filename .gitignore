@@ -4,3 +4,7 @@ WhoScored.5.1.ReSharper.user
 WhoScored/obj/
 WhoScored.suo
 WhoScored/obj/
+TestResults
+WhoScored.sln.DotSettings.user
+WhoScored.Test/bin/
+WhoScored.Test/obj/

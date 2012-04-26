@@ -21,7 +21,7 @@
         {
             get
             {
-                return this._database;
+                return _database;
             }
         }
 
