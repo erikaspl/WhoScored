@@ -13,7 +13,7 @@ namespace WhoScored.UnitTest
     ///to contain all HTFileAccessorTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class HTFileAccessorTest
+    public class HattrickFileAccessorTest
     {
 
 
@@ -78,7 +78,7 @@ namespace WhoScored.UnitTest
         {
             const string protectedUrl = "thisIs  ProtectedUrl";
             var leagueFixtures = new LeagueFixtures(protectedUrl);
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", "thisIs%20%20ProtectedUrl", "file=leaguefixtures&version=1.2");
             Assert.AreEqual(result, expectedUrl);
@@ -90,7 +90,7 @@ namespace WhoScored.UnitTest
         {
             const string protectedUrl = "thisIsProtectedUrl";
             var leagueFixtures = new LeagueFixtures(protectedUrl);
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", protectedUrl, "file=leaguefixtures&version=1.2");
             Assert.AreEqual(result, expectedUrl);
@@ -103,7 +103,7 @@ namespace WhoScored.UnitTest
             var leagueFixtures = new LeagueFixtures(protectedUrl);
             const int leagueLevelUnitID = 1234;
             leagueFixtures.LeagueLevelUnitID = leagueLevelUnitID;
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}&{2}={3}", protectedUrl, "file=leaguefixtures&version=1.2", "leagueLevelUnitID", leagueLevelUnitID.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(result, expectedUrl);
@@ -116,7 +116,7 @@ namespace WhoScored.UnitTest
             var leagueFixtures = new LeagueFixtures(protectedUrl);
 
             leagueFixtures.LeagueLevelUnitID = null;
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", protectedUrl, "file=leaguefixtures&version=1.2");
             Assert.AreEqual(result, expectedUrl);
@@ -129,7 +129,7 @@ namespace WhoScored.UnitTest
             var leagueFixtures = new LeagueFixtures(protectedUrl);
             const int season = 1234;
             leagueFixtures.Season = season;
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}&{2}={3}", protectedUrl, "file=leaguefixtures&version=1.2", "season", season.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(result, expectedUrl);
@@ -142,7 +142,7 @@ namespace WhoScored.UnitTest
             var leagueFixtures = new LeagueFixtures(protectedUrl);
 
             leagueFixtures.Season = null;
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", protectedUrl, "file=leaguefixtures&version=1.2");
             Assert.AreEqual(result, expectedUrl);
@@ -157,7 +157,7 @@ namespace WhoScored.UnitTest
             const int leagueId = 9876;
             leagueFixtures.Season = season;
             leagueFixtures.LeagueLevelUnitID = leagueId;
-            string result = leagueFixtures.GetHattrickFileAccessor();
+            string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}&{2}={3}&{4}={5}", protectedUrl, "file=leaguefixtures&version=1.2",
                 "leagueLevelUnitID", leagueId.ToString(CultureInfo.InvariantCulture),

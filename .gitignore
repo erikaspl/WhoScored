@@ -8,3 +8,7 @@ TestResults
 WhoScored.sln.DotSettings.user
 WhoScored.Test/bin/
 WhoScored.Test/obj/
+WhoScored.Db/bin/
+WhoScored.Db/obj/
+WhoScored.Migration/bin/
+WhoScored.Migration/obj/

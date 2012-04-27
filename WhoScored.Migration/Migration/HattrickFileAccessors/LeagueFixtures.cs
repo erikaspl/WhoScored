@@ -6,6 +6,9 @@ using System.Web;
 
 namespace WhoScored.Migration.HattrickFileAccessors
 {
+    /// <summary>
+    /// This CHPP File Accessor provides parameters to access league fixtures CHPP file
+    /// </summary>
     public class LeagueFixtures : HattrickFileAccessor
     {
         private const string FILE_PARAMETER_VALUE = "leaguefixtures";

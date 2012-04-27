@@ -71,10 +71,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HTFileAccessorTest.cs" />
+    <Compile Include="HattrickFileAccessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WhoScored.Migration\WhoScored.Migration.csproj">
+      <Project>{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}</Project>
+      <Name>WhoScored.Migration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WhoScored\WhoScored.csproj">
       <Project>{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}</Project>
       <Name>WhoScored</Name>
