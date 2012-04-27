@@ -12,9 +12,9 @@ namespace WhoScored
     using DevDefined.OAuth.Framework;
     using DevDefined.OAuth.Tests;
 
-    public class WhoScoredOAuth
+    public class WhoScoredRequest
     {
-        public void WhoScoredConsumer()
+        private void WhoScoredConsumer()
         {
             X509Certificate2 certificate = TestCertificates.OAuthTestCertificate();
 
@@ -32,7 +32,6 @@ namespace WhoScored
 			};
 
 			var session = new OAuthSession(consumerContext, requestUrl, userAuthorizeUrl, accessUrl);
-				//.WithQueryParameters(new { scope = "http://chpp.hattrick.org/" });
 
 			// get a request token from the provider
 			//IToken requestToken = session.GetRequestToken();
@@ -51,6 +50,47 @@ namespace WhoScored
             string matchesArchive = "?file=matchesarchive&version=1.1";
 
 			string responseText = session.Request().Get().ForUrl(string.Format("http://chpp.hattrick.org/chppxml.ashx{0}", matchesArchive)).ToString();        
+        }
+
+
+        /// <summary>
+        /// creates oAuth session
+        /// </summary>
+        /// <returns>session</returns>
+        private OAuthSession GetSession()
+        {
+            X509Certificate2 certificate = TestCertificates.OAuthTestCertificate();
+
+            string requestUrl = ConfigurationManager.AppSettings["requestUrl"];
+            string userAuthorizeUrl = ConfigurationManager.AppSettings["userAuthorizeUrl"];
+            string accessUrl = ConfigurationManager.AppSettings["accessUrl"];
+
+            var consumerContext = new OAuthConsumerContext
+            {
+                ConsumerKey = ConfigurationManager.AppSettings["consumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["consumerSecret"],
+                SignatureMethod = SignatureMethod.HmacSha1,
+                Key = certificate.PrivateKey
+            };
+
+            var session = new OAuthSession(consumerContext, requestUrl, userAuthorizeUrl, accessUrl);
+
+            session.AccessToken = new TokenBase();
+            session.AccessToken.Token = ConfigurationManager.AppSettings["accessTokenKey"];
+            session.AccessToken.TokenSecret = ConfigurationManager.AppSettings["accessTokenSecret"];
+
+            return session;
+        }
+
+
+        /// <summary>
+        /// sends request
+        /// </summary>
+        /// <param name="requestUri"></param>
+        /// <returns>response as string</returns>
+        public string MakeRequest(string requestUri)
+        {
+            return GetSession().Request().Get().ForUrl(requestUri).ToString();            
         }
     }
 

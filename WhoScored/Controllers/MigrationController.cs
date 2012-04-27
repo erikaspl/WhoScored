@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WhoScored.Migration.HattrickFileAccessors;
 
 namespace WhoScored.Controllers
 {
@@ -18,8 +20,12 @@ namespace WhoScored.Controllers
 
         public void Migrate()
         {
-            WhoScoredOAuth oAuth = new WhoScoredOAuth();
-            oAuth.WhoScoredConsumer();
+            var leagueFixtures = new LeagueFixtures(ConfigurationManager.AppSettings["protectedResourceUrl"]);
+
+            leagueFixtures.Season = 30;
+
+            var request = new WhoScoredRequest();
+            string response = request.MakeRequest(leagueFixtures.GetHattrickFileAccessorAbsoluteUri());
         }
 
 
