@@ -72,8 +72,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migration\RequestInputParameterNullValue.cs" />
-    <Compile Include="Migration\HattrickFileAccessors\HattrickFileAccessor.cs" />
-    <Compile Include="Migration\HattrickFileAccessors\LeagueFixtures.cs" />
+    <Compile Include="Migration\HTFileAccessors\HattrickFileAccessor.cs" />
+    <Compile Include="Migration\HTFileAccessors\LeagueFixtures.cs" />
     <Compile Include="Migration\IRequestInputParameter.cs" />
     <Compile Include="Migration\RequestInputParameter.cs" />
     <Compile Include="Models\AccountModels.cs" />
