@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="HattrickData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FileName" type="xs:string" minOccurs="0" />
+        <xs:element name="Version" type="xs:string" minOccurs="0" />
+        <xs:element name="UserID" type="xs:string" minOccurs="0" />
+        <xs:element name="FetchedDate" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueList" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="League" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="LeagueID" type="xs:string" minOccurs="0" />
+                    <xs:element name="LeagueName" type="xs:string" minOccurs="0" />
+                    <xs:element name="Season" type="xs:string" minOccurs="0" />
+                    <xs:element name="SeasonOffset" type="xs:string" minOccurs="0" />
+                    <xs:element name="MatchRound" type="xs:string" minOccurs="0" />
+                    <xs:element name="ShortName" type="xs:string" minOccurs="0" />
+                    <xs:element name="Continent" type="xs:string" minOccurs="0" />
+                    <xs:element name="ZoneName" type="xs:string" minOccurs="0" />
+                    <xs:element name="EnglishName" type="xs:string" minOccurs="0" />
+                    <xs:element name="NationalTeamId" type="xs:string" minOccurs="0" />
+                    <xs:element name="U20TeamId" type="xs:string" minOccurs="0" />
+                    <xs:element name="ActiveUsers" type="xs:string" minOccurs="0" />
+                    <xs:element name="WaitingUsers" type="xs:string" minOccurs="0" />
+                    <xs:element name="TrainingDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="EconomyDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="CupMatchDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="SeriesMatchDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="NumberOfLevels" type="xs:string" minOccurs="0" />
+                    <xs:element name="Country" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CountryID" type="xs:string" minOccurs="0" />
+                          <xs:element name="CountryName" type="xs:string" minOccurs="0" />
+                          <xs:element name="CurrencyName" type="xs:string" minOccurs="0" />
+                          <xs:element name="CurrencyRate" type="xs:string" minOccurs="0" />
+                          <xs:element name="DateFormat" type="xs:string" minOccurs="0" />
+                          <xs:element name="TimeFormat" type="xs:string" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Cup" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CupID" type="xs:string" minOccurs="0" />
+                          <xs:element name="CupName" type="xs:string" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="HattrickData" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
