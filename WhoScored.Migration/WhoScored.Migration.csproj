@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Migration\HattrickFileAccessors\HattrickFileAccessor.cs" />
     <Compile Include="Migration\HattrickFileAccessors\LeagueFixtures.cs" />
+    <Compile Include="Migration\HattrickFileAccessors\WorldDetails.cs" />
     <Compile Include="Migration\IRequestInputParameter.cs" />
     <Compile Include="Migration\RequestInputParameter.cs" />
     <Compile Include="Migration\RequestInputParameterNullValue.cs" />

@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Migration", "WhoS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Db", "WhoScored.Db\WhoScored.Db.csproj", "{06B058FF-4605-4775-9BB7-93D10EDE0B00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Serializer", "WhoScored.Serializer\WhoScored.Serializer.csproj", "{928F1DC5-8C49-4C10-BFD3-2540414E8F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Serializer.UnitTest", "WhoScored.Serializer.UnitTest\WhoScored.Serializer.UnitTest.csproj", "{A9F1B9D7-974E-4434-85D8-76C01A80C685}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = WhoScored.vsmdi
@@ -41,6 +45,14 @@ Global
 		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

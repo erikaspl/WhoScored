@@ -8,6 +8,9 @@ using WhoScored.Migration.HattrickFileAccessors;
 
 namespace WhoScored.Controllers
 {
+    using System.IO;
+    using System.Xml;
+
     public class MigrationController : Controller
     {
         //
@@ -18,14 +21,20 @@ namespace WhoScored.Controllers
             return View();
         }
 
-        public void Migrate()
+        public void MigrateWorldDetails()
         {
-            var leagueFixtures = new LeagueFixtures(ConfigurationManager.AppSettings["protectedResourceUrl"]);
-
-            leagueFixtures.Season = 30;
+            var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
 
             var request = new WhoScoredRequest();
             string response = request.MakeRequest(leagueFixtures.GetHattrickFileAccessorAbsoluteUri());
+
+            using (XmlReader xmlReader = XmlReader.Create(new StringReader(response)))
+            {
+                xmlReader.ReadToDescendant("League");
+
+                xmlReader.ReadContentAs(typeof(string[]), null);
+            }
+
         }
 
 

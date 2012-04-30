@@ -40,7 +40,7 @@ namespace WhoScored.Migration.HattrickFileAccessors
                        };
         }
 
-        #region LeagueLevelUnitID
+        #region CountryId
         public int? LeagueLevelUnitID
         {
             set
@@ -85,7 +85,5 @@ namespace WhoScored.Migration.HattrickFileAccessors
         }
 
         #endregion
-
-
     }
 }
