@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 
-namespace WhoScored.Migration.HattrickFileAccessors
+namespace WhoScored.CHPP.Files.HattrickFileAccessors
 {
     /// <summary>
     /// This is a base class for all Hattrick File Accessors.

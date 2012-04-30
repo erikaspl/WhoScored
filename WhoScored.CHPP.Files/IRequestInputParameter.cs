@@ -1,4 +1,4 @@
-﻿namespace WhoScored.Migration
+﻿namespace WhoScored.CHPP.Files
 {
     public interface IRequestInputParameter
     {

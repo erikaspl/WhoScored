@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored", "WhoScored\WhoScored.csproj", "{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Migration.UnitTest", "WhoScored.Test\WhoScored.Migration.UnitTest.csproj", "{731F945D-7437-41EA-9D10-CF8F29D2E6E2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5225BCA5-D23E-45B0-B90A-056216A9C1F3}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -12,13 +10,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WhoScored.vsmdi = WhoScored.vsmdi
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Migration", "WhoScored.Migration\WhoScored.Migration.csproj", "{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Db", "WhoScored.Db\WhoScored.Db.csproj", "{06B058FF-4605-4775-9BB7-93D10EDE0B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Serializer", "WhoScored.Serializer\WhoScored.Serializer.csproj", "{928F1DC5-8C49-4C10-BFD3-2540414E8F60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.CHPP.Files.UnitTest", "WhoScored.CHPP.Files.UnitTest\WhoScored.CHPP.Files.UnitTest.csproj", "{731F945D-7437-41EA-9D10-CF8F29D2E6E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Serializer.UnitTest", "WhoScored.Serializer.UnitTest\WhoScored.Serializer.UnitTest.csproj", "{A9F1B9D7-974E-4434-85D8-76C01A80C685}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.CHPP.Files", "WhoScored.CHPP.Files\WhoScored.CHPP.Files.csproj", "{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.CHPP.Serializer", "WhoScored.CHPP.Serializer\WhoScored.CHPP.Serializer.csproj", "{928F1DC5-8C49-4C10-BFD3-2540414E8F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.CHPP.Serializer.UnitTest", "WhoScored.CHPP.Serializer.UnitTest\WhoScored.CHPP.Serializer.UnitTest.csproj", "{A9F1B9D7-974E-4434-85D8-76C01A80C685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Migration", "WhoScored.Migration\WhoScored.Migration.csproj", "{A1CF1F14-C69F-4018-92AD-88715E13BCE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.IntegrationTest", "WhoScored.IntegrationTest\WhoScored.IntegrationTest.csproj", "{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -33,6 +37,10 @@ Global
 		{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{731F945D-7437-41EA-9D10-CF8F29D2E6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{731F945D-7437-41EA-9D10-CF8F29D2E6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{731F945D-7437-41EA-9D10-CF8F29D2E6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,10 +49,6 @@ Global
 		{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06B058FF-4605-4775-9BB7-93D10EDE0B00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{928F1DC5-8C49-4C10-BFD3-2540414E8F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +57,14 @@ Global
 		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F1B9D7-974E-4434-85D8-76C01A80C685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CF1F14-C69F-4018-92AD-88715E13BCE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CF1F14-C69F-4018-92AD-88715E13BCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CF1F14-C69F-4018-92AD-88715E13BCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CF1F14-C69F-4018-92AD-88715E13BCE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

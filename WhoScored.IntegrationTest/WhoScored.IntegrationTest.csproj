@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{731F945D-7437-41EA-9D10-CF8F29D2E6E2}</ProjectGuid>
+    <ProjectGuid>{61D1E249-5D47-4116-A94F-F2FCCDC8EBF1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WhoScored.UnitTest</RootNamespace>
-    <AssemblyName>WhoScored.UnitTest</AssemblyName>
+    <RootNamespace>WhoScored.IntegrationTest</RootNamespace>
+    <AssemblyName>WhoScored.IntegrationTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,30 +38,13 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="MongoDB.Bson, Version=1.4.1.4490, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL" />
-    <Reference Include="MongoDB.Driver, Version=1.4.1.4490, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -71,18 +54,31 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HattrickFileAccessorTest.cs" />
+    <Compile Include="MigrationDomainServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WhoScored.Migration\WhoScored.Migration.csproj">
+    <ProjectReference Include="..\WhoScored.CHPP.Files\WhoScored.CHPP.Files.csproj">
       <Project>{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}</Project>
+      <Name>WhoScored.CHPP.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.CHPP.Serializer\WhoScored.CHPP.Serializer.csproj">
+      <Project>{928F1DC5-8C49-4C10-BFD3-2540414E8F60}</Project>
+      <Name>WhoScored.CHPP.Serializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Migration\WhoScored.Migration.csproj">
+      <Project>{A1CF1F14-C69F-4018-92AD-88715E13BCE8}</Project>
       <Name>WhoScored.Migration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WhoScored\WhoScored.csproj">
-      <Project>{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}</Project>
-      <Name>WhoScored</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Config\oAuth.config">
+      <Link>oAuth.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

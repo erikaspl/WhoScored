@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A1CF1F14-C69F-4018-92AD-88715E13BCE8}</ProjectGuid>
+    <ProjectGuid>{928F1DC5-8C49-4C10-BFD3-2540414E8F60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WhoScored.Migration</RootNamespace>
-    <AssemblyName>WhoScored.Migration</AssemblyName>
+    <RootNamespace>WhoScored.CHPP.Serializer</RootNamespace>
+    <AssemblyName>WhoScored.CHPP.Serializer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,11 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevDefined.OAuth">
-      <HintPath>..\Binaries\DevDefined.OAuth.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,19 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MigrationDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WhoScoredRequest.cs" />
+    <Compile Include="WorldDetails\worlddetails.designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WhoScored.CHPP.Files\WhoScored.CHPP.Files.csproj">
-      <Project>{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}</Project>
-      <Name>WhoScored.CHPP.Files</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WhoScored.CHPP.Serializer\WhoScored.CHPP.Serializer.csproj">
-      <Project>{928F1DC5-8C49-4C10-BFD3-2540414E8F60}</Project>
-      <Name>WhoScored.CHPP.Serializer</Name>
-    </ProjectReference>
+    <None Include="WorldDetails\worlddetails.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

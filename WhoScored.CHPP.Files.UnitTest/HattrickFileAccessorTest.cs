@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using WhoScored.Migration.HattrickFileAccessors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
+using WhoScored.CHPP.Files.HattrickFileAccessors;
 
-namespace WhoScored.UnitTest
+namespace WhoScored.CHPP.Files.UnitTest
 {
     
     

@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace WhoScored.Migration
+namespace WhoScored.CHPP.Files
 {
     public class RequestInputParameter : IRequestInputParameter
     {

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WhoScored.Migration.HattrickFileAccessors
+namespace WhoScored.CHPP.Files.HattrickFileAccessors
 {
     using System.Globalization;
-
-    using WhoScored.Migration.HattrickFileAccessors;
 
     public class WorldDetails : HattrickFileAccessor
     {

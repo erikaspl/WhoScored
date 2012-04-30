@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WhoScored.Migration
+﻿namespace WhoScored.CHPP.Files
 {
     public class RequestInputParameterNullValue : IRequestInputParameter
     {

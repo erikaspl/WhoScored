@@ -16,3 +16,13 @@ WhoScored.Serializer/bin/
 WhoScored.Serializer/obj/
 WhoScored.Serializer.UnitTest/obj/
 WhoScored.Serializer.UnitTest/bin/
+WhoScored.CHPP.Files.UnitTest/bin/
+WhoScored.CHPP.Files.UnitTest/obj/
+WhoScored.CHPP.Files/bin/
+WhoScored.CHPP.Files/obj/
+WhoScored.CHPP.Serializer.UnitTest/bin/
+WhoScored.CHPP.Serializer.UnitTest/obj/
+WhoScored.CHPP.Serializer/bin/
+WhoScored.CHPP.Serializer/obj/
+WhoScored.IntegrationTest/bin/
+WhoScored.IntegrationTest/obj/

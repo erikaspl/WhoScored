@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace WhoScored.Migration.HattrickFileAccessors
+namespace WhoScored.CHPP.Files.HattrickFileAccessors
 {
     /// <summary>
     /// This CHPP File Accessor provides parameters to access league fixtures CHPP file

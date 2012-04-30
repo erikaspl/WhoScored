@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WhoScored.Migration.HattrickFileAccessors;
+using WhoScored.CHPP.Files.HattrickFileAccessors;
 
 namespace WhoScored.Controllers
 {
