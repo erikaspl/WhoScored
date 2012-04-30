@@ -12,3 +12,7 @@ WhoScored.Db/bin/
 WhoScored.Db/obj/
 WhoScored.Migration/bin/
 WhoScored.Migration/obj/
+WhoScored.Serializer/bin/
+WhoScored.Serializer/obj/
+WhoScored.Serializer.UnitTest/obj/
+WhoScored.Serializer.UnitTest/bin/
