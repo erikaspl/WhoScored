@@ -26,3 +26,5 @@ WhoScored.CHPP.Serializer/bin/
 WhoScored.CHPP.Serializer/obj/
 WhoScored.IntegrationTest/bin/
 WhoScored.IntegrationTest/obj/
+WhoScored.Model/bin
+WhoScored.Model/obj/

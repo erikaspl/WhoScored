@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using WhoScored.CHPP.Files.HattrickFileAccessors;
-using WhoScored.CHPP.Serializer;
+﻿using System.Configuration;
 
 namespace WhoScored.Migration
 {
+    using WhoScored.CHPP.Files.HattrickFileAccessors;
+    using WhoScored.CHPP.Serializer;
+
     public class MigrationDomainService
     {
-        private string _protectedResourceUrl;
+        private readonly string _protectedResourceUrl;
 
         public MigrationDomainService()
         {
@@ -21,12 +16,12 @@ namespace WhoScored.Migration
 
         public void MigrateWorldDetails()
         {
-            var worldDetails = new WorldDetails(_protectedResourceUrl);          
+            var worldDetailsRaw = new WorldDetails(_protectedResourceUrl);          
 
             var request = new WhoScoredRequest();
-            string response = request.MakeRequest(worldDetails.GetHattrickFileAccessorAbsoluteUri());
+            string response = request.MakeRequest(worldDetailsRaw.GetHattrickFileAccessorAbsoluteUri());
 
-            HattrickData hattrickData = HattrickData.Deserialize(response);
+            var worldDetails = HattrickData.Deserialize(response);
         }
     }
 }

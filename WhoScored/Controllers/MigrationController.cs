@@ -25,18 +25,6 @@ namespace WhoScored.Controllers
         {
             var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
 
-            var request = new WhoScoredRequest();
-            string response = request.MakeRequest(leagueFixtures.GetHattrickFileAccessorAbsoluteUri());
-
-            using (XmlReader xmlReader = XmlReader.Create(new StringReader(response)))
-            {
-                xmlReader.ReadToDescendant("League");
-
-                xmlReader.ReadContentAs(typeof(string[]), null);
-            }
-
         }
-
-
     }
 }
