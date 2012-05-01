@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:HattrickData" ZOrder="9" X="523" Y="72" Height="149" Width="159" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="29" SplitterPosition="145" />
     <Shape ID="DesignTable:LeagueList" ZOrder="8" X="303" Y="70" Height="80" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
-    <Shape ID="DesignTable:League" ZOrder="7" X="70" Y="70" Height="310" Width="163" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
+    <Shape ID="DesignTable:League" ZOrder="7" X="70" Y="70" Height="410" Width="163" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="406" />
     <Shape ID="DesignTable:Country" ZOrder="6" X="303" Y="289" Height="195" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:Cup" ZOrder="5" X="303" Y="554" Height="103" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
   </Shapes>
@@ -53,7 +53,7 @@
       <RoutePoints>
         <Point>
           <X>216</X>
-          <Y>380</Y>
+          <Y>480</Y>
         </Point>
         <Point>
           <X>216</X>

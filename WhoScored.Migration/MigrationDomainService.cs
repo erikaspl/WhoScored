@@ -1,4 +1,7 @@
 ﻿using System.Configuration;
+using System.Linq;
+using WhoScored.Db.Mongo;
+using WhoScored.Model;
 
 namespace WhoScored.Migration
 {
@@ -22,6 +25,9 @@ namespace WhoScored.Migration
             string response = request.MakeRequest(worldDetailsRaw.GetHattrickFileAccessorAbsoluteUri());
 
             var worldDetails = HattrickData.Deserialize(response);
+
+            var dbService = new MongoService();
+            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
         }
     }
 }

@@ -7,9 +7,9 @@ namespace WhoScored.Model
 {
     public interface IWorldDetails
     {
-        int LeagueId { get; set; }
+        int LeagueID { get; set; }
         string LeagueName { get; set; }
         string EnglishName { get; set; }
-        int NumbOfLevels { get; set; }
+        int NumberOfLevels { get; set; }
     }
 }

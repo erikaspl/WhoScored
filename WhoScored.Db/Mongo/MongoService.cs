@@ -2,16 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using WhoScored.Db.Connection;
+using WhoScored.Model;
 
 namespace WhoScored.Db.Mongo
-{
-    using WhoScored.Model;
-
-    public class MongoService : IWhoScoredDb
+{  
+    public class MongoService : IWhoScoredDbService
     {
-        public void SaveWorldDetails(IWorldDetails worldDetails)
+        public MongoService()
         {
-            
+            //BsonClassMap.RegisterClassMap<IWorldDetails>
+            //    (cm =>
+            //         {
+            //             cm.AutoMap();
+            //             cm.SetIdMember(cm.GetMemberMap(c => c.LeagueID));
+            //             cm.GetMemberMap(c => c.LeagueName).SetIsRequired(true);
+            //         }                     
+            //    );
+        }
+
+        private const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
+
+        public void SaveWorldDetails(List<IWorldDetails> worldDetails)
+        {
+            var connector = new MongoConnector();
+            connector.CreateConnection();
+
+            var database = connector.Database;
+
+            var collection = database.GetCollection<IWorldDetails>(WORLD_DETAILS_COLLECTION_NAME);
+
+            collection.InsertBatch(worldDetails);
         }
     }
 }

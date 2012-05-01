@@ -57,6 +57,14 @@
       <Project>{928F1DC5-8C49-4C10-BFD3-2540414E8F60}</Project>
       <Name>WhoScored.CHPP.Serializer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Db\WhoScored.Db.csproj">
+      <Project>{06B058FF-4605-4775-9BB7-93D10EDE0B00}</Project>
+      <Name>WhoScored.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Model\WhoScored.Model.csproj">
+      <Project>{512EBB5A-1430-449E-8A7A-D2E441FC7488}</Project>
+      <Name>WhoScored.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
