@@ -1,6 +1,12 @@
-﻿using WhoScored.Migration;
+﻿using System.IO;
+using System.Linq;
+using System.Xml;
+using WhoScored.CHPP.Serializer;
+using WhoScored.Db.Mongo;
+using WhoScored.Migration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using WhoScored.Model;
 
 namespace WhoScored.IntegrationTest
 {
@@ -64,14 +70,44 @@ namespace WhoScored.IntegrationTest
         #endregion
 
 
-        /// <summary>
-        ///A test for MigrateWorldDetails
-        ///</summary>
         [TestMethod()]
-        public void MigrateWorldDetailsTest()
+        public void MigrateWorldDetailsTest_FullMigration()
         {
             MigrationDomainService target = new MigrationDomainService(); 
             target.MigrateWorldDetails();
+        }
+
+        static string GetXmlString(string strFile)
+        {
+            // Load the xml file into XmlDocument object.
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(strFile);
+            }
+            catch (XmlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            // Now create StringWriter object to get data from xml document.
+            StringWriter sw = new StringWriter();
+            XmlTextWriter xw = new XmlTextWriter(sw);
+            xmlDoc.WriteTo(xw);
+            return sw.ToString();
+        }
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/worlddetails.xml")]
+        public void MigrateWorldDetailsTest_FromXmlToDb()
+        {
+            string strFile = "worlddetails.xml";
+            string response = GetXmlString(strFile);
+
+            var worldDetails = HattrickData.Deserialize(response);
+
+            var dbService = new MongoService();
+            dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
+            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
         }
     }
 }

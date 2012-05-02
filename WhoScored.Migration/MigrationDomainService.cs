@@ -27,6 +27,7 @@ namespace WhoScored.Migration
             var worldDetails = HattrickData.Deserialize(response);
 
             var dbService = new MongoService();
+            dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
             dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
         }
     }

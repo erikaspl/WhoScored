@@ -13,14 +13,18 @@ namespace WhoScored.Db.Mongo
     {
         public MongoService()
         {
-            //BsonClassMap.RegisterClassMap<IWorldDetails>
-            //    (cm =>
-            //         {
-            //             cm.AutoMap();
-            //             cm.SetIdMember(cm.GetMemberMap(c => c.LeagueID));
-            //             cm.GetMemberMap(c => c.LeagueName).SetIsRequired(true);
-            //         }                     
-            //    );
+        }
+
+        public void MapWorldDetails<T>() where T : class, IWorldDetails
+        {
+            BsonClassMap.RegisterClassMap<T>
+                (cm =>
+                     {
+                         cm.AutoMap();
+                         cm.MapIdProperty("LeagueID");
+                         //cm.GetMemberMap(c => c.LeagueName).SetIsRequired(true);
+                     }
+                );
         }
 
         private const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
@@ -32,9 +36,9 @@ namespace WhoScored.Db.Mongo
 
             var database = connector.Database;
 
-            var collection = database.GetCollection<IWorldDetails>(WORLD_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
 
-            collection.InsertBatch(worldDetails);
+            collection.Save(worldDetails);
         }
     }
 }
