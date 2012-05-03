@@ -104,7 +104,7 @@ namespace WhoScored.IntegrationTest
             string response = GetXmlString(strFile);
 
             var worldDetails = HattrickData.Deserialize(response);
-
+         
             var dbService = new MongoService();
             dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
             dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
