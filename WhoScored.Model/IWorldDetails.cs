@@ -10,6 +10,6 @@ namespace WhoScored.Model
         int LeagueID { get; set; }
         string LeagueName { get; set; }
         string EnglishName { get; set; }
-        int NumberOfLevels { get; set; }
+        string NumberOfLevels { get; set; }
     }
 }

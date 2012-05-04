@@ -9,5 +9,7 @@ namespace WhoScored.Db
     public interface IWhoScoredDbService
     {
         void SaveWorldDetails(List<IWorldDetails> worldDetails);
+
+        List<IWorldDetails> GetWorldDetails();
     }
 }

@@ -1,5 +1,9 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 using WhoScored.Db.Mongo;
 using WhoScored.Model;
 
@@ -17,6 +21,7 @@ namespace WhoScored.Migration
             _protectedResourceUrl = ConfigurationManager.AppSettings["protectedResourceUrl"];
         }
 
+
         public void MigrateWorldDetails()
         {
             var worldDetailsRaw = new WorldDetails(_protectedResourceUrl);          
@@ -28,7 +33,8 @@ namespace WhoScored.Migration
 
             var dbService = new MongoService();
             dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
-            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
+            dbService.SaveWorldDetails(worldDetails.LeagueList.Cast<IWorldDetails>().ToList());
         }
+
     }
 }

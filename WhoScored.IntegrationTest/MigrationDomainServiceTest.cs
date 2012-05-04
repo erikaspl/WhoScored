@@ -89,11 +89,19 @@ namespace WhoScored.IntegrationTest
             {
                 Console.WriteLine(e.Message);
             }
+            string result;
+
             // Now create StringWriter object to get data from xml document.
-            StringWriter sw = new StringWriter();
-            XmlTextWriter xw = new XmlTextWriter(sw);
-            xmlDoc.WriteTo(xw);
-            return sw.ToString();
+            using (var sw = new StringWriter())
+            {
+                using (var xw = new XmlTextWriter(sw))
+                {
+                    xmlDoc.WriteTo(xw);
+                    result = sw.ToString();
+                }
+            }
+
+            return result;
         }
 
         [TestMethod()]
@@ -108,6 +116,16 @@ namespace WhoScored.IntegrationTest
             var dbService = new MongoService();
             dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
             dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
+
+            var worldDetailsList = dbService.GetWorldDetails();
+
+            const string newLeagueName = "NewLeagueName";
+            worldDetailsList.First(w => w.LeagueName == "Lietuva").EnglishName = newLeagueName;
+
+            dbService.SaveWorldDetails(worldDetailsList);
+            worldDetailsList = dbService.GetWorldDetails();
+
+            Assert.IsTrue(worldDetailsList.First(w => w.LeagueName == "Lietuva").EnglishName == newLeagueName);
         }
     }
 }

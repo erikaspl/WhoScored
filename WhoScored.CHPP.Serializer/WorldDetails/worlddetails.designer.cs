@@ -551,9 +551,7 @@ namespace WhoScored.CHPP.Serializer
 
         private string seriesMatchDateField;
 
-        private int numberOfLevelsField;
-
-        private bool numberOfLevelsFieldSpecified;
+        private string numberOfLevelsField;
 
         private List<HattrickDataLeagueListLeagueCountry> countryField;
 
@@ -802,7 +800,7 @@ namespace WhoScored.CHPP.Serializer
         }
 
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 17)]
-        public int NumberOfLevels
+        public string NumberOfLevels
         {
             get
             {
@@ -811,19 +809,6 @@ namespace WhoScored.CHPP.Serializer
             set
             {
                 this.numberOfLevelsField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NumberOfLevelsSpecified
-        {
-            get
-            {
-                return this.numberOfLevelsFieldSpecified;
-            }
-            set
-            {
-                this.numberOfLevelsFieldSpecified = value;
             }
         }
 
