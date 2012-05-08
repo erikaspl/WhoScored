@@ -79,6 +79,10 @@
       <Project>{512EBB5A-1430-449E-8A7A-D2E441FC7488}</Project>
       <Name>WhoScored.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WhoScored\WhoScored.csproj">
+      <Project>{1916F49C-6170-4A90-ABD2-9BF3DF0BE6B8}</Project>
+      <Name>WhoScored</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Config\oAuth.config">

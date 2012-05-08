@@ -1,10 +1,11 @@
 ﻿using System.Configuration;
 using System.Linq;
 using WhoScored.Db.Mongo;
-using WhoScored.Model;
 
 namespace WhoScored.Migration
 {
+    using System.Collections.Generic;
+
     using WhoScored.CHPP.Files.HattrickFileAccessors;
     using WhoScored.CHPP.Serializer;
 
@@ -12,9 +13,13 @@ namespace WhoScored.Migration
     {
         private readonly string _protectedResourceUrl;
 
+        private List<string> _isInWhoScored = new List<string>();
+
         public MigrationDomainService()
         {
             _protectedResourceUrl = ConfigurationManager.AppSettings["protectedResourceUrl"];
+
+            _isInWhoScored.Add("Lithuania");
         }
 
         public void MigrateWorldDetails()
@@ -26,9 +31,20 @@ namespace WhoScored.Migration
 
             var worldDetails = HattrickData.Deserialize(response);
 
+            var worldDetailsList = worldDetails.LeagueList.First().League.ToList();
+
+            SetIsInWhoScored(worldDetailsList);
+
             var dbService = new MongoService();
-            dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
-            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
+            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.ToList());
+        }
+
+        private void SetIsInWhoScored(IEnumerable<HattrickDataLeagueListLeague> worldDetails)
+        {
+            foreach (var country in _isInWhoScored)
+            {
+                worldDetails.Where(w => w.EnglishName == country).First().LeagueInWhoScored = true;
+            }
         }
     }
 }

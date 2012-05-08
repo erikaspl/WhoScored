@@ -11,19 +11,29 @@ namespace WhoScored.Controllers
     using System.IO;
     using System.Xml;
 
+    using WhoScored.Db;
+    using WhoScored.Db.Mongo;
+    using WhoScored.Migration;
+    using WhoScored.Models;
+
     public class MigrationController : Controller
     {
+        IWhoScoredDbService dbService = new MongoService();
         //
         // GET: /Migration/
 
         public ActionResult Index()
         {
-            return View();
+            var worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+            return View(worldDetails);
         }
 
         public void MigrateWorldDetails()
         {
-            var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
+            //var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
+
+            var target = new MigrationDomainService();
+            target.MigrateWorldDetails();
 
         }
     }

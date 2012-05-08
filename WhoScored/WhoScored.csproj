@@ -66,6 +66,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\WorldDetailsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,11 +182,21 @@
       <Project>{E6FAA62C-02BF-4D9C-AD5D-B0050BC82782}</Project>
       <Name>WhoScored.CHPP.Files</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Db\WhoScored.Db.csproj">
+      <Project>{06B058FF-4605-4775-9BB7-93D10EDE0B00}</Project>
+      <Name>WhoScored.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Migration\WhoScored.Migration.csproj">
+      <Project>{A1CF1F14-C69F-4018-92AD-88715E13BCE8}</Project>
+      <Name>WhoScored.Migration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Model\WhoScored.Model.csproj">
+      <Project>{512EBB5A-1430-449E-8A7A-D2E441FC7488}</Project>
+      <Name>WhoScored.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Config\oAuth.config">
-      <Link>oAuth.config</Link>
-    </Content>
+    <Content Include="oAuth.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

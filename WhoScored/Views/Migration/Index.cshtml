@@ -1,10 +1,25 @@
-﻿@{
+﻿@model List<WhoScored.Models.LeagueDetails>
+@{
     ViewBag.Title = "Migration";
 }
-<form class="well">
-    <label>Season</label>
-@*    <select />*@
-    <div class="btn-group">
+<form class="well form-inline">
+<fieldset>
+    <div class="control-group">
+        <label class="control-label" for="countrySelect">
+            Country</label>
+        <div class="controls">
+            <select id="countrySelect" multiple="multiple" size="10">
+                @foreach (var country in Model.Where(c => c.LeagueInWhoScored == true).OrderBy(c => c.EnglishName))
+                {
+                    <option id="@country.LeagueID">@country.EnglishName</option>                   
+                }
+            </select>
+            <label class="control-label" for="seasonSelect">
+                Season</label>
+        </div>
+    </div>
+    <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate</a>
     </div>
+</fieldset>
 </form>

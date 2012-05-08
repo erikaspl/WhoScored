@@ -10,8 +10,11 @@ using WhoScored.Model;
 
 namespace WhoScored.IntegrationTest
 {
-    
-    
+    using System.Threading;
+
+    using WhoScored.Db;
+    using WhoScored.Models;
+
     /// <summary>
     ///This is a test class for MigrationDomainServiceTest and is intended
     ///to contain all MigrationDomainServiceTest Unit Tests
@@ -39,41 +42,12 @@ namespace WhoScored.IntegrationTest
             }
         }
 
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
 
         [TestMethod()]
+        [DeploymentItem("oAuth.config")]
         public void MigrateWorldDetailsTest_FullMigration()
         {
-            MigrationDomainService target = new MigrationDomainService(); 
+            var target = new MigrationDomainService(); 
             target.MigrateWorldDetails();
         }
 
@@ -103,11 +77,56 @@ namespace WhoScored.IntegrationTest
             string strFile = "worlddetails.xml";
             string response = GetXmlString(strFile);
 
-            var worldDetails = HattrickData.Deserialize(response);
-         
-            var dbService = new MongoService();
-            dbService.MapWorldDetails<HattrickDataLeagueListLeague>();
-            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.Cast<IWorldDetails>().ToList());
+            var worldDetailsInput = HattrickData.Deserialize(response);
+
+            IWhoScoredDbService dbService = new MongoService();
+            dbService.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
+
+            Thread.Sleep(1000);
+
+            var worldDetailsCount = dbService.GetWorldDetails<HattrickDataLeagueListLeague>().Count;
+
+            dbService.DropWorldDetails();
+            Assert.AreEqual(worldDetailsInput.LeagueList.First().League.Count, worldDetailsCount);           
+        }
+
+
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/worlddetails.xml")]
+        public void UpdateWorldDetailsTest_FromXmlToDb()
+        {
+            string strFile = "worlddetails.xml";   
+            string response = GetXmlString(strFile);
+
+            var worldDetailsInput = HattrickData.Deserialize(response);
+
+            IWhoScoredDbService dbService = new MongoService();
+            dbService.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
+
+            Thread.Sleep(1000);
+
+            var worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+
+            int newNumberOfLevels = 100;
+            string newEnglishName = "newEnglishName";
+            string newLeagueName = "newLeagueName";
+
+            var lithData = worldDetails.Where(w => w.EnglishName == "Lithuania").First();
+            lithData.NumberOfLevels = newNumberOfLevels;
+            lithData.LeagueName = newLeagueName;
+            lithData.EnglishName = newEnglishName;
+
+            dbService.SaveWorldDetails(lithData);
+
+            worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+            lithData = worldDetails.Where(w => w.EnglishName == newEnglishName).First();
+
+            Assert.AreEqual(lithData.EnglishName, newEnglishName);
+            Assert.AreEqual(lithData.LeagueName, newLeagueName);
+            Assert.AreEqual(lithData.NumberOfLevels, newNumberOfLevels);
+
+            dbService.DropWorldDetails();
         }
     }
 }

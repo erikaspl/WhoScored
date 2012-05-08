@@ -697,7 +697,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
         public string NationalTeamId
         {
             get
@@ -710,7 +710,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
         public string U20TeamId
         {
             get
@@ -723,7 +723,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
         public string ActiveUsers
         {
             get
@@ -736,7 +736,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 14)]
         public string WaitingUsers
         {
             get
@@ -749,7 +749,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 15)]
         public string TrainingDate
         {
             get
@@ -762,7 +762,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 14)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 16)]
         public string EconomyDate
         {
             get
@@ -775,7 +775,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 15)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 17)]
         public string CupMatchDate
         {
             get
@@ -788,7 +788,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 16)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 18)]
         public string SeriesMatchDate
         {
             get
@@ -801,7 +801,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 17)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 19)]
         public int NumberOfLevels
         {
             get
@@ -827,7 +827,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("Country", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 18)]
+        [System.Xml.Serialization.XmlElementAttribute("Country", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
         public List<HattrickDataLeagueListLeagueCountry> Country
         {
             get
@@ -840,7 +840,7 @@ namespace WhoScored.CHPP.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("Cup", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 19)]
+        [System.Xml.Serialization.XmlElementAttribute("Cup", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
         public List<HattrickDataLeagueListLeagueCup> Cup
         {
             get
