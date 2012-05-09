@@ -15,24 +15,32 @@ namespace WhoScored.Db.Mongo
 {
     public class MongoService : IWhoScoredDbService
     {
-        private void MapWorldDetails<T>() where T : class, IWorldDetails
+        public const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
+        public const string SETTINGS_COLLECTION_NAME = "Settings";
+
+        public static void MapWorldDetails<T>() where T : class, IWorldDetails
         {
-            BsonClassMap map;
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
-                map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("LeagueID"));
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("LeagueID"));
                 foreach (var property in typeof(IWorldDetails).GetProperties())
                 {
                     map.MapProperty(property.Name);
                 }
             }
-            else
-            {
-                map = BsonClassMap.LookupClassMap(typeof(T));
-            }
         }
 
-        private const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
+        public static void MapSettings<T>() where T : class, ISettings
+        {
+            if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>();
+                foreach (var property in typeof(ISettings).GetProperties())
+                {
+                    map.MapProperty(property.Name);
+                }
+            }
+        }
 
 
         /// <summary>
@@ -43,17 +51,15 @@ namespace WhoScored.Db.Mongo
         public void SaveWorldDetails<T>(List<T> worldDetails)  where T : class, IWorldDetails
         {
             MapWorldDetails<T>();
-            var connector = new MongoConnector();
-            connector.CreateConnection();
 
-            var database = connector.Database;
+            var database = MongoConnector.GetDatabase();
+            
             var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
 
             foreach (var worldDetail in worldDetails)
             {
                 collection.Save(worldDetail);
             }
-            connector.Server.Disconnect();
         }
 
         /// <summary>
@@ -64,15 +70,10 @@ namespace WhoScored.Db.Mongo
         public void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails
         {
             MapWorldDetails<T>();
-            var connector = new MongoConnector();
-            connector.CreateConnection();
-
-            var database = connector.Database;
+            var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
 
             collection.Save(worldDetail);
-
-            connector.Server.Disconnect();
         }
 
 
@@ -83,15 +84,11 @@ namespace WhoScored.Db.Mongo
         public List<T> GetWorldDetails<T>() where T : class, IWorldDetails
         {
             MapWorldDetails<T>();
-            var connector = new MongoConnector();
-            connector.CreateConnection();
 
-            var database = connector.Database;
+            var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
 
             var result = collection.FindAll().ToList();
-
-            connector.Server.Disconnect();
 
             return result;
         }
@@ -102,15 +99,31 @@ namespace WhoScored.Db.Mongo
         /// </summary>
         public void DropWorldDetails()
         {
-            var connector = new MongoConnector();
-            connector.CreateConnection();
-
-            var database = connector.Database;
+            var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<IWorldDetails>(WORLD_DETAILS_COLLECTION_NAME);
 
             collection.Drop();
+        }
 
-            connector.Server.Disconnect();
+
+        public void SaveSettings<T>(T settings) where T : class, ISettings
+        {
+            MapSettings<T>();
+
+            var database = MongoConnector.GetDatabase();
+
+            var collection = database.GetCollection(SETTINGS_COLLECTION_NAME);
+
+            collection.Save(settings);
+        }
+
+        public T GetSettings<T>() where T : class, ISettings
+        {
+            MapSettings<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(SETTINGS_COLLECTION_NAME);
+            return collection.FindAll().ToList().First();
         }
     }
 }

@@ -6,32 +6,17 @@
 
     public class MongoConnector
     {
-        private MongoServer _server;
-        public MongoServer Server
+        public static MongoDatabase GetDatabase()
         {
-            get
-            {
-                return _server;
-            }
+            var server = CreateServer();
+            string databaseName = ConfigurationManager.AppSettings["MongoDatabaseName"];
+            return server.GetDatabase(databaseName);
         }
 
-        private MongoDatabase _database;
-
-        public MongoDatabase Database
-        {
-            get
-            {
-                return _database;
-            }
-        }
-
-        public void CreateConnection()
+        public static MongoServer CreateServer()
         {
             string connectionString = ConfigurationManager.AppSettings["MongoDbConnection"];
-            _server = MongoServer.Create(connectionString);
-
-            string databaseName = ConfigurationManager.AppSettings["MongoDatabaseName"];
-            _database = _server.GetDatabase(databaseName);
+            return MongoServer.Create(connectionString);
         }
     }
 }

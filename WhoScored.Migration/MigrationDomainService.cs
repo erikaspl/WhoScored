@@ -43,7 +43,7 @@ namespace WhoScored.Migration
         {
             foreach (var country in _isInWhoScored)
             {
-                worldDetails.Where(w => w.EnglishName == country).First().LeagueInWhoScored = true;
+                worldDetails.First(w => w.EnglishName == country).LeagueInWhoScored = true;
             }
         }
     }

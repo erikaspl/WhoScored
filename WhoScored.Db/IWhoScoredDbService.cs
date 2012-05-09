@@ -15,5 +15,7 @@ namespace WhoScored.Db
         List<T> GetWorldDetails<T>() where T : class, IWorldDetails;
 
         void DropWorldDetails();
+
+        T GetSettings<T>() where T : class, ISettings;
     }
 }

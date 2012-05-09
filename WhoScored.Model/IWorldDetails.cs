@@ -11,6 +11,7 @@ namespace WhoScored.Model
         string LeagueName { get; set; }
         string EnglishName { get; set; }
         int NumberOfLevels { get; set; }
+        int SeasonOffset { get; set; }
 
         bool LeagueInWhoScored { get; set; }
     }

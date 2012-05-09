@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WhoScored.Model;
 
 namespace WhoScored.Models
 {
-    using WhoScored.Model;
-
     public class LeagueDetails : IWorldDetails 
     {
         public int LeagueID { get; set; }
@@ -17,6 +16,9 @@ namespace WhoScored.Models
 
         public int NumberOfLevels { get; set; }
 
+        public int SeasonOffset { get; set; }
+
         public bool LeagueInWhoScored { get; set; }
+
     }
 }

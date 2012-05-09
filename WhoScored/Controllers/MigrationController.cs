@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using WhoScored.CHPP.Files.HattrickFileAccessors;
+using WhoScored.Db;
+using WhoScored.Db.Mongo;
+using WhoScored.Migration;
+using WhoScored.Models;
+
 
 namespace WhoScored.Controllers
 {
-    using System.IO;
-    using System.Xml;
-
-    using WhoScored.Db;
-    using WhoScored.Db.Mongo;
-    using WhoScored.Migration;
-    using WhoScored.Models;
-
     public class MigrationController : Controller
     {
         IWhoScoredDbService dbService = new MongoService();
@@ -25,7 +17,10 @@ namespace WhoScored.Controllers
         public ActionResult Index()
         {
             var worldDetails = dbService.GetWorldDetails<LeagueDetails>();
-            return View(worldDetails);
+            var settings = dbService.GetSettings<Settings>();
+            var migrationViewData = new MigrationModel { LeagueDetails = worldDetails, Settings = settings };
+
+            return View(migrationViewData);
         }
 
         public void MigrateWorldDetails()

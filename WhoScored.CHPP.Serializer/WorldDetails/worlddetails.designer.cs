@@ -523,7 +523,9 @@ namespace WhoScored.CHPP.Serializer
 
         private string seasonField;
 
-        private string seasonOffsetField;
+        private int seasonOffsetField;
+
+        private bool seasonOffsetFieldSpecified;
 
         private string matchRoundField;
 
@@ -534,6 +536,10 @@ namespace WhoScored.CHPP.Serializer
         private string zoneNameField;
 
         private string englishNameField;
+
+        private List<HattrickDataLeagueListLeagueCountry> countryField;
+
+        private List<HattrickDataLeagueListLeagueCup> cupField;
 
         private string nationalTeamIdField;
 
@@ -554,10 +560,6 @@ namespace WhoScored.CHPP.Serializer
         private int numberOfLevelsField;
 
         private bool numberOfLevelsFieldSpecified;
-
-        private List<HattrickDataLeagueListLeagueCountry> countryField;
-
-        private List<HattrickDataLeagueListLeagueCup> cupField;
 
         private static System.Xml.Serialization.XmlSerializer serializer;
 
@@ -620,7 +622,7 @@ namespace WhoScored.CHPP.Serializer
         }
 
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string SeasonOffset
+        public int SeasonOffset
         {
             get
             {
@@ -629,6 +631,19 @@ namespace WhoScored.CHPP.Serializer
             set
             {
                 this.seasonOffsetField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SeasonOffsetSpecified
+        {
+            get
+            {
+                return this.seasonOffsetFieldSpecified;
+            }
+            set
+            {
+                this.seasonOffsetFieldSpecified = value;
             }
         }
 
@@ -694,6 +709,32 @@ namespace WhoScored.CHPP.Serializer
             set
             {
                 this.englishNameField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute("Country", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        public List<HattrickDataLeagueListLeagueCountry> Country
+        {
+            get
+            {
+                return this.countryField;
+            }
+            set
+            {
+                this.countryField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute("Cup", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
+        public List<HattrickDataLeagueListLeagueCup> Cup
+        {
+            get
+            {
+                return this.cupField;
+            }
+            set
+            {
+                this.cupField = value;
             }
         }
 
@@ -824,32 +865,6 @@ namespace WhoScored.CHPP.Serializer
             set
             {
                 this.numberOfLevelsFieldSpecified = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Country", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
-        public List<HattrickDataLeagueListLeagueCountry> Country
-        {
-            get
-            {
-                return this.countryField;
-            }
-            set
-            {
-                this.countryField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Cup", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
-        public List<HattrickDataLeagueListLeagueCup> Cup
-        {
-            get
-            {
-                return this.cupField;
-            }
-            set
-            {
-                this.cupField = value;
             }
         }
 
