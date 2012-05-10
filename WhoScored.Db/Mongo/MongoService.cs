@@ -15,8 +15,7 @@ namespace WhoScored.Db.Mongo
 {
     public class MongoService : IWhoScoredDbService
     {
-        public const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
-        public const string SETTINGS_COLLECTION_NAME = "Settings";
+        #region Mongo Mappings
 
         public static void MapWorldDetails<T>() where T : class, IWorldDetails
         {
@@ -42,6 +41,23 @@ namespace WhoScored.Db.Mongo
             }
         }
 
+        public static void MapLeagueDetails<T>() where T : class, ILeagueDetails
+        {
+            if (!BsonClassMap.IsClassMapRegistered(typeof (T)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("LeagueLevelUnitID"));
+                foreach (var property in typeof (ILeagueDetails).GetProperties())
+                {
+                    map.MapProperty(property.Name);
+                }
+            }
+        }
+
+        #endregion
+
+        #region WorldDetails CRUID
+
+        public const string WORLD_DETAILS_COLLECTION_NAME = "WorldDetails";
 
         /// <summary>
         /// Saves provided worldDetails to a database. 
@@ -105,6 +121,11 @@ namespace WhoScored.Db.Mongo
             collection.Drop();
         }
 
+        #endregion
+
+        #region Settings CRUID
+
+        public const string SETTINGS_COLLECTION_NAME = "Settings";
 
         public void SaveSettings<T>(T settings) where T : class, ISettings
         {
@@ -125,5 +146,71 @@ namespace WhoScored.Db.Mongo
             var collection = database.GetCollection<T>(SETTINGS_COLLECTION_NAME);
             return collection.FindAll().ToList().First();
         }
+
+        #endregion
+
+        #region LeagueDetails CRUID
+
+        private const string LEAGUE_DETAILS_COLLECTION_NAME = "LeagueDetails";
+
+        /// <summary>
+        /// Saves provided leagueDetails to a database. 
+        /// Updates records if they already exist.
+        /// </summary>
+        /// <param name="leagueDetails">List of league details.</param>
+        public void SaveLeagueDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails
+        {
+            MapLeagueDetails<T>();
+
+            var database = MongoConnector.GetDatabase();
+
+            var collection = database.GetCollection(LEAGUE_DETAILS_COLLECTION_NAME);
+
+            foreach (var worldDetail in leagueDetails)
+            {
+                collection.Save(worldDetail);
+            }
+        }
+
+        /// <summary>
+        /// Saves provided leagueDetail to a database. 
+        /// Updates records if they already exist.
+        /// </summary>
+        /// <param name="leagueDetail"></param>
+        public void SaveLeagueDetails<T>(T leagueDetail) where T : class, ILeagueDetails
+        {
+            MapLeagueDetails<T>();
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(LEAGUE_DETAILS_COLLECTION_NAME);
+
+            collection.Save(leagueDetail);
+        }
+
+
+        public List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails
+        {
+            MapLeagueDetails<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(LEAGUE_DETAILS_COLLECTION_NAME);
+
+            var result = collection.FindAll().ToList();
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Drops world details from the database
+        /// </summary>
+        public void DropLeagueDetails()
+        {
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<ILeagueDetails>(LEAGUE_DETAILS_COLLECTION_NAME);
+
+            collection.Drop();
+        }
+
+        #endregion
     }
 }

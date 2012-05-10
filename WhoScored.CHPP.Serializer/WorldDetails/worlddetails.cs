@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using WhoScored.Model;
 
-namespace WhoScored.CHPP.Serializer
+namespace WhoScored.CHPP.WorldDetails.Serializer
 {
     using System.Xml.Serialization;
 

@@ -16,6 +16,16 @@ namespace WhoScored.Db
 
         void DropWorldDetails();
 
+        void SaveSettings<T>(T settings) where T : class, ISettings;
+
         T GetSettings<T>() where T : class, ISettings;
+
+        void SaveLeagueDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails;
+
+        void SaveLeagueDetails<T>(T leagueDetail) where T : class, ILeagueDetails;
+
+        List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails;
+
+        void DropLeagueDetails();
     }
 }

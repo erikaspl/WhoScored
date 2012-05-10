@@ -1,5 +1,4 @@
 ﻿@model WhoScored.Models.MigrationModel
-
 @{
     ViewBag.Title = "Migration";
 }
@@ -12,11 +11,16 @@
             <select id="countrySelect" multiple="multiple" size="10">
                 @foreach (var country in Model.LeagueDetails.Where(c => c.LeagueInWhoScored == true).OrderBy(c => c.EnglishName))
                 {
-                    <option id="@country.LeagueID">@country.EnglishName</option>                   
+                    <option id="@country.LeagueID" onselect="">@country.EnglishName</option>
                 }
             </select>
-            <label class="control-label" for="seasonSelect">
-                Season</label>
+        </div>
+        <label class="control-label" for="seasonSelect">
+            Season</label>
+        <div class="controls">
+            <select id="seasonSelect" multiple="multiple" size="10">
+                <option>Please select a country</option>
+            </select>
         </div>
     </div>
     <div class="form-actions">

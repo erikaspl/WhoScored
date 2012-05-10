@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Xml;
-using WhoScored.CHPP.Serializer;
+using WhoScored.CHPP.WorldDetails.Serializer;
 using WhoScored.Db.Mongo;
 using WhoScored.Migration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -127,6 +127,27 @@ namespace WhoScored.IntegrationTest
             Assert.AreEqual(lithData.NumberOfLevels, newNumberOfLevels);
 
             dbService.DropWorldDetails();
+        }
+
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/leaguedetails.xml")]
+        public void MigrateLeagueDetailsTest_FromXmlToDb()
+        {
+            string strFile = "leaguedetails.xml";
+            string response = GetXmlString(strFile);
+
+            var leagueDetailsInput = CHPP.LeagueDetails.Serializer.HattrickData.Deserialize(response);
+
+            IWhoScoredDbService dbService = new MongoService();
+            dbService.SaveLeagueDetails(leagueDetailsInput);
+
+            Thread.Sleep(1000);
+
+            var worldDetailsCount = dbService.GetLeagueDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
+
+            dbService.DropLeagueDetails();
+            Assert.AreEqual(1, worldDetailsCount);
         }
     }
 }

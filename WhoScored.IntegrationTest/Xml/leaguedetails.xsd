@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="HattrickData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FileName" type="xs:string" minOccurs="0" />
+        <xs:element name="Version" type="xs:string" minOccurs="0" />
+        <xs:element name="UserID" type="xs:string" minOccurs="0" />
+        <xs:element name="FetchedDate" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueID" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueName" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueLevel" type="xs:string" minOccurs="0" />
+        <xs:element name="MaxLevel" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueLevelUnitID" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueLevelUnitName" type="xs:string" minOccurs="0" />
+        <xs:element name="CurrentMatchRound" type="xs:string" minOccurs="0" />
+        <xs:element name="Team" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TeamID" type="xs:string" minOccurs="0" />
+              <xs:element name="TeamName" type="xs:string" minOccurs="0" />
+              <xs:element name="Position" type="xs:string" minOccurs="0" />
+              <xs:element name="PositionChange" type="xs:string" minOccurs="0" />
+              <xs:element name="Matches" type="xs:string" minOccurs="0" />
+              <xs:element name="GoalsFor" type="xs:string" minOccurs="0" />
+              <xs:element name="GoalsAgainst" type="xs:string" minOccurs="0" />
+              <xs:element name="Points" type="xs:string" minOccurs="0" />
+              <xs:element name="Won" type="xs:string" minOccurs="0" />
+              <xs:element name="Draws" type="xs:string" minOccurs="0" />
+              <xs:element name="Lost" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="HattrickData" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -38,6 +38,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -45,12 +46,28 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LeagueDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldDetails.cs" />
+    <Compile Include="XmlUtil.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Xml\worlddetails.xml" />
+    <ProjectReference Include="..\WhoScored.CHPP.Serializer\WhoScored.CHPP.Serializer.csproj">
+      <Project>{928F1DC5-8C49-4C10-BFD3-2540414E8F60}</Project>
+      <Name>WhoScored.CHPP.Serializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoScored.Model\WhoScored.Model.csproj">
+      <Project>{512EBB5A-1430-449E-8A7A-D2E441FC7488}</Project>
+      <Name>WhoScored.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Xml\leaguedetails.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\worlddetails.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

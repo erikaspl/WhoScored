@@ -40,7 +40,7 @@ namespace WhoScored.CHPP.Files.HattrickFileAccessors
                        };
         }
 
-        #region CountryId
+        #region LeagueLevelUnitID
         public int? LeagueLevelUnitID
         {
             set

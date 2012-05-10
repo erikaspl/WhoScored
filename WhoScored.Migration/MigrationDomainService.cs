@@ -1,13 +1,13 @@
 using System.Configuration;
 using System.Linq;
+using WhoScored.CHPP.WorldDetails.Serializer;
 using WhoScored.Db.Mongo;
+using System.Collections.Generic;
+using WhoScored.CHPP.Files.HattrickFileAccessors;
 
 namespace WhoScored.Migration
 {
-    using System.Collections.Generic;
 
-    using WhoScored.CHPP.Files.HattrickFileAccessors;
-    using WhoScored.CHPP.Serializer;
 
     public class MigrationDomainService
     {
