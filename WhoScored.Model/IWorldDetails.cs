@@ -14,5 +14,6 @@ namespace WhoScored.Model
         int SeasonOffset { get; set; }
 
         bool LeagueInWhoScored { get; set; }
+        List<int> SeriesIdList { get; set; }
     }
 }

@@ -9,7 +9,7 @@
             Country</label>
         <div class="controls">
             <select id="countrySelect" multiple="multiple" size="10">
-                @foreach (var country in Model.LeagueDetails.Where(c => c.LeagueInWhoScored == true).OrderBy(c => c.EnglishName))
+                @foreach (var country in Model.WorldDetails.Where(c => c.LeagueInWhoScored).OrderBy(c => c.EnglishName))
                 {
                     <option id="@country.LeagueID" onselect="">@country.EnglishName</option>
                 }
@@ -24,7 +24,8 @@
         </div>
     </div>
     <div class="form-actions">
-        <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate</a>
+        <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate World</a>
+        <a class="btn btn-danger" href="@Url.Action("MigrateSeriesDetails", "Migration")">Migrate Series</a>
     </div>
 </fieldset>
 </form>

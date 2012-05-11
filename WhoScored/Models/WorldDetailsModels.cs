@@ -6,7 +6,7 @@ using WhoScored.Model;
 
 namespace WhoScored.Models
 {
-    public class LeagueDetails : IWorldDetails 
+    public class WorldDetails : IWorldDetails 
     {
         public int LeagueID { get; set; }
 
@@ -19,6 +19,8 @@ namespace WhoScored.Models
         public int SeasonOffset { get; set; }
 
         public bool LeagueInWhoScored { get; set; }
+
+        public List<int> SeriesIdList { get; set; }
 
     }
 }

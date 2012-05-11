@@ -16,9 +16,9 @@ namespace WhoScored.Controllers
 
         public ActionResult Index()
         {
-            var worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+            var worldDetails = dbService.GetWorldDetails<WorldDetails>();
             var settings = dbService.GetSettings<Settings>();
-            var migrationViewData = new MigrationModel { LeagueDetails = worldDetails, Settings = settings };
+            var migrationViewData = new MigrationModel { WorldDetails = worldDetails, Settings = settings };
 
             return View(migrationViewData);
         }
@@ -29,7 +29,11 @@ namespace WhoScored.Controllers
 
             var target = new MigrationDomainService();
             target.MigrateWorldDetails();
+        }
 
+        public void MigrateSeriesDetails(int countryId)
+        {
+            
         }
     }
 }

@@ -12,5 +12,8 @@ namespace WhoScored.CHPP.WorldDetails.Serializer
 	{
         [XmlIgnore]
         public bool LeagueInWhoScored { get; set; }
+
+        [XmlIgnore]
+        public List<int> SeriesIdList { get; set; }
 	}
 }

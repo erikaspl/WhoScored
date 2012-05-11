@@ -106,7 +106,7 @@ namespace WhoScored.IntegrationTest
 
             Thread.Sleep(1000);
 
-            var worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+            var worldDetails = dbService.GetWorldDetails<WorldDetails>();
 
             int newNumberOfLevels = 100;
             string newEnglishName = "newEnglishName";
@@ -119,7 +119,7 @@ namespace WhoScored.IntegrationTest
 
             dbService.SaveWorldDetails(lithData);
 
-            worldDetails = dbService.GetWorldDetails<LeagueDetails>();
+            worldDetails = dbService.GetWorldDetails<WorldDetails>();
             lithData = worldDetails.Where(w => w.EnglishName == newEnglishName).First();
 
             Assert.AreEqual(lithData.EnglishName, newEnglishName);

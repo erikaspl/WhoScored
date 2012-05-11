@@ -8,6 +8,6 @@ namespace WhoScored.Models
     public class MigrationModel
     {
         public Settings Settings { get; set; }
-        public List<LeagueDetails> LeagueDetails { get; set; }
+        public List<WorldDetails> WorldDetails { get; set; }
     }
 }
