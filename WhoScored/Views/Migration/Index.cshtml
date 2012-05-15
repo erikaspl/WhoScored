@@ -2,23 +2,39 @@
 @{
     ViewBag.Title = "Migration";
 }
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        //Attach cascading behavior to the orderID select element.
+        $("#leagueSelect").CascadingDropDown("#countrySelect", '/Migration/AsyncLeagues',
+            {
+                promptText: '-- Pick an Order--',
+                onLoading: function() {
+                    $(this).css("background-color", "#ff3");
+                },
+                onLoaded: function() {
+                    $(this).animate({ backgroundColor: '#ffffff' }, 300);
+                }
+            });
+    });
+</script>
 <form class="well form-inline">
 <fieldset>
     <div class="control-group">
         <label class="control-label" for="countrySelect">
             Country</label>
         <div class="controls">
-            <select id="countrySelect" multiple="multiple" size="10">
+            <select id="countrySelect" multiple="multiple" size="10" onchange="setLeagues">
                 @foreach (var country in Model.WorldDetails.Where(c => c.LeagueInWhoScored).OrderBy(c => c.EnglishName))
                 {
-                    <option id="@country.LeagueID" onselect="">@country.EnglishName</option>
+                    <option id="@country.LeagueID" >@country.EnglishName</option>
                 }
             </select>
         </div>
         <label class="control-label" for="seasonSelect">
             Season</label>
         <div class="controls">
-            <select id="seasonSelect" multiple="multiple" size="10">
+            <select id="leagueSelect" multiple="multiple" size="10">
                 <option>Please select a country</option>
             </select>
         </div>

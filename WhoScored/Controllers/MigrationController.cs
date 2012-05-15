@@ -23,6 +23,16 @@ namespace WhoScored.Controllers
             return View(migrationViewData);
         }
 
+        public ActionResult AsyncLeagues(string countryId)
+        {
+            var leagues = new SelectListItem
+                              {
+                                  Text = "TestLeague1",
+                                  Value = "TestValue1"
+                              };
+            return Json(leagues);
+        }
+
         public void MigrateWorldDetails()
         {
             //var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
