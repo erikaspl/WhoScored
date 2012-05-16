@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MigrationModel.cs" />
+    <Compile Include="Models\SeriesDetailsModels.cs" />
     <Compile Include="Models\SettingsModels.cs" />
     <Compile Include="Models\WorldDetailsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

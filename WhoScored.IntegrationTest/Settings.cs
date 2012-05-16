@@ -16,18 +16,18 @@ namespace WhoScored.IntegrationTest
         [TestMethod]
         public void LoadSettingsTest()
         {
-            MongoService.MapSettings<Settings>();
+            WhoScoredRepository.MapSettings<Settings>();
             var database = MongoConnector.GetDatabase();
 
             const int globalSeasonId = 48;
 
             var settingsInput = new Settings{GlobalSeason = globalSeasonId};
             
-            var collection = database.GetCollection<ISettings>(MongoService.SETTINGS_COLLECTION_NAME);
+            var collection = database.GetCollection<ISettings>(WhoScoredRepository.SETTINGS_COLLECTION_NAME);
 
             collection.Save(settingsInput);
 
-            collection = database.GetCollection<ISettings>(MongoService.SETTINGS_COLLECTION_NAME);
+            collection = database.GetCollection<ISettings>(WhoScoredRepository.SETTINGS_COLLECTION_NAME);
 
             var settings  = collection.FindAll().ToList().First();
 

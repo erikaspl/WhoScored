@@ -6,13 +6,15 @@ using WhoScored.Model;
 
 namespace WhoScored.Db
 {
-    public interface IWhoScoredDbService
+    public interface IWhoScoredRepository
     {
         void SaveWorldDetails<T>(List<T> worldDetails) where T : class, IWorldDetails;
 
         void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails;
 
         List<T> GetWorldDetails<T>() where T : class, IWorldDetails;
+
+        T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails;
 
         void DropWorldDetails();
 
@@ -25,6 +27,8 @@ namespace WhoScored.Db
         void SaveLeagueDetails<T>(T leagueDetail) where T : class, ILeagueDetails;
 
         List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails;
+
+        List<T> GetLeagueDetails<T>(string countryId) where T : class, ILeagueDetails;
 
         void DropLeagueDetails();
     }

@@ -4,44 +4,32 @@
 }
 <script type="text/javascript">
     $(document).ready(function() {
-
         //Attach cascading behavior to the orderID select element.
-        $("#leagueSelect").CascadingDropDown("#countrySelect", '/Migration/AsyncLeagues',
-            {
-                promptText: '-- Pick an Order--',
-                onLoading: function() {
-                    $(this).css("background-color", "#ff3");
-                },
-                onLoaded: function() {
-                    $(this).animate({ backgroundColor: '#ffffff' }, 300);
-                }
-            });
+        $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
     });
 </script>
 <form class="well form-inline">
 <fieldset>
     <div class="control-group">
-        <label class="control-label" for="countrySelect">
+        <label class="control-label" for="countryId">
             Country</label>
         <div class="controls">
-            <select id="countrySelect" multiple="multiple" size="10" onchange="setLeagues">
+            <select id="countryId" name="countryId" multiple="multiple" size="10">
                 @foreach (var country in Model.WorldDetails.Where(c => c.LeagueInWhoScored).OrderBy(c => c.EnglishName))
                 {
-                    <option id="@country.LeagueID" >@country.EnglishName</option>
+                    <option value="@country.LeagueID" >@country.EnglishName</option>
                 }
             </select>
         </div>
-        <label class="control-label" for="seasonSelect">
-            Season</label>
+        <label class="control-label" for="seriesSelect">
+            Searies</label>
         <div class="controls">
-            <select id="leagueSelect" multiple="multiple" size="10">
-                <option>Please select a country</option>
-            </select>
+            <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10"></select>
         </div>
     </div>
     <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate World</a>
-        <a class="btn btn-danger" href="@Url.Action("MigrateSeriesDetails", "Migration")">Migrate Series</a>
+        <a class="btn btn-danger" href="@Url.Action("MigrateSeriesDetails", "Migration", new {countryId = 66})">Migrate Series</a>
     </div>
 </fieldset>
 </form>

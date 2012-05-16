@@ -53,9 +53,6 @@
                     },
                     reset: function () {
                         methods.clearItems();
-                        $this.append($(optionTag)
-                            .attr("value", "")
-                            .text(config.promptText));
                         $this.trigger('change');
                     },
                     initialize: function () {

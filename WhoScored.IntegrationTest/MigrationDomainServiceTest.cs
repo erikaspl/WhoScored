@@ -79,16 +79,39 @@ namespace WhoScored.IntegrationTest
 
             var worldDetailsInput = HattrickData.Deserialize(response);
 
-            IWhoScoredDbService dbService = new MongoService();
-            dbService.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
+            IWhoScoredRepository repository = new WhoScoredRepository();
+            repository.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
 
             Thread.Sleep(1000);
 
-            var worldDetailsCount = dbService.GetWorldDetails<HattrickDataLeagueListLeague>().Count;
+            var worldDetailsCount = repository.GetWorldDetails<HattrickDataLeagueListLeague>().Count;
 
-            dbService.DropWorldDetails();
+            repository.DropWorldDetails();
             Assert.AreEqual(worldDetailsInput.LeagueList.First().League.Count, worldDetailsCount);           
         }
+
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/worlddetails.xml")]
+        public void GetWorldDetailTest_LoadOneWordlDetailFromDB()
+        {
+            string strFile = "worlddetails.xml";
+            string response = GetXmlString(strFile);
+
+            var worldDetailsInput = HattrickData.Deserialize(response);
+
+            IWhoScoredRepository repository = new WhoScoredRepository();
+            repository.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
+
+            Thread.Sleep(1000);
+
+            var worldDetailsCount = repository.GetWorldDetails<HattrickDataLeagueListLeague>(66);
+
+            repository.DropWorldDetails();
+            Assert.AreEqual(worldDetailsInput.LeagueList.First().League.Count, worldDetailsCount);
+        }
+
+
 
 
 
@@ -101,12 +124,12 @@ namespace WhoScored.IntegrationTest
 
             var worldDetailsInput = HattrickData.Deserialize(response);
 
-            IWhoScoredDbService dbService = new MongoService();
-            dbService.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
+            IWhoScoredRepository repository = new WhoScoredRepository();
+            repository.SaveWorldDetails(worldDetailsInput.LeagueList.First().League.ToList());
 
             Thread.Sleep(1000);
 
-            var worldDetails = dbService.GetWorldDetails<WorldDetails>();
+            var worldDetails = repository.GetWorldDetails<WorldDetails>();
 
             int newNumberOfLevels = 100;
             string newEnglishName = "newEnglishName";
@@ -117,16 +140,16 @@ namespace WhoScored.IntegrationTest
             lithData.LeagueName = newLeagueName;
             lithData.EnglishName = newEnglishName;
 
-            dbService.SaveWorldDetails(lithData);
+            repository.SaveWorldDetails(lithData);
 
-            worldDetails = dbService.GetWorldDetails<WorldDetails>();
+            worldDetails = repository.GetWorldDetails<WorldDetails>();
             lithData = worldDetails.Where(w => w.EnglishName == newEnglishName).First();
 
             Assert.AreEqual(lithData.EnglishName, newEnglishName);
             Assert.AreEqual(lithData.LeagueName, newLeagueName);
             Assert.AreEqual(lithData.NumberOfLevels, newNumberOfLevels);
 
-            dbService.DropWorldDetails();
+            repository.DropWorldDetails();
         }
 
 
@@ -139,14 +162,14 @@ namespace WhoScored.IntegrationTest
 
             var leagueDetailsInput = CHPP.LeagueDetails.Serializer.HattrickData.Deserialize(response);
 
-            IWhoScoredDbService dbService = new MongoService();
-            dbService.SaveLeagueDetails(leagueDetailsInput);
+            IWhoScoredRepository repository = new WhoScoredRepository();
+            repository.SaveLeagueDetails(leagueDetailsInput);
 
             Thread.Sleep(1000);
 
-            var worldDetailsCount = dbService.GetLeagueDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
+            var worldDetailsCount = repository.GetLeagueDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
 
-            dbService.DropLeagueDetails();
+            repository.DropLeagueDetails();
             Assert.AreEqual(1, worldDetailsCount);
         }
     }

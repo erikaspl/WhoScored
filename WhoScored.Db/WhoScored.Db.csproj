@@ -56,9 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IWhoScoredDbService.cs" />
+    <Compile Include="IWhoScoredRepository.cs" />
     <Compile Include="Mongo\Connection\MongoConnector.cs" />
-    <Compile Include="Mongo\MongoService.cs" />
+    <Compile Include="Mongo\WhoScoredRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

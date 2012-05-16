@@ -13,7 +13,7 @@ using WhoScored.Model;
 
 namespace WhoScored.Db.Mongo
 {
-    public class MongoService : IWhoScoredDbService
+    public class WhoScoredRepository : IWhoScoredRepository
     {
         #region Mongo Mappings
 
@@ -109,6 +109,18 @@ namespace WhoScored.Db.Mongo
             return result;
         }
 
+        public T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails
+        {
+            MapWorldDetails<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
+            var query = new QueryDocument("_id", countryId);
+            var result = collection.FindOneAs<T>(query);
+
+            return result;
+        }
+
 
         /// <summary>
         /// Drops world details from the database
@@ -151,7 +163,7 @@ namespace WhoScored.Db.Mongo
 
         #region LeagueDetails CRUID
 
-        private const string LEAGUE_DETAILS_COLLECTION_NAME = "LeagueDetails";
+        private const string LEAGUE_DETAILS_COLLECTION_NAME = "SeriesDetails";
 
         /// <summary>
         /// Saves provided leagueDetails to a database. 
@@ -186,7 +198,6 @@ namespace WhoScored.Db.Mongo
             collection.Save(leagueDetail);
         }
 
-
         public List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails
         {
             MapLeagueDetails<T>();
@@ -199,6 +210,18 @@ namespace WhoScored.Db.Mongo
             return result;
         }
 
+        public List<T> GetLeagueDetails<T>(string countryId) where T : class, ILeagueDetails
+        {
+            MapLeagueDetails<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(LEAGUE_DETAILS_COLLECTION_NAME);
+
+            var query = new QueryDocument("LeagueID", countryId);
+            var result = collection.Find(query).ToList();
+
+            return result;
+        }
 
         /// <summary>
         /// Drops world details from the database

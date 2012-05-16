@@ -47,7 +47,7 @@ namespace WhoScored.Migration
 
             SetIsInWhoScored(worldDetailsList);
 
-            var dbService = new MongoService();
+            var dbService = new WhoScoredRepository();
             dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.ToList());
         }
 
@@ -77,7 +77,7 @@ namespace WhoScored.Migration
                 seriesDetails.Add(LeagueDetails.Deserialize(response));
             }
 
-            var dbService = new MongoService();
+            var dbService = new WhoScoredRepository();
             dbService.SaveLeagueDetails(seriesDetails);
             
         }

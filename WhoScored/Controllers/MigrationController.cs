@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using WhoScored.Db;
 using WhoScored.Db.Mongo;
@@ -10,26 +11,46 @@ namespace WhoScored.Controllers
 {
     public class MigrationController : Controller
     {
-        IWhoScoredDbService dbService = new MongoService();
+        IWhoScoredRepository repository = new WhoScoredRepository();
         //
         // GET: /Migration/
 
         public ActionResult Index()
         {
-            var worldDetails = dbService.GetWorldDetails<WorldDetails>();
-            var settings = dbService.GetSettings<Settings>();
+            var worldDetails = repository.GetWorldDetails<WorldDetails>();
+            var settings = repository.GetSettings<Settings>();
             var migrationViewData = new MigrationModel { WorldDetails = worldDetails, Settings = settings };
 
             return View(migrationViewData);
         }
 
-        public ActionResult AsyncLeagues(string countryId)
+        public ActionResult AsyncSeriesSelect(string countryId)
         {
-            var leagues = new SelectListItem
-                              {
-                                  Text = "TestLeague1",
-                                  Value = "TestValue1"
-                              };
+            var leagues = new List<SelectListItem>();
+            var seriesFullDetails = repository.GetLeagueDetails<SeriesDetails>(countryId);
+            var worldDetails = repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
+
+            foreach (int seriesId in worldDetails.SeriesIdList)
+            {
+                if (seriesFullDetails.Select(s => s.LeagueLevelUnitID).Contains(seriesId))
+                {
+                    var item = seriesFullDetails.First(s => s.LeagueLevelUnitID == seriesId);
+                    leagues.Add(new SelectListItem
+                                    {
+                                        Text = item.LeagueLevelUnitName,
+                                        Value = item.LeagueLevelUnitID.ToString()
+                                    });
+                }
+                else
+                {
+                    leagues.Add(new SelectListItem
+                                    {
+                                        Text = seriesId.ToString(),
+                                        Value = seriesId.ToString()
+                                    });
+                }
+            }
+
             return Json(leagues);
         }
 
