@@ -62,7 +62,8 @@ namespace WhoScored.Controllers
             target.MigrateWorldDetails();
         }
 
-        public void MigrateSeriesDetails(int countryId)
+        [HttpPost]
+        public void MigrateSeriesDetails(int[] seriesId)
         {
             
         }

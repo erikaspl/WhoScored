@@ -6,6 +6,22 @@
     $(document).ready(function() {
         //Attach cascading behavior to the orderID select element.
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
+
+        $('#save').click(function() {
+            var series = $('#seriesSelect').val();
+
+            $.ajax({
+                url: "@Url.Action("MigrateSeriesDetails", "Migration")",
+                type: "POST",
+                data:
+                    {
+                        seriesId: [1,2,3]
+                    },
+                dataType: 'json',
+                traditional: true
+            });
+
+        });
     });
 </script>
 <form class="well form-inline">
@@ -29,6 +45,7 @@
     </div>
     <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate World</a>
+        <button class="btn btn-danger" type="button" id="save">Button</button>
         <a class="btn btn-danger" href="@Url.Action("MigrateSeriesDetails", "Migration", new {countryId = 66})">Migrate Series</a>
     </div>
 </fieldset>

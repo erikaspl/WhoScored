@@ -13,4 +13,5 @@ namespace WhoScored.Models
         public string LeagueLevelUnitName { get; set; }
         public int LeagueLevelUnitID { get; set; }
     }
+
 }
