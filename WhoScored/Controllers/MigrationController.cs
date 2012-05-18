@@ -56,16 +56,14 @@ namespace WhoScored.Controllers
 
         public void MigrateWorldDetails()
         {
-            //var leagueFixtures = new WorldDetails(ConfigurationManager.AppSettings["protectedResourceUrl"]);
-
             var target = new MigrationDomainService();
             target.MigrateWorldDetails();
         }
 
-        [HttpPost]
-        public void MigrateSeriesDetails(int[] seriesId)
+        public void MigrateSeriesDetails(List<int> seriesId)
         {
-            
+            var target = new MigrationDomainService();
+            target.MigrateLeagueDetails(seriesId);
         }
     }
 }

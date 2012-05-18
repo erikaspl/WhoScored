@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using WhoScored.Db.Connection;
 using WhoScored.Model;
 
@@ -217,7 +218,8 @@ namespace WhoScored.Db.Mongo
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(LEAGUE_DETAILS_COLLECTION_NAME);
 
-            var query = new QueryDocument("LeagueID", countryId);
+            var query = new QueryDocument("LeagueID", int.Parse(countryId));
+            //var query = Query.EQ("LeagueID", countryId);
             var result = collection.Find(query).ToList();
 
             return result;
