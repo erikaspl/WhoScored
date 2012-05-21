@@ -6,6 +6,7 @@
     $(document).ready(function() {
         //Attach cascading behavior to the orderID select element.
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
+        $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
         $('#save').click(function() {
             var series = $('#seriesSelect').val();
@@ -37,8 +38,11 @@
                 }
             </select>
         </div>
-        <label class="control-label" for="seriesSelect">
-            Searies</label>
+        <label class="control-label" for="seasonSelect">Season</label>
+        <div class="controls">
+            <select id="seasonSelect" name="seasonSelect"></select>
+        </div>
+        <label class="control-label" for="seriesSelect">Searies</label>
         <div class="controls">
             <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10"></select>
         </div>

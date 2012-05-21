@@ -54,6 +54,24 @@ namespace WhoScored.Controllers
             return Json(leagues);
         }
 
+
+        public ActionResult AsyncSeasonSelect(string countryId)
+        {
+            var seasons = new List<SelectListItem>();
+
+            var worldDetails = repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
+            var settings = repository.GetSettings<Settings>();
+
+            int numberOfSeasons = settings.GlobalSeason + worldDetails.SeasonOffset;
+
+            for (int i = numberOfSeasons; i >= 1; i--)
+            {
+                seasons.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString(), Selected = i == numberOfSeasons});
+            }
+
+            return Json(seasons);
+        }
+
         public void MigrateWorldDetails()
         {
             var target = new MigrationDomainService();
