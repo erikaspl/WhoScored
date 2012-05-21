@@ -104,6 +104,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Xml\seriesfixtures.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Xml\worlddetails.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

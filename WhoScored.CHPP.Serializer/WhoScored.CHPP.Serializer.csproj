@@ -43,6 +43,8 @@
     <Compile Include="LeagueDetails\leaguedetails.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeagueDetails\leaguedetails.cs" />
+    <Compile Include="SeriesFixtures\seriesfixtures.designer.cs" />
+    <Compile Include="SeriesFixtures\SeriesFixturesEntity.cs" />
     <Compile Include="WorldDetails\worlddetails.designer.cs">
       <DependentUpon>worlddetails.cs</DependentUpon>
     </Compile>
@@ -58,6 +60,17 @@
     </None>
     <None Include="LeagueDetails\leaguedetails.xss">
       <DependentUpon>leaguedetails.xsd</DependentUpon>
+    </None>
+    <None Include="SeriesFixtures\seriesfixtures.xsc">
+      <DependentUpon>seriesfixtures.xsd</DependentUpon>
+    </None>
+    <None Include="SeriesFixtures\seriesfixtures.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>seriesfixtures.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SeriesFixtures\seriesfixtures.xss">
+      <DependentUpon>seriesfixtures.xsd</DependentUpon>
     </None>
     <None Include="WorldDetails\worlddetails.xsc">
       <DependentUpon>worlddetails.xsd</DependentUpon>

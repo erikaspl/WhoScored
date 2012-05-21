@@ -54,6 +54,18 @@ namespace WhoScored.Db.Mongo
             }
         }
 
+        public static void MapSeriesFixtures<T>() where T : class, ISeriesFixtures
+        {
+            if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>();
+                foreach (var property in typeof(ILeagueDetails).GetProperties())
+                {
+                    map.MapProperty(property.Name);
+                }
+            }
+        }
+
         #endregion
 
         #region WorldDetails CRUID
@@ -164,20 +176,20 @@ namespace WhoScored.Db.Mongo
 
         #region LeagueDetails CRUID
 
-        private const string LEAGUE_DETAILS_COLLECTION_NAME = "SeriesDetails";
+        private const string SERIES_DETAILS_COLLECTION_NAME = "SeriesDetails";
 
         /// <summary>
         /// Saves provided leagueDetails to a database. 
         /// Updates records if they already exist.
         /// </summary>
         /// <param name="leagueDetails">List of league details.</param>
-        public void SaveLeagueDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails
+        public void SaveSeriesDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails
         {
             MapLeagueDetails<T>();
 
             var database = MongoConnector.GetDatabase();
 
-            var collection = database.GetCollection(LEAGUE_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection(SERIES_DETAILS_COLLECTION_NAME);
 
             foreach (var worldDetail in leagueDetails)
             {
@@ -190,33 +202,33 @@ namespace WhoScored.Db.Mongo
         /// Updates records if they already exist.
         /// </summary>
         /// <param name="leagueDetail"></param>
-        public void SaveLeagueDetails<T>(T leagueDetail) where T : class, ILeagueDetails
+        public void SaveSeriesDetails<T>(T leagueDetail) where T : class, ILeagueDetails
         {
             MapLeagueDetails<T>();
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection(LEAGUE_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection(SERIES_DETAILS_COLLECTION_NAME);
 
             collection.Save(leagueDetail);
         }
 
-        public List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails
+        public List<T> GetSeriesDetails<T>() where T : class, ILeagueDetails
         {
             MapLeagueDetails<T>();
 
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection<T>(LEAGUE_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection<T>(SERIES_DETAILS_COLLECTION_NAME);
 
             var result = collection.FindAll().ToList();
 
             return result;
         }
 
-        public List<T> GetLeagueDetails<T>(string countryId) where T : class, ILeagueDetails
+        public List<T> GetSeriesDetails<T>(string countryId) where T : class, ILeagueDetails
         {
             MapLeagueDetails<T>();
 
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection<T>(LEAGUE_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection<T>(SERIES_DETAILS_COLLECTION_NAME);
 
             var query = new QueryDocument("LeagueID", int.Parse(countryId));
             //var query = Query.EQ("LeagueID", countryId);
@@ -228,12 +240,30 @@ namespace WhoScored.Db.Mongo
         /// <summary>
         /// Drops world details from the database
         /// </summary>
-        public void DropLeagueDetails()
+        public void DropSeriesDetails()
         {
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection<ILeagueDetails>(LEAGUE_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection<ILeagueDetails>(SERIES_DETAILS_COLLECTION_NAME);
 
             collection.Drop();
+        }
+
+        #endregion
+
+        #region Series fixtures CRUID
+
+        private const string SERIES_FIXTURES_COLLECTION_NAME = "SeriesDetails";
+
+        public void SaveSeriesFixtures<T>(List<T> seriesFixtures) where T: class, ISeriesFixtures
+        {
+            MapSeriesFixtures<T>();
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
+
+            foreach (var fixture in seriesFixtures)
+            {
+                collection.Save(fixture);
+            }
         }
 
         #endregion

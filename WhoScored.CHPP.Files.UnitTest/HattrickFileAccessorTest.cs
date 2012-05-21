@@ -77,19 +77,18 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_ProvideNotAllowedChar_ExpectFixedUrl()
         {
             const string protectedUrl = "thisIs  ProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", "thisIs%20%20ProtectedUrl", "file=leaguefixtures&version=1.2");
             Assert.AreEqual(result, expectedUrl);
         }
 
-
         [TestMethod()]
         public void GetHattrickFileAccessorTest_DefaultBehaviout_ExpectDefaultUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
 
             string expectedUrl = string.Format("{0}?{1}", protectedUrl, "file=leaguefixtures&version=1.2");
@@ -100,7 +99,7 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_ProvideLeagueId_ExpectLegueIdInUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
             const int leagueLevelUnitID = 1234;
             leagueFixtures.LeagueLevelUnitID = leagueLevelUnitID;
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
@@ -113,7 +112,7 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_SetLeagueIdToNull_ExpectNoLegueIdInUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
 
             leagueFixtures.LeagueLevelUnitID = null;
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
@@ -126,7 +125,7 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_ProvideSeason_ExpectSeasonInUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
             const int season = 1234;
             leagueFixtures.Season = season;
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
@@ -139,7 +138,7 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_SetSeasonToNull_ExpectNoSeasonInUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
 
             leagueFixtures.Season = null;
             string result = leagueFixtures.GetHattrickFileAccessorAbsoluteUri();
@@ -152,7 +151,7 @@ namespace WhoScored.CHPP.Files.UnitTest
         public void GetHattrickFileAccessorTest_ProvideSeasonAndLeagueId_ExpectSeasonAndLeagueIdInUrl()
         {
             const string protectedUrl = "thisIsProtectedUrl";
-            var leagueFixtures = new LeagueFixtures(protectedUrl);
+            var leagueFixtures = new SeriesFixtures(protectedUrl);
             const int season = 1234;
             const int leagueId = 9876;
             leagueFixtures.Season = season;

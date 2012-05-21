@@ -27,7 +27,7 @@ namespace WhoScored.Controllers
         public ActionResult AsyncSeriesSelect(string countryId)
         {
             var leagues = new List<SelectListItem>();
-            var seriesFullDetails = repository.GetLeagueDetails<SeriesDetails>(countryId);
+            var seriesFullDetails = repository.GetSeriesDetails<SeriesDetails>(countryId);
             var worldDetails = repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
 
             foreach (int seriesId in worldDetails.SeriesIdList)

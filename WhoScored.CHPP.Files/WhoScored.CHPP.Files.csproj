@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="HattrickFileAccessors\HattrickFileAccessor.cs" />
     <Compile Include="HattrickFileAccessors\LeagueDetails.cs" />
-    <Compile Include="HattrickFileAccessors\LeagueFixtures.cs" />
+    <Compile Include="HattrickFileAccessors\SeriesFixtures.cs" />
     <Compile Include="HattrickFileAccessors\WorldDetails.cs" />
     <Compile Include="IRequestInputParameter.cs" />
     <Compile Include="RequestInputParameter.cs" />

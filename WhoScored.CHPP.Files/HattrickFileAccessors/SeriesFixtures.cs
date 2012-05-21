@@ -2,33 +2,34 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace WhoScored.CHPP.Files.HattrickFileAccessors
 {
-    /// <summary>
-    /// This CHPP File Accessor provides parameters to access league fixtures CHPP file
-    /// </summary>
-    public class LeagueFixtures : HattrickFileAccessor
+    public class SeriesFixtures : HattrickFileAccessor
     {
+        public SeriesFixtures(string protectedResourceUrl)
+            : base(protectedResourceUrl)
+        {
+        }
+
         private const string FILE_PARAMETER_VALUE = "leaguefixtures";
         private const string VERSION_PARAMETER_VALUE = "1.2";
 
         protected override string FileParameterValue
         {
-            get { return FILE_PARAMETER_VALUE; }
+            get
+            {
+                return FILE_PARAMETER_VALUE;
+            }
         }
 
         protected override string VersionParameterValue
         {
-            get { return VERSION_PARAMETER_VALUE; }
-        }
-
-        private const string LEAGUE_LEVEL_UNIT_ID_PARAMETER_NAME = "leagueLevelUnitID";
-        private const string SEASON_PARAMETER_NAME = "season";
-
-        public LeagueFixtures(string protectedResourceUrl) : base(protectedResourceUrl)
-        {
+            get
+            {
+                return VERSION_PARAMETER_VALUE;
+            }
         }
 
         protected override List<IRequestInputParameter> GetFileSpecificParameters()
@@ -36,11 +37,13 @@ namespace WhoScored.CHPP.Files.HattrickFileAccessors
             return new List<IRequestInputParameter>
                        {
                            LeagueLevelUnitIDParameter,
-                           SeasonParameter
+                           SeasonParameter                           
                        };
         }
 
         #region LeagueLevelUnitID
+
+        private const string LEAGUE_LEVEL_UNIT_ID_PARAMETER_NAME = "leagueLevelUnitID";
         public int? LeagueLevelUnitID
         {
             set
@@ -61,19 +64,18 @@ namespace WhoScored.CHPP.Files.HattrickFileAccessors
         }
         #endregion
 
-        #region Season
+
+        #region season
+        private const string SEASON_PARAMETER_NAME = "season";
         public int? Season
         {
             set
             {
                 if (value.HasValue)
-                {
                     _seasonParameter = new RequestInputParameter(SEASON_PARAMETER_NAME, value.Value.ToString(CultureInfo.InvariantCulture));
-                }
                 else
-                {
                     _seasonParameter = new RequestInputParameterNullValue();
-                }
+
             }
         }
 
@@ -83,7 +85,7 @@ namespace WhoScored.CHPP.Files.HattrickFileAccessors
             get { return _seasonParameter; }
             set { _seasonParameter = value; }
         }
-
         #endregion
+
     }
 }

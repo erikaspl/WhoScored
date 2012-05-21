@@ -22,14 +22,16 @@ namespace WhoScored.Db
 
         T GetSettings<T>() where T : class, ISettings;
 
-        void SaveLeagueDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails;
+        void SaveSeriesDetails<T>(List<T> leagueDetails) where T : class, ILeagueDetails;
 
-        void SaveLeagueDetails<T>(T leagueDetail) where T : class, ILeagueDetails;
+        void SaveSeriesDetails<T>(T leagueDetail) where T : class, ILeagueDetails;
 
-        List<T> GetLeagueDetails<T>() where T : class, ILeagueDetails;
+        List<T> GetSeriesDetails<T>() where T : class, ILeagueDetails;
 
-        List<T> GetLeagueDetails<T>(string countryId) where T : class, ILeagueDetails;
+        List<T> GetSeriesDetails<T>(string countryId) where T : class, ILeagueDetails;
 
-        void DropLeagueDetails();
+        void DropSeriesDetails();
+
+        void SaveSeriesFixtures<T>(List<T> seriesFixtures) where T : class, ISeriesFixtures;
     }
 }

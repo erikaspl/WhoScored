@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DevDefined.OAuth">
       <HintPath>..\Binaries\DevDefined.OAuth.dll</HintPath>
     </Reference>
@@ -65,6 +68,9 @@
       <Project>{512EBB5A-1430-449E-8A7A-D2E441FC7488}</Project>
       <Name>WhoScored.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

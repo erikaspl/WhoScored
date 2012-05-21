@@ -163,14 +163,35 @@ namespace WhoScored.IntegrationTest
             var leagueDetailsInput = CHPP.LeagueDetails.Serializer.HattrickData.Deserialize(response);
 
             IWhoScoredRepository repository = new WhoScoredRepository();
-            repository.SaveLeagueDetails(leagueDetailsInput);
+            repository.SaveSeriesDetails(leagueDetailsInput);
 
             Thread.Sleep(1000);
 
-            var worldDetailsCount = repository.GetLeagueDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
+            var worldDetailsCount = repository.GetSeriesDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
 
-            repository.DropLeagueDetails();
+            repository.DropSeriesDetails();
             Assert.AreEqual(1, worldDetailsCount);
+        }
+
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/seriesfixtures.xml")]
+        public void MigrateSeriesFixturesTest_FromXmlToDb()
+        {
+            string strFile = "seriesfixtures.xml";
+            string response = GetXmlString(strFile);
+
+            var seriesFixturesInput = CHPP.SeriesFixtures.Serializer.HattrickData.Deserialize(response);
+
+            IWhoScoredRepository repository = new WhoScoredRepository();
+            repository.SaveSeriesFixtures(seriesFixturesInput);
+
+            Thread.Sleep(1000);
+
+            var fixturesCount = repository.GetSeriesFixturesDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
+
+            repository.DropSeriesDetails();
+            Assert.AreEqual(1, fixturesCount);
         }
     }
 }

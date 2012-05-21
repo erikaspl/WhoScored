@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILeagueDetails.cs" />
+    <Compile Include="IMatchSummary.cs" />
+    <Compile Include="ISeriesFixtures.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="IWorldDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
