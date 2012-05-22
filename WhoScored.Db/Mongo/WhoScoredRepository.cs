@@ -5,7 +5,7 @@ using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-
+using MongoDB.Driver.Builders;
 using WhoScored.Db.Connection;
 using WhoScored.Model;
 
@@ -55,7 +55,7 @@ namespace WhoScored.Db.Mongo
         {
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
-                BsonClassMap map = BsonClassMap.RegisterClassMap<T>();
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("Id"));
                 foreach (var property in typeof(ISeriesFixtures).GetProperties())
                 {
                     map.MapProperty(property.Name);
@@ -228,7 +228,6 @@ namespace WhoScored.Db.Mongo
             var collection = database.GetCollection<T>(SERIES_DETAILS_COLLECTION_NAME);
 
             var query = new QueryDocument("LeagueID", int.Parse(countryId));
-            //var query = Query.EQ("LeagueID", countryId);
             var result = collection.Find(query).ToList();
 
             return result;
@@ -281,6 +280,26 @@ namespace WhoScored.Db.Mongo
             var result = collection.FindAll().ToList();
 
             return result;
+        }
+
+        public T GetSeriesFixturesSummary<T>(int leagueId, int season) where T : class, ISeriesFixtures
+        {
+            MapSeriesFixtures<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
+            var query = Query.And(Query.EQ("LeagueLevelUnitID", leagueId), Query.EQ("Season", season));
+            var result = collection.FindOne(query);
+
+            return result;
+        }
+
+        public void DropSeriesFixtures()
+        {
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<ISeriesFixtures>(SERIES_FIXTURES_COLLECTION_NAME);
+
+            collection.Drop();
         }
 
         #endregion

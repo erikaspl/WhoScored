@@ -37,5 +37,9 @@ namespace WhoScored.Db
         void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures;
 
         List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures;
+
+        T GetSeriesFixturesSummary<T>(int leagueId, int season) where T : class, ISeriesFixtures;
+
+        void DropSeriesFixtures();
     }
 }

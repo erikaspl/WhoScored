@@ -5,12 +5,9 @@ namespace WhoScored.Model
 {
     public class SeriesFixturesSummaryEntity : ISeriesFixtures
     {
-        public Guid Id { get; set; }
-
+        public int Id { get; set; }
         public int LeagueLevelUnitID { get; set; }
-
         public int Season { get; set; }
-
         public string LeagueLevelUnitName { get; set; }
         public List<IMatchSummary> Matches { get; set; }
     }

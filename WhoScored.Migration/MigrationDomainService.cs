@@ -112,7 +112,8 @@ namespace WhoScored.Migration
             entity.LeagueLevelUnitName = seriesFixtures.LeagueLevelUnitName;
             entity.Matches = new List<IMatchSummary>();
             entity.Season = int.Parse(seriesFixtures.Season);
-            entity.Id = WhoScoredRepository.GetSeriesFixtureId(entity.LeagueLevelUnitID, entity.Season);
+
+            entity.Id = int.Parse(string.Format("{0}{1}", entity.LeagueLevelUnitID, entity.Season));
 
             foreach (var hattrickDataMatch in seriesFixtures.Match)
             {

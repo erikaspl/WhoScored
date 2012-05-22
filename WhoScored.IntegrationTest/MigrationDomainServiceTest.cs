@@ -187,14 +187,14 @@ namespace WhoScored.IntegrationTest
             var seriesFixturesInput = CHPP.SeriesFixtures.Serializer.HattrickData.Deserialize(response);
 
             IWhoScoredRepository repository = new WhoScoredRepository();
-            var entity = WhoScoredRepository.GetSeriesFixtureEntity(seriesFixturesInput);
+            var entity = MigrationDomainService.GetSeriesFixtureEntity(seriesFixturesInput);
             repository.SaveSeriesFixtures(entity);
 
             Thread.Sleep(1000);
 
             var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>().Count;
 
-            repository.DropSeriesDetails();
+            repository.DropSeriesFixtures();
             Assert.AreEqual(1, fixturesCount);
         }
     }

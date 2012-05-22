@@ -8,7 +8,7 @@
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
-        $('#save').click(function() {
+        $('#migrateSeries').click(function() {
             var series = $('#seriesSelect').val();
 
             $.ajax({
@@ -21,7 +21,23 @@
                 dataType: 'json',
                 traditional: true
             });
+        });
 
+        $('#seriesSelect').change(function() {
+            var series = $('#seriesSelect').val();
+            var season = $('#seasonSelect').val();
+
+            $.ajax({
+                url: "@Url.Action("ShowFixtures", "Migration")",
+                type: "POST",
+                data:
+                    {
+                        seriesId: series,
+                        season: season
+                    },
+                dataType: 'json',
+                traditional: true
+            });
         });
     });
 </script>
@@ -44,12 +60,13 @@
         </div>
         <label class="control-label" for="seriesSelect">Searies</label>
         <div class="controls">
-            <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10"></select>
+            <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10" ></select>
         </div>
     </div>
     <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate World</a>
-        <button class="btn btn-danger" type="button" id="save">Migrate Series</button>
+        <button class="btn btn-danger" type="button" id="migrateSeries">Migrate Series</button>
+        <button class="btn btn-danger" type="button" id="migrateFixtures">Migrate Fixtures</button>
     </div>
 </fieldset>
 </form>

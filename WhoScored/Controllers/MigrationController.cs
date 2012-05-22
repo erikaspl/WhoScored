@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using WhoScored.Db;
 using WhoScored.Db.Mongo;
 using WhoScored.Migration;
+using WhoScored.Model;
 using WhoScored.Models;
 
 
@@ -11,14 +12,14 @@ namespace WhoScored.Controllers
 {
     public class MigrationController : Controller
     {
-        IWhoScoredRepository repository = new WhoScoredRepository();
+        readonly IWhoScoredRepository _repository = new WhoScoredRepository();
         //
         // GET: /Migration/
 
         public ActionResult Index()
         {
-            var worldDetails = repository.GetWorldDetails<WorldDetails>();
-            var settings = repository.GetSettings<Settings>();
+            var worldDetails = _repository.GetWorldDetails<WorldDetails>();
+            var settings = _repository.GetSettings<Settings>();
             var migrationViewData = new MigrationModel { WorldDetails = worldDetails, Settings = settings };
 
             return View(migrationViewData);
@@ -27,8 +28,8 @@ namespace WhoScored.Controllers
         public ActionResult AsyncSeriesSelect(string countryId)
         {
             var leagues = new List<SelectListItem>();
-            var seriesFullDetails = repository.GetSeriesDetails<SeriesDetails>(countryId);
-            var worldDetails = repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
+            var seriesFullDetails = _repository.GetSeriesDetails<SeriesDetails>(countryId);
+            var worldDetails = _repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
 
             foreach (int seriesId in worldDetails.SeriesIdList)
             {
@@ -54,13 +55,12 @@ namespace WhoScored.Controllers
             return Json(leagues);
         }
 
-
         public ActionResult AsyncSeasonSelect(string countryId)
         {
             var seasons = new List<SelectListItem>();
 
-            var worldDetails = repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
-            var settings = repository.GetSettings<Settings>();
+            var worldDetails = _repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
+            var settings = _repository.GetSettings<Settings>();
 
             int numberOfSeasons = settings.GlobalSeason + worldDetails.SeasonOffset;
 
@@ -70,6 +70,14 @@ namespace WhoScored.Controllers
             }
 
             return Json(seasons);
+        }
+
+        public ActionResult ShowFixtures(List<int> seriesId, int season)
+        {            
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>(seriesId.First(), season);
+
+            return Json(seasonSummary);
+
         }
 
         public void MigrateWorldDetails()
