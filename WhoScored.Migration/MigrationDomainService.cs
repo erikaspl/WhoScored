@@ -64,8 +64,6 @@ namespace WhoScored.Migration
             }
         }
 
-
-
         public void MigrateLeagueDetails(List<int> seriesIdList)
         {
             var seriesDetails = new List<LeagueDetails>();
@@ -86,7 +84,7 @@ namespace WhoScored.Migration
 
         public void MigrateFixtures(List<int> seriesIdList, int season)
         {
-            var seriesFixturesResult = new List<SeriesFixturesEntity>();
+            var seriesFixturesResult = new List<SeriesFixturesSummaryEntity>();
 
             foreach (var seriesId in seriesIdList)
             {
@@ -99,32 +97,43 @@ namespace WhoScored.Migration
                 string response = request.MakeRequest(seriesFixturesRaw.GetHattrickFileAccessorAbsoluteUri());
                 var seriesFixtures = HattrickData.Deserialize(response);
 
-                var entity = new SeriesFixturesEntity();
-
-                entity.LeagueLevelUnitID = int.Parse(seriesFixtures.LeagueLevelUnitID);
-                entity.LeagueLevelUnitName = seriesFixtures.LeagueLevelUnitName;
-                entity.Matches = new List<IMatchSummary>();
-
-                foreach (var hattrickDataMatch in seriesFixtures.Match)
-                {
-                    entity.Matches.Add(new MatchSummaryEntity
-                                           {
-                                               AwayGoals = int.Parse(hattrickDataMatch.AwayGoals),
-                                               HomeGoals = int.Parse(hattrickDataMatch.HomeGoals),
-                                               HomeTeamID = int.Parse(hattrickDataMatch.HomeTeam.First().HomeTeamID),
-                                               HomeTeamName = hattrickDataMatch.HomeTeam.First().HomeTeamName,
-                                               AwayTeamID = int.Parse(hattrickDataMatch.AwayTeam.First().AwayTeamID),
-                                               AwayTeamName = hattrickDataMatch.AwayTeam.First().AwayTeamName,
-                                               MatchDate = DateTime.Parse(hattrickDataMatch.MatchDate),
-                                               MatchID = int.Parse(hattrickDataMatch.MatchID),
-                                               MatchRound = int.Parse(hattrickDataMatch.MatchRound)
-                                           });
-                }
-
+                seriesFixturesResult.Add(GetSeriesFixtureEntity(seriesFixtures));
                 var dbService = new WhoScoredRepository();
                 dbService.SaveSeriesFixtures(seriesFixturesResult);
 
             }
+        }
+
+        public static SeriesFixturesSummaryEntity GetSeriesFixtureEntity(HattrickData seriesFixtures)
+        {
+            var entity = new SeriesFixturesSummaryEntity();
+
+            entity.LeagueLevelUnitID = int.Parse(seriesFixtures.LeagueLevelUnitID);
+            entity.LeagueLevelUnitName = seriesFixtures.LeagueLevelUnitName;
+            entity.Matches = new List<IMatchSummary>();
+            entity.Season = int.Parse(seriesFixtures.Season);
+            entity.Id = WhoScoredRepository.GetSeriesFixtureId(entity.LeagueLevelUnitID, entity.Season);
+
+            foreach (var hattrickDataMatch in seriesFixtures.Match)
+            {
+                entity.Matches.Add(new MatchSummaryEntity
+                    {
+                        AwayGoals = !string.IsNullOrEmpty(hattrickDataMatch.AwayGoals)
+                                                  ? (int?)int.Parse(hattrickDataMatch.AwayGoals)
+                                                  : null,
+                        HomeGoals = !string.IsNullOrEmpty(hattrickDataMatch.HomeGoals)
+                                                  ? (int?)int.Parse(hattrickDataMatch.HomeGoals)
+                                                  : null,
+                        HomeTeamID = int.Parse(hattrickDataMatch.HomeTeam.First().HomeTeamID),
+                        HomeTeamName = hattrickDataMatch.HomeTeam.First().HomeTeamName,
+                        AwayTeamID = int.Parse(hattrickDataMatch.AwayTeam.First().AwayTeamID),
+                        AwayTeamName = hattrickDataMatch.AwayTeam.First().AwayTeamName,
+                        MatchDate = DateTime.Parse(hattrickDataMatch.MatchDate),
+                        MatchID = int.Parse(hattrickDataMatch.MatchID),
+                        MatchRound = int.Parse(hattrickDataMatch.MatchRound)
+                    });
+            }
+            return entity;
         }
     }
 }

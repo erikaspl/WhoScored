@@ -44,7 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeagueDetails\leaguedetails.cs" />
     <Compile Include="SeriesFixtures\seriesfixtures.designer.cs" />
-    <Compile Include="SeriesFixtures\SeriesFixturesEntity.cs" />
     <Compile Include="WorldDetails\worlddetails.designer.cs">
       <DependentUpon>worlddetails.cs</DependentUpon>
     </Compile>

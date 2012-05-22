@@ -12,8 +12,11 @@ namespace WhoScored.IntegrationTest
 {
     using System.Threading;
 
+    using WhoScored.CHPP.SeriesFixtures.Serializer;
     using WhoScored.Db;
     using WhoScored.Models;
+
+    using HattrickData = WhoScored.CHPP.WorldDetails.Serializer.HattrickData;
 
     /// <summary>
     ///This is a test class for MigrationDomainServiceTest and is intended
@@ -184,11 +187,12 @@ namespace WhoScored.IntegrationTest
             var seriesFixturesInput = CHPP.SeriesFixtures.Serializer.HattrickData.Deserialize(response);
 
             IWhoScoredRepository repository = new WhoScoredRepository();
-            repository.SaveSeriesFixtures(seriesFixturesInput);
+            var entity = WhoScoredRepository.GetSeriesFixtureEntity(seriesFixturesInput);
+            repository.SaveSeriesFixtures(entity);
 
             Thread.Sleep(1000);
 
-            var fixturesCount = repository.GetSeriesFixturesDetails<CHPP.LeagueDetails.Serializer.HattrickData>().Count;
+            var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>().Count;
 
             repository.DropSeriesDetails();
             Assert.AreEqual(1, fixturesCount);

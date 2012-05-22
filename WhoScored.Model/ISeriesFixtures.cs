@@ -7,8 +7,11 @@ namespace WhoScored.Model
 {
     public interface ISeriesFixtures
     {
+        Guid Id { get; set; }
         int LeagueLevelUnitID { get; set; }
+        int Season { get; set; }
         string LeagueLevelUnitName { get; set; }
         List<IMatchSummary> Matches { get; set; }
+
     }
 }

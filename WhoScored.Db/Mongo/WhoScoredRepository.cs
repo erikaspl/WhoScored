@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml.Serialization;
+
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+
 using WhoScored.Db.Connection;
 using WhoScored.Model;
 
@@ -59,7 +56,7 @@ namespace WhoScored.Db.Mongo
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
                 BsonClassMap map = BsonClassMap.RegisterClassMap<T>();
-                foreach (var property in typeof(ILeagueDetails).GetProperties())
+                foreach (var property in typeof(ISeriesFixtures).GetProperties())
                 {
                     map.MapProperty(property.Name);
                 }
@@ -264,6 +261,26 @@ namespace WhoScored.Db.Mongo
             {
                 collection.Save(fixture);
             }
+        }
+
+        public void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures
+        {
+            MapSeriesFixtures<T>();
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
+            collection.Save(seriesFixture);
+        }
+
+        public List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures
+        {
+            MapSeriesFixtures<T>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
+
+            var result = collection.FindAll().ToList();
+
+            return result;
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace WhoScored.Model
         int AwayTeamID { get; set; }
         string AwayTeamName { get; set; }
         DateTime MatchDate { get; set; }
-        int HomeGoals { get; set; }
-        int AwayGoals { get; set; }
+        int? HomeGoals { get; set; }
+        int? AwayGoals { get; set; }
     }
 }

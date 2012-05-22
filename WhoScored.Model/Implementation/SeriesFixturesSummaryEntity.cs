@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WhoScored.Model;
 
-namespace WhoScored.CHPP.SeriesFixtures.Serializer
+namespace WhoScored.Model
 {
-    public partial class HattrickData
+    public class SeriesFixturesSummaryEntity : ISeriesFixtures
     {
-    }
+        public Guid Id { get; set; }
 
-    public class SeriesFixturesEntity : ISeriesFixtures
-    {
         public int LeagueLevelUnitID { get; set; }
+
+        public int Season { get; set; }
+
         public string LeagueLevelUnitName { get; set; }
         public List<IMatchSummary> Matches { get; set; }
     }
@@ -26,7 +24,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
         public int AwayTeamID { get; set; }
         public string AwayTeamName { get; set; }
         public DateTime MatchDate { get; set; }
-        public int HomeGoals { get; set; }
-        public int AwayGoals { get; set; }
+        public int? HomeGoals { get; set; }
+        public int? AwayGoals { get; set; }
     }
 }

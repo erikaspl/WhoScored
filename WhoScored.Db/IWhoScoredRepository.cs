@@ -33,5 +33,9 @@ namespace WhoScored.Db
         void DropSeriesDetails();
 
         void SaveSeriesFixtures<T>(List<T> seriesFixtures) where T : class, ISeriesFixtures;
+
+        void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures;
+
+        List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures;
     }
 }

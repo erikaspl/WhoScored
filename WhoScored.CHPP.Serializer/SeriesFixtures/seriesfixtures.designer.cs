@@ -393,7 +393,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
         public string MatchDate
         {
             get
@@ -406,7 +406,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
         public string HomeGoals
         {
             get
@@ -419,7 +419,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
         public string AwayGoals
         {
             get
@@ -432,7 +432,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("HomeTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
+        [System.Xml.Serialization.XmlElementAttribute("HomeTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
         public List<HattrickDataMatchHomeTeam> HomeTeam
         {
             get
@@ -445,7 +445,7 @@ namespace WhoScored.CHPP.SeriesFixtures.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("AwayTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
+        [System.Xml.Serialization.XmlElementAttribute("AwayTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
         public List<HattrickDataMatchAwayTeam> AwayTeam
         {
             get
