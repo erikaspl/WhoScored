@@ -23,21 +23,33 @@
             });
         });
 
+//        $('#closeFixturesMessage').click(function() {
+//            $("#fixturesAlert").hide();
+//        });
+
         $('#seriesSelect').change(function() {
             var series = $('#seriesSelect').val();
             var season = $('#seasonSelect').val();
 
-            $.ajax({
-                url: "@Url.Action("ShowFixtures", "Migration")",
-                type: "POST",
-                data:
-                    {
-                        seriesId: series,
-                        season: season
-                    },
-                dataType: 'json',
-                traditional: true
-            });
+            if (season != null && series != null) {
+                $.ajax({
+                    url: "@Url.Action("ShowFixtures", "Migration")",
+                    type: "POST",
+                    data:
+                        {
+                            seriesId: series,
+                            season: season
+                        },
+                    dataType: 'json',
+                    traditional: true,
+                    success: function(data) {
+                        if (data == null) {
+                            $("#fixturesAlert").show();
+
+                        }
+                    }                    
+                });
+            }
         });
     });
 </script>
@@ -54,19 +66,31 @@
                 }
             </select>
         </div>
-        <label class="control-label" for="seasonSelect">Season</label>
+        <label class="control-label" for="seasonSelect">
+            Season</label>
         <div class="controls">
-            <select id="seasonSelect" name="seasonSelect"></select>
+            <select id="seasonSelect" name="seasonSelect">
+            </select>
         </div>
-        <label class="control-label" for="seriesSelect">Searies</label>
+        <label class="control-label" for="seriesSelect">
+            Searies</label>
         <div class="controls">
-            <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10" ></select>
+            <select id="seriesSelect" name="seriesSelect" multiple="multiple" size="10"></select>
         </div>
     </div>
+    
+    <div id="fixturesAlert" class="alert alert-error hide">
+        <button id="closeFixturesMessage" class="close" data-dismiss="alert" type="button" onclick="$('#fixturesAlert').hide();">×</button>
+        No fixtures available.
+    </div>
+
     <div class="form-actions">
-        <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate World</a>
-        <button class="btn btn-danger" type="button" id="migrateSeries">Migrate Series</button>
-        <button class="btn btn-danger" type="button" id="migrateFixtures">Migrate Fixtures</button>
+        <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate
+            World</a>
+        <button class="btn btn-danger" type="button" id="migrateSeries">
+            Migrate Series</button>
+        <button class="btn btn-danger" type="button" id="migrateFixtures">
+            Migrate Fixtures</button>
     </div>
 </fieldset>
 </form>
