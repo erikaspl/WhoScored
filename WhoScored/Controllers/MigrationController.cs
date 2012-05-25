@@ -77,7 +77,6 @@ namespace WhoScored.Controllers
             var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>(seriesId.First(), season);
 
             return Json(seasonSummary);
-
         }
 
         public void MigrateWorldDetails()
@@ -90,6 +89,28 @@ namespace WhoScored.Controllers
         {
             var target = new MigrationDomainService();
             target.MigrateLeagueDetails(seriesId);
+        }
+
+        public void MigrateSeriesFixtures(int seriesId, int season)
+        {
+            var target = new MigrationDomainService();
+            target.MigrateFixtures(new List<int>{seriesId}, season);
+        }
+
+        public ActionResult AjaxHandler(jQueryDataTableParamModel param)
+        {
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = 97,
+                iTotalDisplayRecords = 3,
+                aaData = new List<string[]>() {
+                    new string[] {"1", "Microsoft", "Redmond", "USA"},
+                    new string[] {"2", "Google", "Mountain View", "USA"},
+                    new string[] {"3", "Gowi", "Pancevo", "Serbia"}
+                    }
+            },
+            JsonRequestBehavior.AllowGet);
         }
     }
 }
