@@ -38,4 +38,8 @@ public class jQueryDataTableParamModel
     /// Comma separated list of column names
     /// </summary>
     public string sColumns { get; set; }
+
+    public int SeriesId { get; set; }
+
+    public int Season { get; set; }
 }

@@ -41,7 +41,16 @@
                         season: season
                     },
                 dataType: 'json',
-                traditional: true
+                traditional: true, 
+                success: function(result) {
+                    if (result == true) {
+                        $("#fixturesMigrationSuccess").show();
+                        $("#fixturesMigrationFailure").hide();
+                    } else {
+                        $("#fixturesMigrationFailure").show();
+                        $("#fixturesMigrationSuccess").hide();
+                    }
+                }
             });
         });
 
@@ -63,27 +72,48 @@
                     success: function(data) {
                         if (data == null) {
                             $("#fixturesAlert").show();
+                            $('#example_wrapper').hide();
                         }
-                        else
-                        {
-                                    $('#example').dataTable({
-                                        "bServerSide": true,
-                                        "sAjaxSource": "Migration/AjaxHandler",
-                                        "bProcessing": true,
-                                        "aoColumns": [
-                                                { "sName": "ID",
-                                                    "bSearchable": false,
-                                                    "bSortable": false,
-                                                    "fnRender": function (oObj) {
-                                                        return '<a href=\"Details/' + 
-                                                        oObj.aData[0] + '\">View</a>';
-                                                    }
-                                                },
-                                                    { "sName": "COMPANY_NAME" },
-                                                    { "sName": "ADDRESS" },
-                                                    { "sName": "TOWN" }
-                                                ]
+                        else {
+                            $('#example').dataTable({
+                                "bRetrieve": true,
+                                "bServerSide": true,
+                                "sAjaxSource": "Migration/AjaxHandler",
+                                "bProcessing": true,
+                                "fnServerData": function ( sSource, aoData, fnCallback ) {
+
+                                    aoData.push({ "name": "season", "value": season });
+                                    aoData.push({ "name": "seriesId", "value": series });
+
+                                    $.ajax({
+                                        "dataType": 'json',
+                                        "type": "POST",
+                                        "url": sSource,
+                                        "data": aoData,
+                                        "success": fnCallback
                                     });
+                                },
+                                "aoColumns": [
+                                    {
+                                        "sName": "MatchID",
+                                        "bSearchable": false,
+                                        "bSortable": false,
+                                        "fnRender": function(oObj) {
+                                            return '<a href=\"Details/' +
+                                                oObj.aData[0] + '\">View</a>';
+                                        }
+                                    },
+                                    { "sName": "MatchDate" },
+                                    { "sName": "MatchRound" },
+                                    { "sName": "HomeTeamName" }
+//                                  { "sName": "AwayTeamName" }
+                                ]
+                            });
+                            $('#example').show();
+                            $('#example_wrapper').show();
+                            $("#fixturesAlert").hide();
+                            $("#fixturesMigrationSuccess").hide();
+                            $("#fixturesMigrationFailure").hide();
                         }
                     }                    
                 });
@@ -119,10 +149,25 @@
     </div>
     <div id="fixturesAlert" class="alert alert-error hide">
         <button id="closeFixturesMessage" class="close" data-dismiss="alert" type="button"
-            onclick="$('#fixturesAlert').hide();">
+                onclick="$('#fixturesAlert').hide();">
             ×</button>
         No fixtures available.
     </div>
+    
+    <div id="fixturesMigrationSuccess" class="alert alert-success hide">
+        <button id="closeFixturesMigrationSuccess" class="close" data-dismiss="alert" type="button"
+                onclick="$('#fixturesMigrationSuccess').hide();">
+            ×</button>
+        Fixtures Successfully migrated.
+    </div>
+
+    <div id="fixturesMigrationFailure" class="alert alert-error hide">
+        <button id="closeFixturesMigrationFailure" class="close" data-dismiss="alert" type="button"
+                onclick="$('#fixturesMigrationFailure').hide();">
+            ×</button>
+        Fixtures migration failed.
+    </div>  
+    
     <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate
             World</a>
@@ -132,7 +177,7 @@
             Migrate Fixtures</button>
     </div>
 </fieldset>
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered hide"
     id="example" width="100%">
     <thead>
         <tr>

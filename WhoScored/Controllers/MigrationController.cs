@@ -91,14 +91,18 @@ namespace WhoScored.Controllers
             target.MigrateLeagueDetails(seriesId);
         }
 
-        public void MigrateSeriesFixtures(int seriesId, int season)
+        public ActionResult MigrateSeriesFixtures(int seriesId, int season)
         {
             var target = new MigrationDomainService();
             target.MigrateFixtures(new List<int>{seriesId}, season);
+
+            return Json(true);
         }
 
         public ActionResult AjaxHandler(jQueryDataTableParamModel param)
         {
+            //var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesId.First(), season);
+
             return Json(new
             {
                 sEcho = param.sEcho,
