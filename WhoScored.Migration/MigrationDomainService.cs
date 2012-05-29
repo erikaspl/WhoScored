@@ -99,7 +99,7 @@ namespace WhoScored.Migration
 
                 seriesFixturesResult.Add(GetSeriesFixtureEntity(seriesFixtures));
                 var dbService = new WhoScoredRepository();
-                dbService.SaveSeriesFixtures(seriesFixturesResult);
+                dbService.SaveSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesFixturesResult);
 
             }
         }

@@ -32,13 +32,21 @@ namespace WhoScored.Db
 
         void DropSeriesDetails();
 
-        void SaveSeriesFixtures<T>(List<T> seriesFixtures) where T : class, ISeriesFixtures;
+        void SaveSeriesFixtures<T, Y>(List<T> seriesFixtures) 
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary;
 
-        void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures;
+        void SaveSeriesFixtures<T, Y>(T seriesFixture)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary;
 
-        List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures;
+        List<T> GetSeriesFixturesSummary<T, Y>()
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary;
 
-        T GetSeriesFixturesSummary<T>(int leagueId, int season) where T : class, ISeriesFixtures;
+        T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary;
 
         void DropSeriesFixtures();
     }

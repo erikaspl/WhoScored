@@ -188,11 +188,11 @@ namespace WhoScored.IntegrationTest
 
             IWhoScoredRepository repository = new WhoScoredRepository();
             var entity = MigrationDomainService.GetSeriesFixtureEntity(seriesFixturesInput);
-            repository.SaveSeriesFixtures(entity);
+            repository.SaveSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>(entity);
 
             Thread.Sleep(1000);
 
-            var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>().Count;
+            var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>().Count;
 
             repository.DropSeriesFixtures();
             Assert.AreEqual(1, fixturesCount);

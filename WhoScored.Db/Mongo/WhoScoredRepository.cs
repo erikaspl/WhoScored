@@ -51,12 +51,23 @@ namespace WhoScored.Db.Mongo
             }
         }
 
-        public static void MapSeriesFixtures<T>() where T : class, ISeriesFixtures
+        public static void MapSeriesFixtures<T, Y>() 
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
         {
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
                 BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("Id"));
                 foreach (var property in typeof(ISeriesFixtures).GetProperties())
+                {
+                    map.MapProperty(property.Name);
+                }
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Y)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<Y>();
+                foreach (var property in typeof(IMatchSummary).GetProperties())
                 {
                     map.MapProperty(property.Name);
                 }
@@ -248,11 +259,13 @@ namespace WhoScored.Db.Mongo
 
         #region Series fixtures CRUID
 
-        private const string SERIES_FIXTURES_COLLECTION_NAME = "SeriesDetails";
+        private const string SERIES_FIXTURES_COLLECTION_NAME = "SeriesFixtureSummary";
 
-        public void SaveSeriesFixtures<T>(List<T> seriesFixtures) where T: class, ISeriesFixtures
+        public void SaveSeriesFixtures<T, Y>(List<T> seriesFixtures)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T>();
+            MapSeriesFixtures<T, Y>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
 
@@ -262,17 +275,21 @@ namespace WhoScored.Db.Mongo
             }
         }
 
-        public void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures
+        public void SaveSeriesFixtures<T, Y>(T seriesFixture)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T>();
+            MapSeriesFixtures<T, Y>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
             collection.Save(seriesFixture);
         }
 
-        public List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures
+        public List<T> GetSeriesFixturesSummary<T, Y>()
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T>();
+            MapSeriesFixtures<T, Y>();
 
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
@@ -282,9 +299,11 @@ namespace WhoScored.Db.Mongo
             return result;
         }
 
-        public T GetSeriesFixturesSummary<T>(int leagueId, int season) where T : class, ISeriesFixtures
+        public T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T>();
+            MapSeriesFixtures<T, Y>();
 
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);

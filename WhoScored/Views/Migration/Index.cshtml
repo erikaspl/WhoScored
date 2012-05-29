@@ -28,6 +28,23 @@
             });
         });
 
+        $('#migrateFixtures').click(function() {
+            var series = $('#seriesSelect').val();
+            var season = $('#seasonSelect').val();
+
+            $.ajax({
+                url: "@Url.Action("MigrateSeriesFixtures", "Migration")",
+                type: "POST",
+                data:
+                    {
+                        seriesId: series,
+                        season: season
+                    },
+                dataType: 'json',
+                traditional: true
+            });
+        });
+
         $('#seriesSelect').change(function() {
             var series = $('#seriesSelect').val();
             var season = $('#seasonSelect').val();

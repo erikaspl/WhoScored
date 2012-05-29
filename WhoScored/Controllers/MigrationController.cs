@@ -73,8 +73,8 @@ namespace WhoScored.Controllers
         }
 
         public ActionResult ShowFixtures(List<int> seriesId, int season)
-        {            
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>(seriesId.First(), season);
+        {
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesId.First(), season);
 
             return Json(seasonSummary);
         }
