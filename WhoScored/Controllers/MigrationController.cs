@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WhoScored.Db;
@@ -76,7 +78,12 @@ namespace WhoScored.Controllers
         {
             var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesId.First(), season);
 
-            return Json(seasonSummary);
+            if (seasonSummary != null)
+            {
+                return Json(true);
+            }
+
+            return Json(false);
         }
 
         public void MigrateWorldDetails()
@@ -101,18 +108,34 @@ namespace WhoScored.Controllers
 
         public ActionResult AjaxHandler(jQueryDataTableParamModel param)
         {
-            //var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesId.First(), season);
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(param.SeriesId, param.Season);
 
+            IEnumerable<IMatchSummary> filteredMatches;
+
+            if (!string.IsNullOrEmpty(param.sSearch))
+            {
+                filteredMatches = seasonSummary.Matches.Where(m => m.HomeTeamName.ToLower().Contains(param.sSearch.ToLower())
+                                                                   || m.AwayTeamName.ToLower().Contains(param.sSearch.ToLower()));
+            }
+            else
+            {
+                filteredMatches = seasonSummary.Matches;
+            }
+
+            var displayedMatches = filteredMatches.OrderByDescending(m => m.MatchRound).Skip(param.iDisplayStart).Take(param.iDisplayLength);
+
+            var result = from c in displayedMatches
+                         select new[]
+                                 {
+                                     Convert.ToString(c.MatchID), c.MatchDate.ToString("dd/MM/yyyy"),
+                                     c.MatchRound.ToString(), c.HomeTeamName, c.AwayTeamName
+                                 };
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = 97,
-                iTotalDisplayRecords = 3,
-                aaData = new List<string[]>() {
-                    new string[] {"1", "Microsoft", "Redmond", "USA"},
-                    new string[] {"2", "Google", "Mountain View", "USA"},
-                    new string[] {"3", "Gowi", "Pancevo", "Serbia"}
-                    }
+                iTotalRecords = seasonSummary.Matches.Count,
+                iTotalDisplayRecords = seasonSummary.Matches.Count,
+                aaData = result
             },
             JsonRequestBehavior.AllowGet);
         }

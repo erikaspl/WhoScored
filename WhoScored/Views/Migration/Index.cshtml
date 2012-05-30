@@ -70,7 +70,7 @@
                     dataType: 'json',
                     traditional: true,
                     success: function(data) {
-                        if (data == null) {
+                        if (data == false) {
                             $("#fixturesAlert").show();
                             $('#example_wrapper').hide();
                         }
@@ -105,8 +105,8 @@
                                     },
                                     { "sName": "MatchDate" },
                                     { "sName": "MatchRound" },
-                                    { "sName": "HomeTeamName" }
-//                                  { "sName": "AwayTeamName" }
+                                    { "sName": "HomeTeamName" },
+                                    { "sName": "AwayTeamName" }
                                 ]
                             });
                             $('#example').show();
