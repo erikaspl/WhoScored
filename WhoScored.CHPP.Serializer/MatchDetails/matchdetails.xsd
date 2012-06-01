@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="HattrickData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FileName" type="xs:string" minOccurs="0" />
+        <xs:element name="Version" type="xs:string" minOccurs="0" />
+        <xs:element name="UserID" type="xs:string" minOccurs="0" />
+        <xs:element name="FetchedDate" type="xs:string" minOccurs="0" />
+        <xs:element name="UserIsSupporter" type="xs:string" minOccurs="0" />
+        <xs:element name="SourceSystem" type="xs:string" minOccurs="0" />
+        <xs:element name="Match" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MatchID" type="xs:string" minOccurs="0" />
+              <xs:element name="MatchType" type="xs:string" minOccurs="0" />
+              <xs:element name="MatchDate" type="xs:string" minOccurs="0" />
+              <xs:element name="FinishedDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Injuries" type="xs:string" minOccurs="0" />
+              <xs:element name="PossessionFirstHalfHome" type="xs:string" minOccurs="0" />
+              <xs:element name="PossessionFirstHalfAway" type="xs:string" minOccurs="0" />
+              <xs:element name="PossessionSecondHalfHome" type="xs:string" minOccurs="0" />
+              <xs:element name="PossessionSecondHalfAway" type="xs:string" minOccurs="0" />
+              <xs:element name="HomeTeam" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="HomeTeamID" type="xs:string" minOccurs="0" />
+                    <xs:element name="HomeTeamName" type="xs:string" minOccurs="0" />
+                    <xs:element name="DressURI" type="xs:string" minOccurs="0" />
+                    <xs:element name="Formation" type="xs:string" minOccurs="0" />
+                    <xs:element name="HomeGoals" type="xs:string" minOccurs="0" />
+                    <xs:element name="TacticType" type="xs:string" minOccurs="0" />
+                    <xs:element name="TacticSkill" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidfield" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingRightDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingLeftDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingRightAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingLeftAtt" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AwayTeam" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="AwayTeamID" type="xs:string" minOccurs="0" />
+                    <xs:element name="AwayTeamName" type="xs:string" minOccurs="0" />
+                    <xs:element name="DressURI" type="xs:string" minOccurs="0" />
+                    <xs:element name="Formation" type="xs:string" minOccurs="0" />
+                    <xs:element name="AwayGoals" type="xs:string" minOccurs="0" />
+                    <xs:element name="TacticType" type="xs:string" minOccurs="0" />
+                    <xs:element name="TacticSkill" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidfield" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingRightDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingLeftDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingRightAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingMidAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingLeftAtt" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Arena" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ArenaID" type="xs:string" minOccurs="0" />
+                    <xs:element name="ArenaName" type="xs:string" minOccurs="0" />
+                    <xs:element name="WeatherID" type="xs:string" minOccurs="0" />
+                    <xs:element name="SoldTotal" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Scorers" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Goal" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ScorerPlayerID" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                          <xs:element name="ScorerPlayerName" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+                          <xs:element name="ScorerTeamID" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+                          <xs:element name="ScorerHomeGoals" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
+                          <xs:element name="ScorerAwayGoals" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
+                          <xs:element name="ScorerMinute" type="xs:string" minOccurs="0" msdata:Ordinal="5" />
+                        </xs:sequence>
+                        <xs:attribute name="Index" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Bookings" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Booking" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="BookingPlayerID" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                          <xs:element name="BookingPlayerName" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+                          <xs:element name="BookingTeamID" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+                          <xs:element name="BookingType" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
+                          <xs:element name="BookingMinute" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
+                        </xs:sequence>
+                        <xs:attribute name="Index" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="EventList" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Event" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Minute" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                          <xs:element name="SubjectPlayerID" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+                          <xs:element name="SubjectTeamID" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+                          <xs:element name="ObjectPlayerID" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
+                          <xs:element name="EventTypeID" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
+                          <xs:element name="EventVariation" type="xs:string" minOccurs="0" msdata:Ordinal="5" />
+                          <xs:element name="EventText" type="xs:string" minOccurs="0" msdata:Ordinal="6" />
+                        </xs:sequence>
+                        <xs:attribute name="Index" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="HattrickData" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
