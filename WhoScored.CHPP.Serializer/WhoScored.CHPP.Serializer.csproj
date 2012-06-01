@@ -61,7 +61,13 @@
     <None Include="LeagueDetails\leaguedetails.xss">
       <DependentUpon>leaguedetails.xsd</DependentUpon>
     </None>
+    <None Include="MatchDetails\matchdetails.xsc">
+      <DependentUpon>matchdetails.xsd</DependentUpon>
+    </None>
     <None Include="MatchDetails\matchdetails.xsd" />
+    <None Include="MatchDetails\matchdetails.xss">
+      <DependentUpon>matchdetails.xsd</DependentUpon>
+    </None>
     <None Include="SeriesFixtures\seriesfixtures.xsc">
       <DependentUpon>seriesfixtures.xsd</DependentUpon>
     </None>

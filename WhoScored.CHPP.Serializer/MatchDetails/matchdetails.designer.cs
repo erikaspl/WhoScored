@@ -4,8 +4,7 @@
 //    <NameSpace>WhoScored.CHPP.MatchDetails.Serializer</NameSpace><Collection>List</Collection><codeType>CSharp</codeType><EnableDataBinding>False</EnableDataBinding><EnableLazyLoading>False</EnableLazyLoading><TrackingChangesEnable>False</TrackingChangesEnable><GenTrackingClasses>False</GenTrackingClasses><HidePrivateFieldInIDE>False</HidePrivateFieldInIDE><EnableSummaryComment>False</EnableSummaryComment><VirtualProp>False</VirtualProp><IncludeSerializeMethod>True</IncludeSerializeMethod><UseBaseClass>False</UseBaseClass><GenBaseClass>False</GenBaseClass><GenerateCloneMethod>False</GenerateCloneMethod><GenerateDataContracts>False</GenerateDataContracts><CodeBaseTag>Net40</CodeBaseTag><SerializeMethodName>Serialize</SerializeMethodName><DeserializeMethodName>Deserialize</DeserializeMethodName><SaveToFileMethodName>SaveToFile</SaveToFileMethodName><LoadFromFileMethodName>LoadFromFile</LoadFromFileMethodName><GenerateXMLAttributes>True</GenerateXMLAttributes><EnableEncoding>False</EnableEncoding><AutomaticProperties>False</AutomaticProperties><GenerateShouldSerialize>False</GenerateShouldSerialize><DisableDebug>False</DisableDebug><PropNameSpecified>Default</PropNameSpecified><Encoder>UTF8</Encoder><CustomUsings></CustomUsings><ExcludeIncludedTypes>False</ExcludeIncludedTypes><EnableInitializeFields>True</EnableInitializeFields>
 //  </auto-generated>
 // ------------------------------------------------------------------------------
-namespace WhoScored.CHPP.MatchDetails.Serializer
-{
+namespace WhoScored.CHPP.MatchDetails.Serializer {
     using System;
     using System.Diagnostics;
     using System.Xml.Serialization;
@@ -15,170 +14,139 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
     using System.IO;
     using System.Text;
     using System.Collections.Generic;
-
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class HattrickData
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class HattrickData {
+        
         private string fileNameField;
-
+        
         private string versionField;
-
+        
         private string userIDField;
-
+        
         private string fetchedDateField;
-
+        
         private string userIsSupporterField;
-
+        
         private string sourceSystemField;
-
+        
         private List<HattrickDataMatch> matchField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        public HattrickData()
-        {
+        
+        public HattrickData() {
             this.matchField = new List<HattrickDataMatch>();
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string FileName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string FileName {
+            get {
                 return this.fileNameField;
             }
-            set
-            {
+            set {
                 this.fileNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string Version
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string Version {
+            get {
                 return this.versionField;
             }
-            set
-            {
+            set {
                 this.versionField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string UserID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string UserID {
+            get {
                 return this.userIDField;
             }
-            set
-            {
+            set {
                 this.userIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string FetchedDate
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string FetchedDate {
+            get {
                 return this.fetchedDateField;
             }
-            set
-            {
+            set {
                 this.fetchedDateField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string UserIsSupporter
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string UserIsSupporter {
+            get {
                 return this.userIsSupporterField;
             }
-            set
-            {
+            set {
                 this.userIsSupporterField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string SourceSystem
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string SourceSystem {
+            get {
                 return this.sourceSystemField;
             }
-            set
-            {
+            set {
                 this.sourceSystemField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute("Match", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
-        public List<HattrickDataMatch> Match
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute("Match", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public List<HattrickDataMatch> Match {
+            get {
                 return this.matchField;
             }
-            set
-            {
+            set {
                 this.matchField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickData));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickData object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickData object
         /// </summary>
@@ -186,86 +154,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickData object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickData obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickData obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickData);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickData obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickData obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickData Deserialize(string xml)
-        {
+        
+        public static HattrickData Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickData)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickData object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickData object
         /// </summary>
@@ -273,34 +226,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickData object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickData obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickData obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickData);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickData obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickData obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickData LoadFromFile(string fileName)
-        {
+        
+        public static HattrickData LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -308,188 +255,107 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatch
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatch {
+        
         private string matchIDField;
-
+        
         private string matchTypeField;
-
+        
         private string matchDateField;
-
+        
         private string finishedDateField;
-
-        private string injuriesField;
-
+        
         private string possessionFirstHalfHomeField;
-
+        
         private string possessionFirstHalfAwayField;
-
+        
         private string possessionSecondHalfHomeField;
-
+        
         private string possessionSecondHalfAwayField;
-
+        
         private List<HattrickDataMatchHomeTeam> homeTeamField;
-
+        
         private List<HattrickDataMatchAwayTeam> awayTeamField;
-
+        
         private List<HattrickDataMatchArena> arenaField;
-
+        
         private List<HattrickDataMatchScorersGoal> scorersField;
-
+        
         private List<HattrickDataMatchBookingsBooking> bookingsField;
-
+        
+        private List<HattrickDataMatchInjuriesInjury> injuriesField;
+        
         private List<HattrickDataMatchEventListEvent> eventListField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        public HattrickDataMatch()
-        {
+        
+        public HattrickDataMatch() {
             this.eventListField = new List<HattrickDataMatchEventListEvent>();
+            this.injuriesField = new List<HattrickDataMatchInjuriesInjury>();
             this.bookingsField = new List<HattrickDataMatchBookingsBooking>();
             this.scorersField = new List<HattrickDataMatchScorersGoal>();
             this.arenaField = new List<HattrickDataMatchArena>();
             this.awayTeamField = new List<HattrickDataMatchAwayTeam>();
             this.homeTeamField = new List<HattrickDataMatchHomeTeam>();
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string MatchID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string MatchID {
+            get {
                 return this.matchIDField;
             }
-            set
-            {
+            set {
                 this.matchIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string MatchType
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string MatchType {
+            get {
                 return this.matchTypeField;
             }
-            set
-            {
+            set {
                 this.matchTypeField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string MatchDate
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string MatchDate {
+            get {
                 return this.matchDateField;
             }
-            set
-            {
+            set {
                 this.matchDateField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string FinishedDate
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string FinishedDate {
+            get {
                 return this.finishedDateField;
             }
-            set
-            {
+            set {
                 this.finishedDateField = value;
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4, IsNullable = true)]
-        public string Injuries
-        {
-            get
-            {
-                return this.injuriesField;
-            }
-            set
-            {
-                this.injuriesField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string PossessionFirstHalfHome
-        {
-            get
-            {
-                return this.possessionFirstHalfHomeField;
-            }
-            set
-            {
-                this.possessionFirstHalfHomeField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
-        public string PossessionFirstHalfAway
-        {
-            get
-            {
-                return this.possessionFirstHalfAwayField;
-            }
-            set
-            {
-                this.possessionFirstHalfAwayField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
-        public string PossessionSecondHalfHome
-        {
-            get
-            {
-                return this.possessionSecondHalfHomeField;
-            }
-            set
-            {
-                this.possessionSecondHalfHomeField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
-        public string PossessionSecondHalfAway
-        {
-            get
-            {
-                return this.possessionSecondHalfAwayField;
-            }
-            set
-            {
-                this.possessionSecondHalfAwayField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("HomeTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        [System.Xml.Serialization.XmlElementAttribute("HomeTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
         public List<HattrickDataMatchHomeTeam> HomeTeam
         {
             get
@@ -502,7 +368,7 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("AwayTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
+        [System.Xml.Serialization.XmlElementAttribute("AwayTeam", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
         public List<HattrickDataMatchAwayTeam> AwayTeam
         {
             get
@@ -515,7 +381,7 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("Arena", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
+        [System.Xml.Serialization.XmlElementAttribute("Arena", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
         public List<HattrickDataMatchArena> Arena
         {
             get
@@ -528,7 +394,7 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
+        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Goal", typeof(HattrickDataMatchScorersGoal), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
         public List<HattrickDataMatchScorersGoal> Scorers
         {
@@ -542,7 +408,7 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
+        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Booking", typeof(HattrickDataMatchBookingsBooking), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
         public List<HattrickDataMatchBookingsBooking> Bookings
         {
@@ -556,62 +422,105 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
             }
         }
 
-        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 14)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Event", typeof(HattrickDataMatchEventListEvent), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
-        public List<HattrickDataMatchEventListEvent> EventList
+        [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Injury", typeof(HattrickDataMatchInjuriesInjury), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
+        public List<HattrickDataMatchInjuriesInjury> Injuries
         {
             get
             {
-                return this.eventListField;
+                return this.injuriesField;
             }
             set
             {
+                this.injuriesField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string PossessionFirstHalfHome {
+            get {
+                return this.possessionFirstHalfHomeField;
+            }
+            set {
+                this.possessionFirstHalfHomeField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string PossessionFirstHalfAway {
+            get {
+                return this.possessionFirstHalfAwayField;
+            }
+            set {
+                this.possessionFirstHalfAwayField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string PossessionSecondHalfHome {
+            get {
+                return this.possessionSecondHalfHomeField;
+            }
+            set {
+                this.possessionSecondHalfHomeField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string PossessionSecondHalfAway {
+            get {
+                return this.possessionSecondHalfAwayField;
+            }
+            set {
+                this.possessionSecondHalfAwayField = value;
+            }
+        }
+               
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Event", typeof(HattrickDataMatchEventListEvent), Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public List<HattrickDataMatchEventListEvent> EventList {
+            get {
+                return this.eventListField;
+            }
+            set {
                 this.eventListField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatch));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatch object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatch object
         /// </summary>
@@ -619,86 +528,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatch object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatch obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatch obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatch);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatch obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatch obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatch Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatch Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatch)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatch object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatch object
         /// </summary>
@@ -706,34 +600,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatch object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatch obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatch obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatch);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatch obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatch obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatch LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatch LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -741,282 +629,264 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchHomeTeam
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchHomeTeam {
+        
         private string homeTeamIDField;
-
+        
         private string homeTeamNameField;
-
+        
         private string dressURIField;
-
+        
         private string formationField;
-
+        
         private string homeGoalsField;
-
+        
         private string tacticTypeField;
-
+        
         private string tacticSkillField;
-
+        
         private string ratingMidfieldField;
-
+        
         private string ratingRightDefField;
-
+        
         private string ratingMidDefField;
-
+        
         private string ratingLeftDefField;
-
+        
         private string ratingRightAttField;
-
+        
         private string ratingMidAttField;
-
+        
         private string ratingLeftAttField;
-
+        
+        private string teamAttitudeField;
+        
+        private string ratingIndirectSetPiecesDefField;
+        
+        private string ratingIndirectSetPiecesAttField;
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string HomeTeamID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string HomeTeamID {
+            get {
                 return this.homeTeamIDField;
             }
-            set
-            {
+            set {
                 this.homeTeamIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string HomeTeamName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string HomeTeamName {
+            get {
                 return this.homeTeamNameField;
             }
-            set
-            {
+            set {
                 this.homeTeamNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string DressURI
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string DressURI {
+            get {
                 return this.dressURIField;
             }
-            set
-            {
+            set {
                 this.dressURIField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string Formation
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string Formation {
+            get {
                 return this.formationField;
             }
-            set
-            {
+            set {
                 this.formationField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string HomeGoals
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string HomeGoals {
+            get {
                 return this.homeGoalsField;
             }
-            set
-            {
+            set {
                 this.homeGoalsField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string TacticType
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string TacticType {
+            get {
                 return this.tacticTypeField;
             }
-            set
-            {
+            set {
                 this.tacticTypeField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
-        public string TacticSkill
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string TacticSkill {
+            get {
                 return this.tacticSkillField;
             }
-            set
-            {
+            set {
                 this.tacticSkillField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
-        public string RatingMidfield
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string RatingMidfield {
+            get {
                 return this.ratingMidfieldField;
             }
-            set
-            {
+            set {
                 this.ratingMidfieldField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
-        public string RatingRightDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string RatingRightDef {
+            get {
                 return this.ratingRightDefField;
             }
-            set
-            {
+            set {
                 this.ratingRightDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
-        public string RatingMidDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string RatingMidDef {
+            get {
                 return this.ratingMidDefField;
             }
-            set
-            {
+            set {
                 this.ratingMidDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
-        public string RatingLeftDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string RatingLeftDef {
+            get {
                 return this.ratingLeftDefField;
             }
-            set
-            {
+            set {
                 this.ratingLeftDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
-        public string RatingRightAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string RatingRightAtt {
+            get {
                 return this.ratingRightAttField;
             }
-            set
-            {
+            set {
                 this.ratingRightAttField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
-        public string RatingMidAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string RatingMidAtt {
+            get {
                 return this.ratingMidAttField;
             }
-            set
-            {
+            set {
                 this.ratingMidAttField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
-        public string RatingLeftAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string RatingLeftAtt {
+            get {
                 return this.ratingLeftAttField;
             }
-            set
-            {
+            set {
                 this.ratingLeftAttField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public string TeamAttitude {
+            get {
+                return this.teamAttitudeField;
+            }
+            set {
+                this.teamAttitudeField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public string RatingIndirectSetPiecesDef {
+            get {
+                return this.ratingIndirectSetPiecesDefField;
+            }
+            set {
+                this.ratingIndirectSetPiecesDefField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        public string RatingIndirectSetPiecesAtt {
+            get {
+                return this.ratingIndirectSetPiecesAttField;
+            }
+            set {
+                this.ratingIndirectSetPiecesAttField = value;
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchHomeTeam));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatchHomeTeam object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchHomeTeam object
         /// </summary>
@@ -1024,86 +894,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchHomeTeam object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchHomeTeam obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchHomeTeam obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchHomeTeam);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchHomeTeam obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchHomeTeam obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchHomeTeam Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchHomeTeam Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchHomeTeam)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchHomeTeam object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchHomeTeam object
         /// </summary>
@@ -1111,34 +966,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchHomeTeam object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchHomeTeam obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchHomeTeam obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchHomeTeam);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchHomeTeam obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchHomeTeam obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchHomeTeam LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchHomeTeam LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -1146,282 +995,252 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchAwayTeam
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchAwayTeam {
+        
         private string awayTeamIDField;
-
+        
         private string awayTeamNameField;
-
+        
         private string dressURIField;
-
+        
         private string formationField;
-
+        
         private string awayGoalsField;
-
+        
         private string tacticTypeField;
-
+        
         private string tacticSkillField;
-
+        
         private string ratingMidfieldField;
-
+        
         private string ratingRightDefField;
-
+        
         private string ratingMidDefField;
-
+        
         private string ratingLeftDefField;
-
+        
         private string ratingRightAttField;
-
+        
         private string ratingMidAttField;
-
+        
         private string ratingLeftAttField;
-
+        
+        private string ratingIndirectSetPiecesDefField;
+        
+        private string ratingIndirectSetPiecesAttField;
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string AwayTeamID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string AwayTeamID {
+            get {
                 return this.awayTeamIDField;
             }
-            set
-            {
+            set {
                 this.awayTeamIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string AwayTeamName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string AwayTeamName {
+            get {
                 return this.awayTeamNameField;
             }
-            set
-            {
+            set {
                 this.awayTeamNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string DressURI
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string DressURI {
+            get {
                 return this.dressURIField;
             }
-            set
-            {
+            set {
                 this.dressURIField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string Formation
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string Formation {
+            get {
                 return this.formationField;
             }
-            set
-            {
+            set {
                 this.formationField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string AwayGoals
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string AwayGoals {
+            get {
                 return this.awayGoalsField;
             }
-            set
-            {
+            set {
                 this.awayGoalsField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string TacticType
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string TacticType {
+            get {
                 return this.tacticTypeField;
             }
-            set
-            {
+            set {
                 this.tacticTypeField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
-        public string TacticSkill
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string TacticSkill {
+            get {
                 return this.tacticSkillField;
             }
-            set
-            {
+            set {
                 this.tacticSkillField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
-        public string RatingMidfield
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string RatingMidfield {
+            get {
                 return this.ratingMidfieldField;
             }
-            set
-            {
+            set {
                 this.ratingMidfieldField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
-        public string RatingRightDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string RatingRightDef {
+            get {
                 return this.ratingRightDefField;
             }
-            set
-            {
+            set {
                 this.ratingRightDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
-        public string RatingMidDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string RatingMidDef {
+            get {
                 return this.ratingMidDefField;
             }
-            set
-            {
+            set {
                 this.ratingMidDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
-        public string RatingLeftDef
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string RatingLeftDef {
+            get {
                 return this.ratingLeftDefField;
             }
-            set
-            {
+            set {
                 this.ratingLeftDefField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
-        public string RatingRightAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string RatingRightAtt {
+            get {
                 return this.ratingRightAttField;
             }
-            set
-            {
+            set {
                 this.ratingRightAttField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
-        public string RatingMidAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string RatingMidAtt {
+            get {
                 return this.ratingMidAttField;
             }
-            set
-            {
+            set {
                 this.ratingMidAttField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
-        public string RatingLeftAtt
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string RatingLeftAtt {
+            get {
                 return this.ratingLeftAttField;
             }
-            set
-            {
+            set {
                 this.ratingLeftAttField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public string RatingIndirectSetPiecesDef {
+            get {
+                return this.ratingIndirectSetPiecesDefField;
+            }
+            set {
+                this.ratingIndirectSetPiecesDefField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public string RatingIndirectSetPiecesAtt {
+            get {
+                return this.ratingIndirectSetPiecesAttField;
+            }
+            set {
+                this.ratingIndirectSetPiecesAttField = value;
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchAwayTeam));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatchAwayTeam object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchAwayTeam object
         /// </summary>
@@ -1429,86 +1248,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchAwayTeam object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchAwayTeam obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchAwayTeam obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchAwayTeam);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchAwayTeam obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchAwayTeam obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchAwayTeam Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchAwayTeam Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchAwayTeam)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchAwayTeam object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchAwayTeam object
         /// </summary>
@@ -1516,34 +1320,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchAwayTeam object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchAwayTeam obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchAwayTeam obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchAwayTeam);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchAwayTeam obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchAwayTeam obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchAwayTeam LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchAwayTeam LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -1551,132 +1349,156 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchArena
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchArena {
+        
         private string arenaIDField;
-
+        
         private string arenaNameField;
-
+        
         private string weatherIDField;
-
+        
         private string soldTotalField;
-
+        
+        private string soldTerracesField;
+        
+        private string soldBasicField;
+        
+        private string soldRoofField;
+        
+        private string soldVIPField;
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string ArenaID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string ArenaID {
+            get {
                 return this.arenaIDField;
             }
-            set
-            {
+            set {
                 this.arenaIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string ArenaName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string ArenaName {
+            get {
                 return this.arenaNameField;
             }
-            set
-            {
+            set {
                 this.arenaNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string WeatherID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string WeatherID {
+            get {
                 return this.weatherIDField;
             }
-            set
-            {
+            set {
                 this.weatherIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string SoldTotal
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string SoldTotal {
+            get {
                 return this.soldTotalField;
             }
-            set
-            {
+            set {
                 this.soldTotalField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string SoldTerraces {
+            get {
+                return this.soldTerracesField;
+            }
+            set {
+                this.soldTerracesField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string SoldBasic {
+            get {
+                return this.soldBasicField;
+            }
+            set {
+                this.soldBasicField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string SoldRoof {
+            get {
+                return this.soldRoofField;
+            }
+            set {
+                this.soldRoofField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string SoldVIP {
+            get {
+                return this.soldVIPField;
+            }
+            set {
+                this.soldVIPField = value;
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchArena));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatchArena object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchArena object
         /// </summary>
@@ -1684,86 +1506,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchArena object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchArena obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchArena obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchArena);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchArena obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchArena obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchArena Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchArena Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchArena)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchArena object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchArena object
         /// </summary>
@@ -1771,34 +1578,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchArena object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchArena obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchArena obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchArena);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchArena obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchArena obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchArena LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchArena LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -1806,177 +1607,144 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchScorersGoal
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchScorersGoal {
+        
         private string scorerPlayerIDField;
-
+        
         private string scorerPlayerNameField;
-
+        
         private string scorerTeamIDField;
-
+        
         private string scorerHomeGoalsField;
-
+        
         private string scorerAwayGoalsField;
-
+        
         private string scorerMinuteField;
-
+        
         private string indexField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string ScorerPlayerID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string ScorerPlayerID {
+            get {
                 return this.scorerPlayerIDField;
             }
-            set
-            {
+            set {
                 this.scorerPlayerIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string ScorerPlayerName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string ScorerPlayerName {
+            get {
                 return this.scorerPlayerNameField;
             }
-            set
-            {
+            set {
                 this.scorerPlayerNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string ScorerTeamID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string ScorerTeamID {
+            get {
                 return this.scorerTeamIDField;
             }
-            set
-            {
+            set {
                 this.scorerTeamIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string ScorerHomeGoals
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string ScorerHomeGoals {
+            get {
                 return this.scorerHomeGoalsField;
             }
-            set
-            {
+            set {
                 this.scorerHomeGoalsField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string ScorerAwayGoals
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string ScorerAwayGoals {
+            get {
                 return this.scorerAwayGoalsField;
             }
-            set
-            {
+            set {
                 this.scorerAwayGoalsField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string ScorerMinute
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string ScorerMinute {
+            get {
                 return this.scorerMinuteField;
             }
-            set
-            {
+            set {
                 this.scorerMinuteField = value;
             }
         }
-
+        
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Index
-        {
-            get
-            {
+        public string Index {
+            get {
                 return this.indexField;
             }
-            set
-            {
+            set {
                 this.indexField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchScorersGoal));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatchScorersGoal object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchScorersGoal object
         /// </summary>
@@ -1984,86 +1752,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchScorersGoal object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchScorersGoal obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchScorersGoal obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchScorersGoal);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchScorersGoal obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchScorersGoal obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchScorersGoal Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchScorersGoal Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchScorersGoal)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchScorersGoal object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchScorersGoal object
         /// </summary>
@@ -2071,34 +1824,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchScorersGoal object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchScorersGoal obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchScorersGoal obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchScorersGoal);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchScorersGoal obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchScorersGoal obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchScorersGoal LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchScorersGoal LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -2106,162 +1853,132 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchBookingsBooking
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchBookingsBooking {
+        
         private string bookingPlayerIDField;
-
+        
         private string bookingPlayerNameField;
-
+        
         private string bookingTeamIDField;
-
+        
         private string bookingTypeField;
-
+        
         private string bookingMinuteField;
-
+        
         private string indexField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string BookingPlayerID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string BookingPlayerID {
+            get {
                 return this.bookingPlayerIDField;
             }
-            set
-            {
+            set {
                 this.bookingPlayerIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string BookingPlayerName
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string BookingPlayerName {
+            get {
                 return this.bookingPlayerNameField;
             }
-            set
-            {
+            set {
                 this.bookingPlayerNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string BookingTeamID
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string BookingTeamID {
+            get {
                 return this.bookingTeamIDField;
             }
-            set
-            {
+            set {
                 this.bookingTeamIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string BookingType
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string BookingType {
+            get {
                 return this.bookingTypeField;
             }
-            set
-            {
+            set {
                 this.bookingTypeField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string BookingMinute
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string BookingMinute {
+            get {
                 return this.bookingMinuteField;
             }
-            set
-            {
+            set {
                 this.bookingMinuteField = value;
             }
         }
-
+        
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Index
-        {
-            get
-            {
+        public string Index {
+            get {
                 return this.indexField;
             }
-            set
-            {
+            set {
                 this.indexField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchBookingsBooking));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current HattrickDataMatchBookingsBooking object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchBookingsBooking object
         /// </summary>
@@ -2269,86 +1986,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchBookingsBooking object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchBookingsBooking obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchBookingsBooking obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchBookingsBooking);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchBookingsBooking obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchBookingsBooking obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchBookingsBooking Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchBookingsBooking Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchBookingsBooking)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchBookingsBooking object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchBookingsBooking object
         /// </summary>
@@ -2356,34 +2058,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchBookingsBooking object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchBookingsBooking obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchBookingsBooking obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchBookingsBooking);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchBookingsBooking obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchBookingsBooking obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchBookingsBooking LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchBookingsBooking LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -2391,192 +2087,390 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class HattrickDataMatchEventListEvent
-    {
-
-        private string minuteField;
-
-        private string subjectPlayerIDField;
-
-        private string subjectTeamIDField;
-
-        private string objectPlayerIDField;
-
-        private string eventTypeIDField;
-
-        private string eventVariationField;
-
-        private string eventTextField;
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchInjuriesInjury {
+        
+        private string injuryPlayerIDField;
+        
+        private string injuryPlayerNameField;
+        
+        private string injuryTeamIDField;
+        
+        private string injuryTypeField;
+        
+        private string injuryMinuteField;
+        
         private string indexField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
-        public string Minute
-        {
-            get
-            {
-                return this.minuteField;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string InjuryPlayerID {
+            get {
+                return this.injuryPlayerIDField;
             }
-            set
-            {
-                this.minuteField = value;
+            set {
+                this.injuryPlayerIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
-        public string SubjectPlayerID
-        {
-            get
-            {
-                return this.subjectPlayerIDField;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string InjuryPlayerName {
+            get {
+                return this.injuryPlayerNameField;
             }
-            set
-            {
-                this.subjectPlayerIDField = value;
+            set {
+                this.injuryPlayerNameField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
-        public string SubjectTeamID
-        {
-            get
-            {
-                return this.subjectTeamIDField;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string InjuryTeamID {
+            get {
+                return this.injuryTeamIDField;
             }
-            set
-            {
-                this.subjectTeamIDField = value;
+            set {
+                this.injuryTeamIDField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
-        public string ObjectPlayerID
-        {
-            get
-            {
-                return this.objectPlayerIDField;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string InjuryType {
+            get {
+                return this.injuryTypeField;
             }
-            set
-            {
-                this.objectPlayerIDField = value;
+            set {
+                this.injuryTypeField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
-        public string EventTypeID
-        {
-            get
-            {
-                return this.eventTypeIDField;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string InjuryMinute {
+            get {
+                return this.injuryMinuteField;
             }
-            set
-            {
-                this.eventTypeIDField = value;
+            set {
+                this.injuryMinuteField = value;
             }
         }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
-        public string EventVariation
-        {
-            get
-            {
-                return this.eventVariationField;
-            }
-            set
-            {
-                this.eventVariationField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
-        public string EventText
-        {
-            get
-            {
-                return this.eventTextField;
-            }
-            set
-            {
-                this.eventTextField = value;
-            }
-        }
-
+        
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Index
-        {
-            get
-            {
+        public string Index {
+            get {
                 return this.indexField;
             }
-            set
-            {
+            set {
                 this.indexField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchEventListEvent));
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
+                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchInjuriesInjury));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
-        /// Serializes current HattrickDataMatchEventListEvent object into an XML document
+        /// Serializes current HattrickDataMatchInjuriesInjury object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Deserializes workflow markup into an HattrickDataMatchInjuriesInjury object
+        /// </summary>
+        /// <param name="xml">string workflow markup to deserialize</param>
+        /// <param name="obj">Output HattrickDataMatchInjuriesInjury object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool Deserialize(string xml, out HattrickDataMatchInjuriesInjury obj, out System.Exception exception) {
+            exception = null;
+            obj = default(HattrickDataMatchInjuriesInjury);
+            try {
+                obj = Deserialize(xml);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchInjuriesInjury obj) {
+            System.Exception exception = null;
+            return Deserialize(xml, out obj, out exception);
+        }
+        
+        public static HattrickDataMatchInjuriesInjury Deserialize(string xml) {
+            System.IO.StringReader stringReader = null;
+            try {
+                stringReader = new System.IO.StringReader(xml);
+                return ((HattrickDataMatchInjuriesInjury)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
+            }
+            finally {
+                if ((stringReader != null)) {
+                    stringReader.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Serializes current HattrickDataMatchInjuriesInjury object into file
+        /// </summary>
+        /// <param name="fileName">full path of outupt xml file</param>
+        /// <param name="exception">output Exception value if failed</param>
+        /// <returns>true if can serialize and save into file; otherwise, false</returns>
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
+            exception = null;
+            try {
+                SaveToFile(fileName);
+                return true;
+            }
+            catch (System.Exception e) {
+                exception = e;
+                return false;
+            }
+        }
+        
+        public virtual void SaveToFile(string fileName) {
+            System.IO.StreamWriter streamWriter = null;
+            try {
+                string xmlString = Serialize();
+                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
+                streamWriter = xmlFile.CreateText();
+                streamWriter.WriteLine(xmlString);
+                streamWriter.Close();
+            }
+            finally {
+                if ((streamWriter != null)) {
+                    streamWriter.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes xml markup from file into an HattrickDataMatchInjuriesInjury object
+        /// </summary>
+        /// <param name="fileName">string xml file to load and deserialize</param>
+        /// <param name="obj">Output HattrickDataMatchInjuriesInjury object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchInjuriesInjury obj, out System.Exception exception) {
+            exception = null;
+            obj = default(HattrickDataMatchInjuriesInjury);
+            try {
+                obj = LoadFromFile(fileName);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchInjuriesInjury obj) {
+            System.Exception exception = null;
+            return LoadFromFile(fileName, out obj, out exception);
+        }
+        
+        public static HattrickDataMatchInjuriesInjury LoadFromFile(string fileName) {
+            System.IO.FileStream file = null;
+            System.IO.StreamReader sr = null;
+            try {
+                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
+                sr = new System.IO.StreamReader(file);
+                string xmlString = sr.ReadToEnd();
+                sr.Close();
+                file.Close();
+                return Deserialize(xmlString);
+            }
+            finally {
+                if ((file != null)) {
+                    file.Dispose();
+                }
+                if ((sr != null)) {
+                    sr.Dispose();
+                }
+            }
+        }
+        #endregion
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public partial class HattrickDataMatchEventListEvent {
+        
+        private string minuteField;
+        
+        private string subjectPlayerIDField;
+        
+        private string subjectTeamIDField;
+        
+        private string objectPlayerIDField;
+        
+        private string eventTypeIDField;
+        
+        private string eventVariationField;
+        
+        private string eventTextField;
+        
+        private string indexField;
+        
+        private static System.Xml.Serialization.XmlSerializer serializer;
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string Minute {
+            get {
+                return this.minuteField;
+            }
+            set {
+                this.minuteField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string SubjectPlayerID {
+            get {
+                return this.subjectPlayerIDField;
+            }
+            set {
+                this.subjectPlayerIDField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string SubjectTeamID {
+            get {
+                return this.subjectTeamIDField;
+            }
+            set {
+                this.subjectTeamIDField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string ObjectPlayerID {
+            get {
+                return this.objectPlayerIDField;
+            }
+            set {
+                this.objectPlayerIDField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string EventTypeID {
+            get {
+                return this.eventTypeIDField;
+            }
+            set {
+                this.eventTypeIDField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string EventVariation {
+            get {
+                return this.eventVariationField;
+            }
+            set {
+                this.eventVariationField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string EventText {
+            get {
+                return this.eventTextField;
+            }
+            set {
+                this.eventTextField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Index {
+            get {
+                return this.indexField;
+            }
+            set {
+                this.indexField = value;
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
+                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(HattrickDataMatchEventListEvent));
+                }
+                return serializer;
+            }
+        }
+        
+        #region Serialize/Deserialize
+        /// <summary>
+        /// Serializes current HattrickDataMatchEventListEvent object into an XML document
+        /// </summary>
+        /// <returns>string XML value</returns>
+        public virtual string Serialize() {
+            System.IO.StreamReader streamReader = null;
+            System.IO.MemoryStream memoryStream = null;
+            try {
+                memoryStream = new System.IO.MemoryStream();
+                Serializer.Serialize(memoryStream, this);
+                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+                streamReader = new System.IO.StreamReader(memoryStream);
+                return streamReader.ReadToEnd();
+            }
+            finally {
+                if ((streamReader != null)) {
+                    streamReader.Dispose();
+                }
+                if ((memoryStream != null)) {
+                    memoryStream.Dispose();
+                }
+            }
+        }
+        
         /// <summary>
         /// Deserializes workflow markup into an HattrickDataMatchEventListEvent object
         /// </summary>
@@ -2584,86 +2478,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchEventListEvent object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out HattrickDataMatchEventListEvent obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out HattrickDataMatchEventListEvent obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchEventListEvent);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out HattrickDataMatchEventListEvent obj)
-        {
+        
+        public static bool Deserialize(string xml, out HattrickDataMatchEventListEvent obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static HattrickDataMatchEventListEvent Deserialize(string xml)
-        {
+        
+        public static HattrickDataMatchEventListEvent Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((HattrickDataMatchEventListEvent)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current HattrickDataMatchEventListEvent object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an HattrickDataMatchEventListEvent object
         /// </summary>
@@ -2671,34 +2550,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output HattrickDataMatchEventListEvent object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchEventListEvent obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchEventListEvent obj, out System.Exception exception) {
             exception = null;
             obj = default(HattrickDataMatchEventListEvent);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out HattrickDataMatchEventListEvent obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out HattrickDataMatchEventListEvent obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static HattrickDataMatchEventListEvent LoadFromFile(string fileName)
-        {
+        
+        public static HattrickDataMatchEventListEvent LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -2706,93 +2579,77 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }
         }
         #endregion
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17020")]
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class NewDataSet
-    {
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class NewDataSet {
+        
         private List<HattrickData> itemsField;
-
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
-
-        public NewDataSet()
-        {
+        
+        public NewDataSet() {
             this.itemsField = new List<HattrickData>();
         }
-
-        [System.Xml.Serialization.XmlElementAttribute("HattrickData", Order = 0)]
-        public List<HattrickData> Items
-        {
-            get
-            {
+        
+        [System.Xml.Serialization.XmlElementAttribute("HattrickData", Order=0)]
+        public List<HattrickData> Items {
+            get {
                 return this.itemsField;
             }
-            set
-            {
+            set {
                 this.itemsField = value;
             }
         }
-
-        private static System.Xml.Serialization.XmlSerializer Serializer
-        {
-            get
-            {
-                if ((serializer == null))
-                {
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
                     serializer = new System.Xml.Serialization.XmlSerializer(typeof(NewDataSet));
                 }
                 return serializer;
             }
         }
-
+        
         #region Serialize/Deserialize
         /// <summary>
         /// Serializes current NewDataSet object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
-        public virtual string Serialize()
-        {
+        public virtual string Serialize() {
             System.IO.StreamReader streamReader = null;
             System.IO.MemoryStream memoryStream = null;
-            try
-            {
+            try {
                 memoryStream = new System.IO.MemoryStream();
                 Serializer.Serialize(memoryStream, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
                 streamReader = new System.IO.StreamReader(memoryStream);
                 return streamReader.ReadToEnd();
             }
-            finally
-            {
-                if ((streamReader != null))
-                {
+            finally {
+                if ((streamReader != null)) {
                     streamReader.Dispose();
                 }
-                if ((memoryStream != null))
-                {
+                if ((memoryStream != null)) {
                     memoryStream.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes workflow markup into an NewDataSet object
         /// </summary>
@@ -2800,86 +2657,71 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output NewDataSet object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out NewDataSet obj, out System.Exception exception)
-        {
+        public static bool Deserialize(string xml, out NewDataSet obj, out System.Exception exception) {
             exception = null;
             obj = default(NewDataSet);
-            try
-            {
+            try {
                 obj = Deserialize(xml);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool Deserialize(string xml, out NewDataSet obj)
-        {
+        
+        public static bool Deserialize(string xml, out NewDataSet obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
-
-        public static NewDataSet Deserialize(string xml)
-        {
+        
+        public static NewDataSet Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
-            try
-            {
+            try {
                 stringReader = new System.IO.StringReader(xml);
                 return ((NewDataSet)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
-            finally
-            {
-                if ((stringReader != null))
-                {
+            finally {
+                if ((stringReader != null)) {
                     stringReader.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Serializes current NewDataSet object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
         /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception)
-        {
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
             exception = null;
-            try
-            {
+            try {
                 SaveToFile(fileName);
                 return true;
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 exception = e;
                 return false;
             }
         }
-
-        public virtual void SaveToFile(string fileName)
-        {
+        
+        public virtual void SaveToFile(string fileName) {
             System.IO.StreamWriter streamWriter = null;
-            try
-            {
+            try {
                 string xmlString = Serialize();
                 System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
                 streamWriter = xmlFile.CreateText();
                 streamWriter.WriteLine(xmlString);
                 streamWriter.Close();
             }
-            finally
-            {
-                if ((streamWriter != null))
-                {
+            finally {
+                if ((streamWriter != null)) {
                     streamWriter.Dispose();
                 }
             }
         }
-
+        
         /// <summary>
         /// Deserializes xml markup from file into an NewDataSet object
         /// </summary>
@@ -2887,34 +2729,28 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         /// <param name="obj">Output NewDataSet object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out NewDataSet obj, out System.Exception exception)
-        {
+        public static bool LoadFromFile(string fileName, out NewDataSet obj, out System.Exception exception) {
             exception = null;
             obj = default(NewDataSet);
-            try
-            {
+            try {
                 obj = LoadFromFile(fileName);
                 return true;
             }
-            catch (System.Exception ex)
-            {
+            catch (System.Exception ex) {
                 exception = ex;
                 return false;
             }
         }
-
-        public static bool LoadFromFile(string fileName, out NewDataSet obj)
-        {
+        
+        public static bool LoadFromFile(string fileName, out NewDataSet obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
-
-        public static NewDataSet LoadFromFile(string fileName)
-        {
+        
+        public static NewDataSet LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
-            try
-            {
+            try {
                 file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
@@ -2922,14 +2758,11 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
                 file.Close();
                 return Deserialize(xmlString);
             }
-            finally
-            {
-                if ((file != null))
-                {
+            finally {
+                if ((file != null)) {
                     file.Dispose();
                 }
-                if ((sr != null))
-                {
+                if ((sr != null)) {
                     sr.Dispose();
                 }
             }

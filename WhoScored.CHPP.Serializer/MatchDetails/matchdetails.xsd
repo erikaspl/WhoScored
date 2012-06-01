@@ -16,7 +16,6 @@
               <xs:element name="MatchType" type="xs:string" minOccurs="0" />
               <xs:element name="MatchDate" type="xs:string" minOccurs="0" />
               <xs:element name="FinishedDate" type="xs:string" minOccurs="0" />
-              <xs:element name="Injuries" type="xs:string" minOccurs="0" />
               <xs:element name="PossessionFirstHalfHome" type="xs:string" minOccurs="0" />
               <xs:element name="PossessionFirstHalfAway" type="xs:string" minOccurs="0" />
               <xs:element name="PossessionSecondHalfHome" type="xs:string" minOccurs="0" />
@@ -38,6 +37,9 @@
                     <xs:element name="RatingRightAtt" type="xs:string" minOccurs="0" />
                     <xs:element name="RatingMidAtt" type="xs:string" minOccurs="0" />
                     <xs:element name="RatingLeftAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="TeamAttitude" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingIndirectSetPiecesDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingIndirectSetPiecesAtt" type="xs:string" minOccurs="0" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -58,6 +60,8 @@
                     <xs:element name="RatingRightAtt" type="xs:string" minOccurs="0" />
                     <xs:element name="RatingMidAtt" type="xs:string" minOccurs="0" />
                     <xs:element name="RatingLeftAtt" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingIndirectSetPiecesDef" type="xs:string" minOccurs="0" />
+                    <xs:element name="RatingIndirectSetPiecesAtt" type="xs:string" minOccurs="0" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -68,6 +72,10 @@
                     <xs:element name="ArenaName" type="xs:string" minOccurs="0" />
                     <xs:element name="WeatherID" type="xs:string" minOccurs="0" />
                     <xs:element name="SoldTotal" type="xs:string" minOccurs="0" />
+                    <xs:element name="SoldTerraces" type="xs:string" minOccurs="0" />
+                    <xs:element name="SoldBasic" type="xs:string" minOccurs="0" />
+                    <xs:element name="SoldRoof" type="xs:string" minOccurs="0" />
+                    <xs:element name="SoldVIP" type="xs:string" minOccurs="0" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -101,6 +109,24 @@
                           <xs:element name="BookingTeamID" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
                           <xs:element name="BookingType" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
                           <xs:element name="BookingMinute" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
+                        </xs:sequence>
+                        <xs:attribute name="Index" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Injuries" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Injury" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="InjuryPlayerID" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                          <xs:element name="InjuryPlayerName" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+                          <xs:element name="InjuryTeamID" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+                          <xs:element name="InjuryType" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
+                          <xs:element name="InjuryMinute" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
                         </xs:sequence>
                         <xs:attribute name="Index" type="xs:string" />
                       </xs:complexType>
