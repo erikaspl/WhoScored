@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="LeagueDetails\leaguedetails.designer.cs" />
     <Compile Include="MatchDetails\matchdetails.designer.cs" />
+    <Compile Include="MatchDetails\matchdetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeagueDetails\leaguedetails.cs" />
     <Compile Include="SeriesFixtures\seriesfixtures.designer.cs" />

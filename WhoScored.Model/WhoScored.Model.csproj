@@ -40,8 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMatch.cs" />
+    <Compile Include="IMatchArena.cs" />
     <Compile Include="ILeagueDetails.cs" />
+    <Compile Include="IMatchBookings.cs" />
+    <Compile Include="IMatchEventList.cs" />
+    <Compile Include="IMatchInjuries.cs" />
+    <Compile Include="IMatchScorers.cs" />
     <Compile Include="IMatchSummary.cs" />
+    <Compile Include="IMatchTeam.cs" />
     <Compile Include="Implementation\SeriesFixturesSummaryEntity.cs" />
     <Compile Include="ISeriesFixtures.cs" />
     <Compile Include="ISettings.cs" />

@@ -74,6 +74,66 @@ namespace WhoScored.Db.Mongo
             }
         }
 
+        public static void MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>()
+            where T : class, IMatch
+            where TY : class, IMatchArena
+            where TZ : class, IMatchTeam
+            where TA : class, IMatchScorers
+            where TB : class, IMatchBookings
+            where TC : class, IMatchInjuries
+            where TD : class, IMatchEventList
+        {
+            if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("MatchID"));
+                MapTypeProperties<IMatch>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TY)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TY>();
+                MapTypeProperties<IMatchArena>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TZ)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TZ>();
+                MapTypeProperties<IMatchTeam>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TA)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TA>();
+                MapTypeProperties<IMatchScorers>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TB)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TB>();
+                MapTypeProperties<IMatchBookings>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TC)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TC>();
+                MapTypeProperties<IMatchInjuries>(map);
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(TD)))
+            {
+                BsonClassMap map = BsonClassMap.RegisterClassMap<TD>();
+                MapTypeProperties<IMatchEventList>(map);
+            }
+        }
+
+        private static void MapTypeProperties<T>(BsonClassMap map)
+        {
+            foreach (var property in typeof(T).GetProperties())
+            {
+                map.MapProperty(property.Name);
+            }           
+        }
+
         #endregion
 
         #region WorldDetails CRUID
@@ -319,6 +379,26 @@ namespace WhoScored.Db.Mongo
             var collection = database.GetCollection<ISeriesFixtures>(SERIES_FIXTURES_COLLECTION_NAME);
 
             collection.Drop();
+        }
+
+        #endregion
+
+        #region MatchDetails CRUID
+
+        private const string MATCH_DETAILS_COLLECTION_NAME = "MatchDetails";
+
+        public void SaveMatchDetails<T, Y>(List<T> matchDetails)
+            where T : class, ISeriesFixtures
+            where Y : class, IMatchSummary
+        {
+            MapSeriesFixtures<T, Y>();
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
+
+            foreach (var fixture in matchDetails)
+            {
+                collection.Save(fixture);
+            }
         }
 
         #endregion

@@ -271,7 +271,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatch {
+    public partial class HattrickDataMatch
+    {
         
         private string matchIDField;
         
@@ -1011,7 +1012,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatchAwayTeam {
+    public partial class HattrickDataMatchAwayTeam
+    {
         
         private string awayTeamIDField;
         
@@ -1623,7 +1625,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatchScorersGoal {
+    public partial class HattrickDataMatchScorersGoal
+    {
         
         private string scorerPlayerIDField;
         
@@ -1869,7 +1872,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatchBookingsBooking {
+    public partial class HattrickDataMatchBookingsBooking
+    {
         
         private string bookingPlayerIDField;
         
@@ -2103,7 +2107,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatchInjuriesInjury {
+    public partial class HattrickDataMatchInjuriesInjury
+    {
         
         private string injuryPlayerIDField;
         
@@ -2337,7 +2342,8 @@ namespace WhoScored.CHPP.MatchDetails.Serializer {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class HattrickDataMatchEventListEvent {
+    public partial class HattrickDataMatchEventListEvent
+    {
         
         private string minuteField;
         
