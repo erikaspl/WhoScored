@@ -387,11 +387,16 @@ namespace WhoScored.Db.Mongo
 
         private const string MATCH_DETAILS_COLLECTION_NAME = "MatchDetails";
 
-        public void SaveMatchDetails<T, Y>(List<T> matchDetails)
-            where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary
+        public void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(List<T> matchDetails)
+            where T : class, IMatch
+            where TY : class, IMatchArena
+            where TZ : class, IMatchTeam
+            where TA : class, IMatchScorers
+            where TB : class, IMatchBookings
+            where TC : class, IMatchInjuries
+            where TD : class, IMatchEventList
         {
-            MapSeriesFixtures<T, Y>();
+            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
 
@@ -399,6 +404,49 @@ namespace WhoScored.Db.Mongo
             {
                 collection.Save(fixture);
             }
+        }
+
+        public void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(T matchDetails)
+            where T : class, IMatch
+            where TY : class, IMatchArena
+            where TZ : class, IMatchTeam
+            where TA : class, IMatchScorers
+            where TB : class, IMatchBookings
+            where TC : class, IMatchInjuries
+            where TD : class, IMatchEventList
+        {
+            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
+
+            collection.Save(matchDetails);
+        }
+
+        public List<T> GetMatchDetails<T, TY, TZ, TA, TB, TC, TD>()
+            where T : class, IMatch
+            where TY : class, IMatchArena
+            where TZ : class, IMatchTeam
+            where TA : class, IMatchScorers
+            where TB : class, IMatchBookings
+            where TC : class, IMatchInjuries
+            where TD : class, IMatchEventList
+        {
+            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<T>(MATCH_DETAILS_COLLECTION_NAME);
+
+            var result = collection.FindAll().ToList();
+
+            return result;
+        }
+
+        public void DropMatchDetails()
+        {
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection<IMatch>(MATCH_DETAILS_COLLECTION_NAME);
+
+            collection.Drop();
         }
 
         #endregion

@@ -104,6 +104,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Xml\matchdetails.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Xml\seriesfixtures.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

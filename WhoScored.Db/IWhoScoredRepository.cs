@@ -49,5 +49,21 @@ namespace WhoScored.Db
             where Y : class, IMatchSummary;
 
         void DropSeriesFixtures();
+
+
+        void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(List<T> matchDetails) where T : class, IMatch
+            where TY : class, IMatchArena where TZ : class, IMatchTeam where TA : class, IMatchScorers
+            where TB : class, IMatchBookings where TC : class, IMatchInjuries where TD : class, IMatchEventList;
+
+        void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(T matchDetails) where T : class, IMatch
+            where TY : class, IMatchArena where TZ : class, IMatchTeam where TA : class, IMatchScorers
+            where TB : class, IMatchBookings where TC : class, IMatchInjuries where TD : class, IMatchEventList;
+
+
+        List<T> GetMatchDetails<T, TY, TZ, TA, TB, TC, TD>() where T : class, IMatch where TY : class, IMatchArena
+            where TZ : class, IMatchTeam where TA : class, IMatchScorers where TB : class, IMatchBookings
+            where TC : class, IMatchInjuries where TD : class, IMatchEventList;
+
+        void DropMatchDetails();
     }
 }

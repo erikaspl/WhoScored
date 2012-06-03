@@ -12,11 +12,12 @@ namespace WhoScored.IntegrationTest
 {
     using System.Threading;
 
-    using WhoScored.CHPP.SeriesFixtures.Serializer;
+    using WhoScored.CHPP.MatchDetails.Serializer;
     using WhoScored.Db;
     using WhoScored.Models;
 
     using HattrickData = WhoScored.CHPP.WorldDetails.Serializer.HattrickData;
+    using HattrickDataMatch = WhoScored.CHPP.SeriesFixtures.Serializer.HattrickDataMatch;
 
     /// <summary>
     ///This is a test class for MigrationDomainServiceTest and is intended
@@ -108,10 +109,10 @@ namespace WhoScored.IntegrationTest
 
             Thread.Sleep(1000);
 
-            var worldDetailsCount = repository.GetWorldDetails<HattrickDataLeagueListLeague>(66);
+            var countryDetails = repository.GetWorldDetails<HattrickDataLeagueListLeague>(66);
 
             repository.DropWorldDetails();
-            Assert.AreEqual(worldDetailsInput.LeagueList.First().League.Count, worldDetailsCount);
+            Assert.AreEqual(worldDetailsInput.LeagueList.First().League.Where(l => l.LeagueID == 66).First().LeagueName, countryDetails.LeagueName);
         }
 
 
@@ -196,6 +197,30 @@ namespace WhoScored.IntegrationTest
 
             repository.DropSeriesFixtures();
             Assert.AreEqual(1, fixturesCount);
+        }
+
+
+        [TestMethod()]
+        [DeploymentItem("./Xml/matchdetails.xml")]
+        public void MigrateMatchDetailsTest_FromXmlToDb()
+        {
+            string strFile = "matchdetails.xml";
+            string response = GetXmlString(strFile);
+
+            var matchDetailsInput = CHPP.MatchDetails.Serializer.HattrickData.Deserialize(response).Match.First();
+
+            IWhoScoredRepository repository = new WhoScoredRepository();
+
+            repository.SaveMatchDetails<CHPP.MatchDetails.Serializer.HattrickDataMatch, HattrickDataMatchArena, 
+                HattrickDataMatchAwayTeam, HattrickDataMatchScorersGoal,HattrickDataMatchBookingsBooking,
+                HattrickDataMatchInjuriesInjury, HattrickDataMatchEventListEvent>(matchDetailsInput);
+
+            Thread.Sleep(1000);
+
+            var matchDetails = repository.GetMatchDetails<MatchDetails, MatchArena, MatchTeam, MatchScorers, MatchBookings, MatchInjuries, MatchEventList>();
+
+            repository.DropSeriesFixtures();
+            Assert.AreEqual(1, matchDetails.Count);
         }
     }
 }

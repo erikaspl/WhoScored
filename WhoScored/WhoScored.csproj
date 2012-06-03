@@ -68,6 +68,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MatchDetails.cs" />
     <Compile Include="Models\MigrationModel.cs" />
     <Compile Include="Models\SeriesDetailsModels.cs" />
     <Compile Include="Models\SettingsModels.cs" />
