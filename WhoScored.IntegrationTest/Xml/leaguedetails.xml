@@ -1,118 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<HattrickData>
-	<FileName>leaguedetails.xml</FileName>
-	<Version>1.4</Version>
-	<UserID>1234061</UserID>
-	<FetchedDate>2012-05-10 19:07:13</FetchedDate>
-	<LeagueID>66</LeagueID>
-	<LeagueName>Lietuva</LeagueName>
-	<LeagueLevel>1</LeagueLevel>
-	<MaxLevel>6</MaxLevel>
-	<LeagueLevelUnitID>29747</LeagueLevelUnitID>
-	<LeagueLevelUnitName>A Lyga</LeagueLevelUnitName>
-	<CurrentMatchRound>12</CurrentMatchRound>
-	<Team>
-		<TeamID>676088</TeamID>
-		<TeamName>PrienuSM</TeamName>
-		<Position>1</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>28</GoalsFor>
-		<GoalsAgainst>6</GoalsAgainst>
-		<Points>28</Points>
-		<Won>9</Won>
-		<Draws>1</Draws>
-		<Lost>1</Lost>
-	</Team>
-	<Team>
-		<TeamID>668880</TeamID>
-		<TeamName>FC Žilvas</TeamName>
-		<Position>2</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>31</GoalsFor>
-		<GoalsAgainst>10</GoalsAgainst>
-		<Points>27</Points>
-		<Won>9</Won>
-		<Draws>0</Draws>
-		<Lost>2</Lost>
-	</Team>
-	<Team>
-		<TeamID>241278</TeamID>
-		<TeamName>Šeškai</TeamName>
-		<Position>3</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>38</GoalsFor>
-		<GoalsAgainst>14</GoalsAgainst>
-		<Points>19</Points>
-		<Won>6</Won>
-		<Draws>1</Draws>
-		<Lost>4</Lost>
-	</Team>
-	<Team>
-		<TeamID>672788</TeamID>
-		<TeamName>Biofizikai</TeamName>
-		<Position>4</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>28</GoalsFor>
-		<GoalsAgainst>24</GoalsAgainst>
-		<Points>15</Points>
-		<Won>4</Won>
-		<Draws>3</Draws>
-		<Lost>4</Lost>
-	</Team>
-	<Team>
-		<TeamID>669671</TeamID>
-		<TeamName>Eiliniai</TeamName>
-		<Position>5</Position>
-		<PositionChange>1</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>26</GoalsFor>
-		<GoalsAgainst>19</GoalsAgainst>
-		<Points>13</Points>
-		<Won>3</Won>
-		<Draws>4</Draws>
-		<Lost>4</Lost>
-	</Team>
-	<Team>
-		<TeamID>483378</TeamID>
-		<TeamName>Abugibugi</TeamName>
-		<Position>6</Position>
-		<PositionChange>2</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>13</GoalsFor>
-		<GoalsAgainst>17</GoalsAgainst>
-		<Points>10</Points>
-		<Won>2</Won>
-		<Draws>4</Draws>
-		<Lost>5</Lost>
-	</Team>
-	<Team>
-		<TeamID>671785</TeamID>
-		<TeamName>Kauno Extremalai</TeamName>
-		<Position>7</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>14</GoalsFor>
-		<GoalsAgainst>22</GoalsAgainst>
-		<Points>9</Points>
-		<Won>2</Won>
-		<Draws>3</Draws>
-		<Lost>6</Lost>
-	</Team>
-	<Team>
-		<TeamID>273136</TeamID>
-		<TeamName>FC Killeriai</TeamName>
-		<Position>8</Position>
-		<PositionChange>0</PositionChange>
-		<Matches>11</Matches>
-		<GoalsFor>3</GoalsFor>
-		<GoalsAgainst>69</GoalsAgainst>
-		<Points>3</Points>
-		<Won>1</Won>
-		<Draws>0</Draws>
-		<Lost>10</Lost>
-	</Team>
-</HattrickData>
+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
