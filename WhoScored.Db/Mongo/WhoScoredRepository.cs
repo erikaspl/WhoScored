@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using WhoScored.Db.Connection;
 using WhoScored.Model;
+using MongoDB.Driver.Linq;
 
 namespace WhoScored.Db.Mongo
 {
@@ -69,7 +70,8 @@ namespace WhoScored.Db.Mongo
                 BsonClassMap map = BsonClassMap.RegisterClassMap<Y>();
                 foreach (var property in typeof(IMatchSummary).GetProperties())
                 {
-                    map.MapProperty(property.Name);
+                    if (property.Name != "IsMatchMigrated")
+                        map.MapProperty(property.Name);
                 }
             }
         }
@@ -147,8 +149,6 @@ namespace WhoScored.Db.Mongo
         /// <param name="worldDetails">List of world details.</param>
         public void SaveWorldDetails<T>(List<T> worldDetails)  where T : class, IWorldDetails
         {
-            MapWorldDetails<T>();
-
             var database = MongoConnector.GetDatabase();
             
             var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
@@ -166,7 +166,6 @@ namespace WhoScored.Db.Mongo
         /// <param name="worldDetail"></param>
         public void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails
         {
-            MapWorldDetails<T>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
 
@@ -180,8 +179,6 @@ namespace WhoScored.Db.Mongo
         /// <returns></returns>
         public List<T> GetWorldDetails<T>() where T : class, IWorldDetails
         {
-            MapWorldDetails<T>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
 
@@ -192,8 +189,6 @@ namespace WhoScored.Db.Mongo
 
         public T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails
         {
-            MapWorldDetails<T>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
             var query = new QueryDocument("_id", countryId);
@@ -222,8 +217,6 @@ namespace WhoScored.Db.Mongo
 
         public void SaveSettings<T>(T settings) where T : class, ISettings
         {
-            MapSettings<T>();
-
             var database = MongoConnector.GetDatabase();
 
             var collection = database.GetCollection(SETTINGS_COLLECTION_NAME);
@@ -233,8 +226,6 @@ namespace WhoScored.Db.Mongo
 
         public T GetSettings<T>() where T : class, ISettings
         {
-            MapSettings<T>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SETTINGS_COLLECTION_NAME);
             return collection.FindAll().ToList().First();
@@ -261,7 +252,7 @@ namespace WhoScored.Db.Mongo
 
             foreach (var worldDetail in leagueDetails)
             {
-                collection.Save(worldDetail);
+                var result = collection.Save(worldDetail);
             }
         }
 
@@ -272,7 +263,6 @@ namespace WhoScored.Db.Mongo
         /// <param name="leagueDetail"></param>
         public void SaveSeriesDetails<T>(T leagueDetail) where T : class, ILeagueDetails
         {
-            MapLeagueDetails<T>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_DETAILS_COLLECTION_NAME);
 
@@ -281,8 +271,6 @@ namespace WhoScored.Db.Mongo
 
         public List<T> GetSeriesDetails<T>() where T : class, ILeagueDetails
         {
-            MapLeagueDetails<T>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_DETAILS_COLLECTION_NAME);
 
@@ -293,8 +281,6 @@ namespace WhoScored.Db.Mongo
 
         public List<T> GetSeriesDetails<T>(string countryId) where T : class, ILeagueDetails
         {
-            MapLeagueDetails<T>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_DETAILS_COLLECTION_NAME);
 
@@ -325,7 +311,6 @@ namespace WhoScored.Db.Mongo
             where T : class, ISeriesFixtures
             where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T, Y>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
 
@@ -339,7 +324,6 @@ namespace WhoScored.Db.Mongo
             where T : class, ISeriesFixtures
             where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T, Y>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
             collection.Save(seriesFixture);
@@ -349,8 +333,6 @@ namespace WhoScored.Db.Mongo
             where T : class, ISeriesFixtures
             where Y : class, IMatchSummary
         {
-            MapSeriesFixtures<T, Y>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
 
@@ -361,14 +343,24 @@ namespace WhoScored.Db.Mongo
 
         public T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
             where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary
-        {
-            MapSeriesFixtures<T, Y>();
+            where Y : class, IMatch
 
+        {
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
+            var matchSummaryCol = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
             var query = Query.And(Query.EQ("LeagueLevelUnitID", leagueId), Query.EQ("Season", season));
-            var result = collection.FindOne(query);
+            var result = matchSummaryCol.FindOne(query);
+
+            var matchCollection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
+
+            if (result != null)
+            {
+                foreach (var matchSummary in result.Matches)
+                {
+                    matchSummary.IsMatchMigrated =
+                        matchCollection.AsQueryable<Y>().Count(m => m.MatchID == matchSummary.MatchID.ToString()) > 0;
+                }
+            }
 
             return result;
         }
@@ -396,7 +388,6 @@ namespace WhoScored.Db.Mongo
             where TC : class, IMatchInjuries
             where TD : class, IMatchEventList
         {
-            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
 
@@ -415,7 +406,6 @@ namespace WhoScored.Db.Mongo
             where TC : class, IMatchInjuries
             where TD : class, IMatchEventList
         {
-            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
 
@@ -431,8 +421,6 @@ namespace WhoScored.Db.Mongo
             where TC : class, IMatchInjuries
             where TD : class, IMatchEventList
         {
-            MapMatchDetails<T, TY, TZ, TA, TB, TC, TD>();
-
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(MATCH_DETAILS_COLLECTION_NAME);
 

@@ -16,5 +16,6 @@ namespace WhoScored.Model
         DateTime MatchDate { get; set; }
         int? HomeGoals { get; set; }
         int? AwayGoals { get; set; }
+        bool IsMatchMigrated { get; set; }
     }
 }

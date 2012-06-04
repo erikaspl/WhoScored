@@ -1,24 +1,39 @@
 using System;
 using System.Configuration;
 using System.Linq;
-using WhoScored.CHPP.SeriesFixtures.Serializer;
+
 using WhoScored.CHPP.WorldDetails.Serializer;
 using WhoScored.Db.Mongo;
 using System.Collections.Generic;
 using WhoScored.CHPP.Files.HattrickFileAccessors;
 using WhoScored.Model;
-using HattrickData = WhoScored.CHPP.SeriesFixtures.Serializer.HattrickData;
+
 using LeagueDetails = WhoScored.CHPP.LeagueDetails.Serializer.HattrickData;
 using WorldDetails = WhoScored.CHPP.WorldDetails.Serializer.HattrickData;
 namespace WhoScored.Migration
-{
-
+{ 
+    using HattrickData = WhoScored.CHPP.SeriesFixtures.Serializer.HattrickData;
+    using HattrickDataMatch = WhoScored.CHPP.SeriesFixtures.Serializer.HattrickDataMatch;
 
     public class MigrationDomainService
     {
         private readonly string _protectedResourceUrl;
 
         private readonly Dictionary<string, List<int>> _isInWhoScored = new Dictionary<string, List<int>>();
+
+        public static void RegisterMigrationClassMap()
+        {
+            WhoScoredRepository.MapWorldDetails<HattrickDataLeagueListLeague>();
+
+            WhoScoredRepository.MapLeagueDetails<CHPP.LeagueDetails.Serializer.HattrickData>();
+
+            WhoScoredRepository.MapMatchDetails<CHPP.MatchDetails.Serializer.HattrickDataMatch, CHPP.MatchDetails.Serializer.HattrickDataMatchArena, 
+                CHPP.MatchDetails.Serializer.HattrickDataMatchHomeTeam, CHPP.MatchDetails.Serializer.HattrickDataMatchScorersGoal,
+                CHPP.MatchDetails.Serializer.HattrickDataMatchBookingsBooking, CHPP.MatchDetails.Serializer.HattrickDataMatchInjuriesInjury, 
+                CHPP.MatchDetails.Serializer.HattrickDataMatchEventListEvent>();
+
+            WhoScoredRepository.MapSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>();
+        }
 
         public MigrationDomainService()
         {
@@ -51,7 +66,7 @@ namespace WhoScored.Migration
             SetIsInWhoScored(worldDetailsList);
 
             var dbService = new WhoScoredRepository();
-            dbService.SaveWorldDetails(worldDetails.LeagueList.First().League.ToList());
+            dbService.SaveWorldDetails(worldDetailsList);
         }
 
         private void SetIsInWhoScored(IEnumerable<HattrickDataLeagueListLeague> worldDetails)

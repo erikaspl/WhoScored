@@ -15,8 +15,6 @@ namespace WhoScored.Controllers
     public class MigrationController : Controller
     {
         readonly IWhoScoredRepository _repository = new WhoScoredRepository();
-        //
-        // GET: /Migration/
 
         public ActionResult Index()
         {
@@ -76,7 +74,7 @@ namespace WhoScored.Controllers
 
         public ActionResult ShowFixtures(List<int> seriesId, int season)
         {
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesId.First(), season);
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId.First(), season);
 
             if (seasonSummary != null)
             {
@@ -108,7 +106,7 @@ namespace WhoScored.Controllers
 
         public ActionResult AjaxHandler(jQueryDataTableParamModel param)
         {
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>(param.SeriesId, param.Season);
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(param.SeriesId, param.Season);
 
             IEnumerable<IMatchSummary> filteredMatches;
 

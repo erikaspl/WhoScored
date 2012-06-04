@@ -7,6 +7,12 @@ using System.Web.Routing;
 
 namespace WhoScored
 {
+    using WhoScored.Controllers;
+    using WhoScored.Db.Mongo;
+    using WhoScored.Migration;
+    using WhoScored.Model;
+    using WhoScored.Models;
+
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
@@ -32,6 +38,9 @@ namespace WhoScored
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            RegisterMappings.RegisterClassMap();
+            MigrationDomainService.RegisterMigrationClassMap();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

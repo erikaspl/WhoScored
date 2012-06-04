@@ -46,7 +46,7 @@ namespace WhoScored.Db
 
         T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
             where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary;
+            where Y : class, IMatch;
 
         void DropSeriesFixtures();
 
