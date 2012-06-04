@@ -13,11 +13,11 @@ namespace WhoScored.IntegrationTest
     using System.Threading;
 
     using WhoScored.CHPP.MatchDetails.Serializer;
+    using WhoScored.Controllers;
     using WhoScored.Db;
     using WhoScored.Models;
 
     using HattrickData = WhoScored.CHPP.WorldDetails.Serializer.HattrickData;
-    using HattrickDataMatch = WhoScored.CHPP.SeriesFixtures.Serializer.HattrickDataMatch;
 
     /// <summary>
     ///This is a test class for MigrationDomainServiceTest and is intended
@@ -44,6 +44,13 @@ namespace WhoScored.IntegrationTest
             {
                 testContextInstance = value;
             }
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            MigrationDomainService.RegisterMigrationClassMap();
+            RegisterMappings.RegisterClassMap();
         }
 
 

@@ -74,6 +74,7 @@
     <Compile Include="Models\SettingsModels.cs" />
     <Compile Include="Models\WorldDetailsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterMappings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
