@@ -307,9 +307,8 @@ namespace WhoScored.Db.Mongo
 
         private const string SERIES_FIXTURES_COLLECTION_NAME = "SeriesFixtureSummary";
 
-        public void SaveSeriesFixtures<T, Y>(List<T> seriesFixtures)
+        public void SaveSeriesFixtures<T>(List<T> seriesFixtures)
             where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
@@ -320,18 +319,16 @@ namespace WhoScored.Db.Mongo
             }
         }
 
-        public void SaveSeriesFixtures<T, Y>(T seriesFixture)
+        public void SaveSeriesFixtures<T>(T seriesFixture)
             where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(SERIES_FIXTURES_COLLECTION_NAME);
             collection.Save(seriesFixture);
         }
 
-        public List<T> GetSeriesFixturesSummary<T, Y>()
+        public List<T> GetSeriesFixturesSummary<T>()
             where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
@@ -344,7 +341,6 @@ namespace WhoScored.Db.Mongo
         public T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
             where T : class, ISeriesFixtures
             where Y : class, IMatch
-
         {
             var database = MongoConnector.GetDatabase();
             var matchSummaryCol = database.GetCollection<T>(SERIES_FIXTURES_COLLECTION_NAME);
@@ -379,14 +375,7 @@ namespace WhoScored.Db.Mongo
 
         private const string MATCH_DETAILS_COLLECTION_NAME = "MatchDetails";
 
-        public void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(List<T> matchDetails)
-            where T : class, IMatch
-            where TY : class, IMatchArena
-            where TZ : class, IMatchTeam
-            where TA : class, IMatchScorers
-            where TB : class, IMatchBookings
-            where TC : class, IMatchInjuries
-            where TD : class, IMatchEventList
+        public void SaveMatchDetails<T>(List<T> matchDetails) where T : class, IMatch
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
@@ -397,14 +386,7 @@ namespace WhoScored.Db.Mongo
             }
         }
 
-        public void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(T matchDetails)
-            where T : class, IMatch
-            where TY : class, IMatchArena
-            where TZ : class, IMatchTeam
-            where TA : class, IMatchScorers
-            where TB : class, IMatchBookings
-            where TC : class, IMatchInjuries
-            where TD : class, IMatchEventList
+        public void SaveMatchDetails<T>(T matchDetails) where T : class, IMatch
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
@@ -412,14 +394,7 @@ namespace WhoScored.Db.Mongo
             collection.Save(matchDetails);
         }
 
-        public List<T> GetMatchDetails<T, TY, TZ, TA, TB, TC, TD>()
-            where T : class, IMatch
-            where TY : class, IMatchArena
-            where TZ : class, IMatchTeam
-            where TA : class, IMatchScorers
-            where TB : class, IMatchBookings
-            where TC : class, IMatchInjuries
-            where TD : class, IMatchEventList
+        public List<T> GetMatchDetails<T>() where T : class, IMatch
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(MATCH_DETAILS_COLLECTION_NAME);

@@ -11,7 +11,7 @@ namespace WhoScored
 
     public class RegisterMappings
     {
-        public static void RegisterClassMap()
+        public static void RegisterModelClassMap()
         {
             WhoScoredRepository.MapLeagueDetails<SeriesDetails>();
 

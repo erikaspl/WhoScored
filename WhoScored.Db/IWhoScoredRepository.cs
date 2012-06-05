@@ -32,37 +32,21 @@ namespace WhoScored.Db
 
         void DropSeriesDetails();
 
-        void SaveSeriesFixtures<T, Y>(List<T> seriesFixtures) 
-            where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary;
+        void SaveSeriesFixtures<T>(List<T> seriesFixtures)  where T : class, ISeriesFixtures;
 
-        void SaveSeriesFixtures<T, Y>(T seriesFixture)
-            where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary;
+        void SaveSeriesFixtures<T>(T seriesFixture) where T : class, ISeriesFixtures;            
 
-        List<T> GetSeriesFixturesSummary<T, Y>()
-            where T : class, ISeriesFixtures
-            where Y : class, IMatchSummary;
+        List<T> GetSeriesFixturesSummary<T>() where T : class, ISeriesFixtures;
 
-        T GetSeriesFixturesSummary<T, Y>(int leagueId, int season)
-            where T : class, ISeriesFixtures
-            where Y : class, IMatch;
+        T GetSeriesFixturesSummary<T, Y>(int leagueId, int season) where T : class, ISeriesFixtures where Y : class, IMatch;
 
         void DropSeriesFixtures();
 
+        void SaveMatchDetails<T>(List<T> matchDetails) where T : class, IMatch;
 
-        void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(List<T> matchDetails) where T : class, IMatch
-            where TY : class, IMatchArena where TZ : class, IMatchTeam where TA : class, IMatchScorers
-            where TB : class, IMatchBookings where TC : class, IMatchInjuries where TD : class, IMatchEventList;
+        void SaveMatchDetails<T>(T matchDetails) where T : class, IMatch;
 
-        void SaveMatchDetails<T, TY, TZ, TA, TB, TC, TD>(T matchDetails) where T : class, IMatch
-            where TY : class, IMatchArena where TZ : class, IMatchTeam where TA : class, IMatchScorers
-            where TB : class, IMatchBookings where TC : class, IMatchInjuries where TD : class, IMatchEventList;
-
-
-        List<T> GetMatchDetails<T, TY, TZ, TA, TB, TC, TD>() where T : class, IMatch where TY : class, IMatchArena
-            where TZ : class, IMatchTeam where TA : class, IMatchScorers where TB : class, IMatchBookings
-            where TC : class, IMatchInjuries where TD : class, IMatchEventList;
+        List<T> GetMatchDetails<T>() where T : class, IMatch;
 
         void DropMatchDetails();
     }

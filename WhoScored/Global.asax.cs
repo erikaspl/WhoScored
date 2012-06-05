@@ -39,7 +39,7 @@ namespace WhoScored
         {
             AreaRegistration.RegisterAllAreas();
 
-            RegisterMappings.RegisterClassMap();
+            RegisterMappings.RegisterModelClassMap();
             MigrationDomainService.RegisterMigrationClassMap();
 
             RegisterGlobalFilters(GlobalFilters.Filters);

@@ -50,7 +50,7 @@ namespace WhoScored.IntegrationTest
         public void TestInitialize()
         {
             MigrationDomainService.RegisterMigrationClassMap();
-            RegisterMappings.RegisterClassMap();
+            RegisterMappings.RegisterModelClassMap();
         }
 
 
@@ -196,11 +196,11 @@ namespace WhoScored.IntegrationTest
 
             IWhoScoredRepository repository = new WhoScoredRepository();
             var entity = MigrationDomainService.GetSeriesFixtureEntity(seriesFixturesInput);
-            repository.SaveSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>(entity);
+            repository.SaveSeriesFixtures(entity);
 
             Thread.Sleep(1000);
 
-            var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchSummaryEntity>().Count;
+            var fixturesCount = repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity>().Count;
 
             repository.DropSeriesFixtures();
             Assert.AreEqual(1, fixturesCount);
@@ -218,13 +218,11 @@ namespace WhoScored.IntegrationTest
 
             IWhoScoredRepository repository = new WhoScoredRepository();
 
-            repository.SaveMatchDetails<CHPP.MatchDetails.Serializer.HattrickDataMatch, HattrickDataMatchArena, 
-                HattrickDataMatchAwayTeam, HattrickDataMatchScorersGoal,HattrickDataMatchBookingsBooking,
-                HattrickDataMatchInjuriesInjury, HattrickDataMatchEventListEvent>(matchDetailsInput);
+            repository.SaveMatchDetails(matchDetailsInput);
 
             Thread.Sleep(1000);
 
-            var matchDetails = repository.GetMatchDetails<MatchDetails, MatchArena, MatchTeam, MatchScorers, MatchBookings, MatchInjuries, MatchEventList>();
+            var matchDetails = repository.GetMatchDetails<MatchDetails>();
 
             repository.DropSeriesFixtures();
             Assert.AreEqual(1, matchDetails.Count);

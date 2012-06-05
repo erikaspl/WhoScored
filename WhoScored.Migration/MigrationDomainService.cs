@@ -114,7 +114,7 @@ namespace WhoScored.Migration
 
                 seriesFixturesResult.Add(GetSeriesFixtureEntity(seriesFixtures));
                 var dbService = new WhoScoredRepository();
-                dbService.SaveSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>(seriesFixturesResult);
+                dbService.SaveSeriesFixtures(seriesFixturesResult);
 
             }
         }
