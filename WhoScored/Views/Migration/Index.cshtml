@@ -3,6 +3,21 @@
     ViewBag.Title = "Migration";
 }
 <script type="text/javascript">
+
+    function migrateMatchDetails(matchId) {
+        $.ajax({
+                url: "@Url.Action("MigrateMatchDetails", "Migration")",
+                type: "POST",
+                data:
+                    {
+                        matchId: matchId
+                    },
+                dataType: 'json',
+                traditional: true
+            });
+  
+    }
+
     $(document).ready(function() {
         
         $.extend( $.fn.dataTableExt.oStdClasses, {
@@ -54,9 +69,12 @@
             });
         });
 
+        var series = null;
+        var season = null;
+
         $('#seriesSelect').change(function() {
-            var series = $('#seriesSelect').val();
-            var season = $('#seasonSelect').val();
+            series = $('#seriesSelect').val();
+            season = $('#seasonSelect').val();
 
             if (season != null && series != null) {
                 $.ajax({
@@ -75,7 +93,13 @@
                             $('#example_wrapper').hide();
                         }
                         else {
-                            $('#example').dataTable({
+                            $('#example').show();
+                            $('#example_wrapper').show();
+                            $("#fixturesAlert").hide();
+                            $("#fixturesMigrationSuccess").hide();
+                            $("#fixturesMigrationFailure").hide();
+
+                            var oFixturesListTable = $('#example').dataTable({
                                 "bRetrieve": true,
                                 "bServerSide": true,
                                 "sAjaxSource": "Migration/AjaxHandler",
@@ -99,21 +123,23 @@
                                         "bSearchable": false,
                                         "bSortable": false,
                                         "fnRender": function(oObj) {
-                                            return '<a href=\"Details/' +
-                                                oObj.aData[0] + '\">View</a>';
+                                            if (oObj.aData[5] == 'False') {
+                                                return '<button class="btn btn-danger btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
+                                              
+                                            }
+                                            else {
+                                                return 'Match migrated';
+                                            }
                                         }
                                     },
                                     { "sName": "MatchDate" },
                                     { "sName": "MatchRound" },
                                     { "sName": "HomeTeamName" },
-                                    { "sName": "AwayTeamName" }
+                                    { "sName": "AwayTeamName" }                                
                                 ]
                             });
-                            $('#example').show();
-                            $('#example_wrapper').show();
-                            $("#fixturesAlert").hide();
-                            $("#fixturesMigrationSuccess").hide();
-                            $("#fixturesMigrationFailure").hide();
+
+                            oFixturesListTable.fnDraw();
                         }
                     }                    
                 });

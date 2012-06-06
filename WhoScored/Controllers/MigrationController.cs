@@ -104,6 +104,11 @@ namespace WhoScored.Controllers
             return Json(true);
         }
 
+        public ActionResult MigrateMatchDetails(string matchId)
+        {
+            return Json(true);
+        }
+
         public ActionResult AjaxHandler(jQueryDataTableParamModel param)
         {
             var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(param.SeriesId, param.Season);
@@ -126,7 +131,7 @@ namespace WhoScored.Controllers
                          select new[]
                                  {
                                      Convert.ToString(c.MatchID), c.MatchDate.ToString("dd/MM/yyyy"),
-                                     c.MatchRound.ToString(), c.HomeTeamName, c.AwayTeamName
+                                     c.MatchRound.ToString(), c.HomeTeamName, c.AwayTeamName, c.IsMatchMigrated.ToString()
                                  };
             return Json(new
             {
