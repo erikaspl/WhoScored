@@ -1,353 +1,353 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<HattrickData>
-	<FileName>matchdetails.xml</FileName>
-	<Version>2.3</Version>
-	<UserID>1234061</UserID>
-	<FetchedDate>2012-06-01 18:00:19</FetchedDate>
-	<UserIsSupporter>1</UserIsSupporter>
-	<SourceSystem>Hattrick</SourceSystem>
-	<Match>
-		<MatchID>379397187</MatchID>
-		<MatchType>8</MatchType>
-		<MatchDate>2012-05-23 19:20:00</MatchDate>
-		<FinishedDate>2012-05-23 21:05:00</FinishedDate>
-		<HomeTeam>
-			<HomeTeamID>482744</HomeTeamID>
-			<HomeTeamName>Arsenal LT</HomeTeamName>
-			<DressURI>http://res.hattrick.org/kits/10/92/916/915554/matchKitSmall.png</DressURI>
-			<Formation>3-5-2</Formation>
-			<HomeGoals>2</HomeGoals>
-			<TacticType>0</TacticType>
-			<TacticSkill>0</TacticSkill>
-			<RatingMidfield>20</RatingMidfield>
-			<RatingRightDef>16</RatingRightDef>
-			<RatingMidDef>24</RatingMidDef>
-			<RatingLeftDef>32</RatingLeftDef>
-			<RatingRightAtt>18</RatingRightAtt>
-			<RatingMidAtt>15</RatingMidAtt>
-			<RatingLeftAtt>17</RatingLeftAtt>
-			<TeamAttitude>0</TeamAttitude>
-			<RatingIndirectSetPiecesDef>21</RatingIndirectSetPiecesDef>
-			<RatingIndirectSetPiecesAtt>18</RatingIndirectSetPiecesAtt>
-		</HomeTeam>
-		<AwayTeam>
-			<AwayTeamID>347637</AwayTeamID>
-			<AwayTeamName>wallas</AwayTeamName>
-			<DressURI>http://res.hattrick.org/kits/1/1/1/2/matchKitSmall.png</DressURI>
-			<Formation>5-4-1</Formation>
-			<AwayGoals>1</AwayGoals>
-			<TacticType>0</TacticType>
-			<TacticSkill>0</TacticSkill>
-			<RatingMidfield>18</RatingMidfield>
-			<RatingRightDef>14</RatingRightDef>
-			<RatingMidDef>22</RatingMidDef>
-			<RatingLeftDef>24</RatingLeftDef>
-			<RatingRightAtt>10</RatingRightAtt>
-			<RatingMidAtt>5</RatingMidAtt>
-			<RatingLeftAtt>5</RatingLeftAtt>
-			<RatingIndirectSetPiecesDef>14</RatingIndirectSetPiecesDef>
-			<RatingIndirectSetPiecesAtt>14</RatingIndirectSetPiecesAtt>
-		</AwayTeam>
-		<Arena>
-			<ArenaID>482744</ArenaID>
-			<ArenaName>Highbury</ArenaName>
-			<WeatherID>2</WeatherID>
-			<SoldTotal>4534</SoldTotal>
-			<SoldTerraces>2779</SoldTerraces>
-			<SoldBasic>1161</SoldBasic>
-			<SoldRoof>489</SoldRoof>
-			<SoldVIP>105</SoldVIP>
-		</Arena>
-		<Scorers>
-			<Goal Index="0">
-				<ScorerPlayerID>291580385</ScorerPlayerID>
-				<ScorerPlayerName>Wisis Decurtins</ScorerPlayerName>
-				<ScorerTeamID>482744</ScorerTeamID>
-				<ScorerHomeGoals>1</ScorerHomeGoals>
-				<ScorerAwayGoals>0</ScorerAwayGoals>
-				<ScorerMinute>43</ScorerMinute>
-			</Goal>
-			<Goal Index="1">
-				<ScorerPlayerID>275774212</ScorerPlayerID>
-				<ScorerPlayerName>Fabio Sbardella</ScorerPlayerName>
-				<ScorerTeamID>482744</ScorerTeamID>
-				<ScorerHomeGoals>2</ScorerHomeGoals>
-				<ScorerAwayGoals>0</ScorerAwayGoals>
-				<ScorerMinute>63</ScorerMinute>
-			</Goal>
-			<Goal Index="2">
-				<ScorerPlayerID>181226712</ScorerPlayerID>
-				<ScorerPlayerName>Ariel Wolf</ScorerPlayerName>
-				<ScorerTeamID>347637</ScorerTeamID>
-				<ScorerHomeGoals>2</ScorerHomeGoals>
-				<ScorerAwayGoals>1</ScorerAwayGoals>
-				<ScorerMinute>80</ScorerMinute>
-			</Goal>
-		</Scorers>
-		<Bookings>
-			<Booking Index="0">
-				<BookingPlayerID>226904069</BookingPlayerID>
-				<BookingPlayerName>Brieuc Temmerman</BookingPlayerName>
-				<BookingTeamID>347637</BookingTeamID>
-				<BookingType>1</BookingType>
-				<BookingMinute>43</BookingMinute>
-			</Booking>
-		</Bookings>
-		<Injuries>
-			<Injury Index="0">
-				<InjuryPlayerID>301746593</InjuryPlayerID>
-				<InjuryPlayerName>Arturo Cannizzaro</InjuryPlayerName>
-				<InjuryTeamID>482744</InjuryTeamID>
-				<InjuryType>2</InjuryType>
-				<InjuryMinute>27</InjuryMinute>
-			</Injury>
-			<Injury Index="1">
-				<InjuryPlayerID>222700842</InjuryPlayerID>
-				<InjuryPlayerName>Daugvilas Legkauskas</InjuryPlayerName>
-				<InjuryTeamID>482744</InjuryTeamID>
-				<InjuryType>2</InjuryType>
-				<InjuryMinute>86</InjuryMinute>
-			</Injury>
-		</Injuries>
-		<PossessionFirstHalfHome>51</PossessionFirstHalfHome>
-		<PossessionFirstHalfAway>49</PossessionFirstHalfAway>
-		<PossessionSecondHalfHome>52</PossessionSecondHalfHome>
-		<PossessionSecondHalfAway>48</PossessionSecondHalfAway>
-		<EventList>
-			<Event Index="0">
-				<Minute>0</Minute>
-				<SubjectPlayerID>482744</SubjectPlayerID>
-				<SubjectTeamID>0</SubjectTeamID>
-				<ObjectPlayerID>4534</ObjectPlayerID>
-				<EventTypeID>32</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>The weather was pretty good, and a crowd of 4534 had shown up at &lt;a href="/Club/Arena/Default.aspx?ArenaID=482744"&gt;Highbury&lt;/a&gt; for the match.</EventText>
-			</Event>
-			<Event Index="1">
-				<Minute>0</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>1030502</ObjectPlayerID>
-				<EventTypeID>20</EventTypeID>
-				<EventVariation>1</EventVariation>
-				<EventText>Gooners started off with a 3-5-2 lineup.</EventText>
-			</Event>
-			<Event Index="2">
-				<Minute>0</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>21</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>Starters: Katkonas  - van den Horn, Eelman, Manni  - Nachlinger, Cannizzaro, Sbardella, Klapa, Decurtins  - Legkauskas, Chmelnickas.&lt;br /&gt;&lt;br /&gt;</EventText>
-			</Event>
-			<Event Index="3">
-				<Minute>0</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>1050401</ObjectPlayerID>
-				<EventTypeID>20</EventTypeID>
-				<EventVariation>3</EventVariation>
-				<EventText>wallas tactics involved an interesting 5-4-1 combination.</EventText>
-			</Event>
-			<Event Index="4">
-				<Minute>0</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>21</EventTypeID>
-				<EventVariation>3</EventVariation>
-				<EventText>Lineup: Quintero  - Yanev, Temmerman, Sejersbøl, Garcia, Mínguez  - Terrine, Alemany, Wolf, Ruoste  - Corbacho.&lt;br /&gt;&lt;br /&gt;</EventText>
-			</Event>
-			<Event Index="5">
-				<Minute>18</Minute>
-				<SubjectPlayerID>130718373</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>221</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>Making his way up the middle 18 minutes into the match, &lt;a href="/Club/Players/Player.aspx?playerId=130718373" title="Walter Giorgio Manni"&gt;Walter Giorgio Manni&lt;/a&gt; almost managed to squeeze a goal past the visitors' keeper, but the alert &lt;a href="/Club/Players/Player.aspx?playerId=259488898" title="Ra&amp;#250;l Quintero"&gt;Raúl Quintero&lt;/a&gt; blocked it to keep the score level.</EventText>
-			</Event>
-			<Event Index="6">
-				<Minute>27</Minute>
-				<SubjectPlayerID>301746593</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>285153733</ObjectPlayerID>
-				<EventTypeID>91</EventTypeID>
-				<EventVariation>2</EventVariation>
-				<EventText>27 minutes into the game, &lt;a href="/Club/Players/Player.aspx?playerId=301746593" title="Arturo Cannizzaro"&gt;Arturo Cannizzaro&lt;/a&gt; had to leave the pitch due to a knee injury. In came &lt;a href="/Club/Players/Player.aspx?playerId=285153733" title="Arbogast Schoenwalder"&gt;Arbogast Schoenwalder&lt;/a&gt;.</EventText>
-			</Event>
-			<Event Index="7">
-				<Minute>28</Minute>
-				<SubjectPlayerID>285153733</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>221</EventTypeID>
-				<EventVariation>2</EventVariation>
-				<EventText>After a fine move down the middle &lt;a href="/Club/Players/Player.aspx?playerId=285153733" title="Arbogast Schoenwalder"&gt;Arbogast Schoenwalder&lt;/a&gt; nearly gave the home side a goal after 28 minutes. The finishing shot went just wide, though.</EventText>
-			</Event>
-			<Event Index="8">
-				<Minute>35</Minute>
-				<SubjectPlayerID>285153733</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>207</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>Gooners's &lt;a href="/Club/Players/Player.aspx?playerId=285153733" title="Arbogast Schoenwalder"&gt;Arbogast Schoenwalder&lt;/a&gt;'s long shot really ought to have found the net 35 minutes into the match, but it fell just wide of the target.</EventText>
-			</Event>
-			<Event Index="9">
-				<Minute>40</Minute>
-				<SubjectPlayerID>292612420</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>126170836</ObjectPlayerID>
-				<EventTypeID>239</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>&lt;a href="/Club/Players/Player.aspx?playerId=292612420" title="Jean Terrine"&gt;Jean Terrine&lt;/a&gt; almost seemed to dance around &lt;a href="/Club/Players/Player.aspx?playerId=126170836" title="Wilko van den Horn"&gt;Wilko van den Horn&lt;/a&gt;, his movements were so smooth. Unfortunately for wallas, his finish ended up on the wrong side of the post.</EventText>
-			</Event>
-			<Event Index="10">
-				<Minute>43</Minute>
-				<SubjectPlayerID>226904069</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>511</EventTypeID>
-				<EventVariation>2</EventVariation>
-				<EventText>&lt;a href="/Club/Players/Player.aspx?playerId=226904069" title="Brieuc Temmerman"&gt;Brieuc Temmerman&lt;/a&gt; of wallas received a yellow card after 43 minutes for unsportsmanlike behaviour.</EventText>
-			</Event>
-			<Event Index="11">
-				<Minute>43</Minute>
-				<SubjectPlayerID>291580385</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>122</EventTypeID>
-				<EventVariation>3</EventVariation>
-				<EventText>43 minutes into the match and the home team took a 1 - 0 lead after breaking through on the left. Scorer for Gooners was &lt;a href="/Club/Players/Player.aspx?playerId=291580385" title="Wisis Decurtins"&gt;Wisis Decurtins&lt;/a&gt;.</EventText>
-			</Event>
-			<Event Index="12">
-				<Minute>45</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>0</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>45</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>It was 1 - 0 at the break.</EventText>
-			</Event>
-			<Event Index="13">
-				<Minute>45</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>51</ObjectPlayerID>
-				<EventTypeID>40</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>Gooners enjoyed most of the ball, as they maintained 51 percent of possession.&lt;br /&gt;&lt;br /&gt;</EventText>
-			</Event>
-			<Event Index="14">
-				<Minute>51</Minute>
-				<SubjectPlayerID>186312410</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>231</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>&lt;a href="/Club/Players/Player.aspx?playerId=186312410" title="Marčius Chmelnickas"&gt;Marčius Chmelnickas&lt;/a&gt; had a fantastic opportunity to put Gooners up another goal 51 minutes into the match, but he fired just over the crossbar.</EventText>
-			</Event>
-			<Event Index="15">
-				<Minute>63</Minute>
-				<SubjectPlayerID>275774212</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>131</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>Gooners solidified their lead at the 63 minute mark, as &lt;a href="/Club/Players/Player.aspx?playerId=275774212" title="Fabio Sbardella"&gt;Fabio Sbardella&lt;/a&gt; manoeuvered the ball through the opposing central defence and scored to make it 2 - 0.</EventText>
-			</Event>
-			<Event Index="16">
-				<Minute>63</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>62</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>After this, you could see that the players of Gooners were more interested in killing time than scoring more goals.</EventText>
-			</Event>
-			<Event Index="17">
-				<Minute>80</Minute>
-				<SubjectPlayerID>181226712</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>314991973</ObjectPlayerID>
-				<EventTypeID>119</EventTypeID>
-				<EventVariation>1</EventVariation>
-				<EventText>&lt;a href="/Club/Players/Player.aspx?playerId=181226712" title="Ariel Wolf"&gt;Ariel Wolf&lt;/a&gt; sailed high above the opponents as he headed the 2 - 1 goal in on a corner kick from &lt;a href="/Club/Players/Player.aspx?playerId=314991973" title="Amaro Garcia"&gt;Amaro Garcia&lt;/a&gt; after 80 minutes of play.</EventText>
-			</Event>
-			<Event Index="18">
-				<Minute>86</Minute>
-				<SubjectPlayerID>222700842</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>277619835</ObjectPlayerID>
-				<EventTypeID>91</EventTypeID>
-				<EventVariation>3</EventVariation>
-				<EventText>Gooners's &lt;a href="/Club/Players/Player.aspx?playerId=222700842" title="Daugvilas Legkauskas"&gt;Daugvilas Legkauskas&lt;/a&gt; left the field after 86 minutes because of a nasty blow to the shin. His replacement was &lt;a href="/Club/Players/Player.aspx?playerId=277619835" title="Jacob Vinaixa"&gt;Jacob Vinaixa&lt;/a&gt;.</EventText>
-			</Event>
-			<Event Index="19">
-				<Minute>87</Minute>
-				<SubjectPlayerID>285153733</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>259488898</ObjectPlayerID>
-				<EventTypeID>231</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>Gooners's &lt;a href="/Club/Players/Player.aspx?playerId=285153733" title="Arbogast Schoenwalder"&gt;Arbogast Schoenwalder&lt;/a&gt; saw his fine effort strike the top of the bar following some good work up the middle by his teammates after 87 minutes.</EventText>
-			</Event>
-			<Event Index="20">
-				<Minute>90</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>52</ObjectPlayerID>
-				<EventTypeID>40</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>Possession in this half belonged to Gooners, who controlled the ball 52 percent of the time.&lt;br /&gt;&lt;br /&gt;</EventText>
-			</Event>
-			<Event Index="21">
-				<Minute>90</Minute>
-				<SubjectPlayerID>277619835</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>41</EventTypeID>
-				<EventVariation>3</EventVariation>
-				<EventText>Most important Gooners player was &lt;a href="/Club/Players/Player.aspx?playerId=277619835" title="Jacob Vinaixa"&gt;Jacob Vinaixa&lt;/a&gt;.</EventText>
-			</Event>
-			<Event Index="22">
-				<Minute>90</Minute>
-				<SubjectPlayerID>76283404</SubjectPlayerID>
-				<SubjectTeamID>482744</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>42</EventTypeID>
-				<EventVariation>5</EventVariation>
-				<EventText>On the other hand, &lt;a href="/Club/Players/Player.aspx?playerId=76283404" title="Harmen-Jan Eelman"&gt;Harmen-Jan Eelman&lt;/a&gt;'s play was disheartening.</EventText>
-			</Event>
-			<Event Index="23">
-				<Minute>90</Minute>
-				<SubjectPlayerID>247910383</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>41</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>wallas's top performer was clearly &lt;a href="/Club/Players/Player.aspx?playerId=247910383" title="Javier M&amp;#237;nguez"&gt;Javier Mínguez&lt;/a&gt;.</EventText>
-			</Event>
-			<Event Index="24">
-				<Minute>90</Minute>
-				<SubjectPlayerID>259488898</SubjectPlayerID>
-				<SubjectTeamID>347637</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>42</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>&lt;a href="/Club/Players/Player.aspx?playerId=259488898" title="Ra&amp;#250;l Quintero"&gt;Raúl Quintero&lt;/a&gt; turned in a dismal performance, however.</EventText>
-			</Event>
-			<Event Index="27">
-				<Minute>90</Minute>
-				<SubjectPlayerID>0</SubjectPlayerID>
-				<SubjectTeamID>0</SubjectTeamID>
-				<ObjectPlayerID>0</ObjectPlayerID>
-				<EventTypeID>599</EventTypeID>
-				<EventVariation>4</EventVariation>
-				<EventText>The match ends 2 - 1.</EventText>
-			</Event>
-		</EventList>
-	</Match>
-</HattrickData>
+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
