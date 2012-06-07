@@ -102,6 +102,8 @@
                             var oFixturesListTable = $('#example').dataTable({
                                 "bRetrieve": true,
                                 "bServerSide": true,
+                                "bPaginate": false,
+                                "bLengthChange": false,
                                 "sAjaxSource": "Migration/AjaxHandler",
                                 "bProcessing": true,
                                 "fnServerData": function ( sSource, aoData, fnCallback ) {
@@ -119,12 +121,12 @@
                                 },
                                 "aoColumns": [
                                     {
-                                        "sName": "MatchID",
+                                        "sName": "MatchID",                                        
                                         "bSearchable": false,
                                         "bSortable": false,
                                         "fnRender": function(oObj) {
                                             if (oObj.aData[5] == 'False') {
-                                                return '<button class="btn btn-danger btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
+                                                return '<button class="btn btn-primary btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
                                               
                                             }
                                             else {

@@ -104,7 +104,7 @@ namespace WhoScored.Controllers
             return Json(true);
         }
 
-        public ActionResult MigrateMatchDetails(string matchId)
+        public ActionResult MigrateMatchDetails(int matchId)
         {
             return Json(true);
         }
@@ -136,8 +136,8 @@ namespace WhoScored.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = seasonSummary.Matches.Count,
-                iTotalDisplayRecords = seasonSummary.Matches.Count,
+                //iTotalRecords = seasonSummary.Matches.Count,
+                //iTotalDisplayRecords = seasonSummary.Matches.Count,                
                 aaData = result
             },
             JsonRequestBehavior.AllowGet);
