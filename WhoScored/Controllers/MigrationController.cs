@@ -86,26 +86,29 @@ namespace WhoScored.Controllers
 
         public void MigrateWorldDetails()
         {
-            var target = new MigrationDomainService();
-            target.MigrateWorldDetails();
+            var migrationService = new MigrationDomainService();
+            migrationService.MigrateWorldDetails();
         }
 
         public void MigrateSeriesDetails(List<int> seriesId)
         {
-            var target = new MigrationDomainService();
-            target.MigrateLeagueDetails(seriesId);
+            var migrationService = new MigrationDomainService();
+            migrationService.MigrateLeagueDetails(seriesId);
         }
 
         public ActionResult MigrateSeriesFixtures(int seriesId, int season)
         {
-            var target = new MigrationDomainService();
-            target.MigrateFixtures(new List<int>{seriesId}, season);
+            var migrationService = new MigrationDomainService();
+            migrationService.MigrateFixtures(new List<int>{seriesId}, season);
 
             return Json(true);
         }
 
         public ActionResult MigrateMatchDetails(int matchId)
         {
+            var migrationService = new MigrationDomainService();
+            migrationService.MigrateMatchDetails(matchId);
+
             return Json(true);
         }
 
@@ -125,7 +128,7 @@ namespace WhoScored.Controllers
                 filteredMatches = seasonSummary.Matches;
             }
 
-            var displayedMatches = filteredMatches.OrderByDescending(m => m.MatchRound).Skip(param.iDisplayStart).Take(param.iDisplayLength);
+            var displayedMatches = filteredMatches.OrderByDescending(m => m.MatchRound);
 
             var result = from c in displayedMatches
                          select new[]
@@ -136,8 +139,8 @@ namespace WhoScored.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                //iTotalRecords = seasonSummary.Matches.Count,
-                //iTotalDisplayRecords = seasonSummary.Matches.Count,                
+                iTotalRecords = seasonSummary.Matches.Count,
+                iTotalDisplayRecords = seasonSummary.Matches.Count,                
                 aaData = result
             },
             JsonRequestBehavior.AllowGet);

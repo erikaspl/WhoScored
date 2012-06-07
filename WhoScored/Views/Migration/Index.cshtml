@@ -4,7 +4,11 @@
 }
 <script type="text/javascript">
 
+    var oFixturesListTable;
+
     function migrateMatchDetails(matchId) {
+
+        $('#processingModal').modal('show');
         $.ajax({
                 url: "@Url.Action("MigrateMatchDetails", "Migration")",
                 type: "POST",
@@ -13,13 +17,26 @@
                         matchId: matchId
                     },
                 dataType: 'json',
-                traditional: true
-            });
-  
+                traditional: true,
+                success: function() {
+                    $('#processingModal').modal('hide');
+                    oFixturesListTable.fnDraw();
+                }
+        });
+        
     }
 
     $(document).ready(function() {
         
+        var series = null;
+        var season = null;
+
+        $('#processingModal').modal({
+            keyboard: false,
+            backdrop: false,
+            show: false
+        });
+
         $.extend( $.fn.dataTableExt.oStdClasses, {
             "sWrapper": "dataTables_wrapper form-inline"
         } );
@@ -34,6 +51,7 @@
             $.ajax({
                 url: "@Url.Action("MigrateSeriesDetails", "Migration")",
                 type: "POST",
+                async: false,
                 data:
                     {
                         seriesId: series
@@ -69,9 +87,6 @@
             });
         });
 
-        var series = null;
-        var season = null;
-
         $('#seriesSelect').change(function() {
             series = $('#seriesSelect').val();
             season = $('#seasonSelect').val();
@@ -99,7 +114,7 @@
                             $("#fixturesMigrationSuccess").hide();
                             $("#fixturesMigrationFailure").hide();
 
-                            var oFixturesListTable = $('#example').dataTable({
+                            oFixturesListTable = $('#example').dataTable({
                                 "bRetrieve": true,
                                 "bServerSide": true,
                                 "bPaginate": false,
@@ -177,25 +192,22 @@
     </div>
     <div id="fixturesAlert" class="alert alert-error hide">
         <button id="closeFixturesMessage" class="close" data-dismiss="alert" type="button"
-                onclick="$('#fixturesAlert').hide();">
+            onclick="$('#fixturesAlert').hide();">
             ×</button>
         No fixtures available.
     </div>
-    
     <div id="fixturesMigrationSuccess" class="alert alert-success hide">
         <button id="closeFixturesMigrationSuccess" class="close" data-dismiss="alert" type="button"
-                onclick="$('#fixturesMigrationSuccess').hide();">
+            onclick="$('#fixturesMigrationSuccess').hide();">
             ×</button>
         Fixtures Successfully migrated.
     </div>
-
     <div id="fixturesMigrationFailure" class="alert alert-error hide">
         <button id="closeFixturesMigrationFailure" class="close" data-dismiss="alert" type="button"
-                onclick="$('#fixturesMigrationFailure').hide();">
+            onclick="$('#fixturesMigrationFailure').hide();">
             ×</button>
         Fixtures migration failed.
-    </div>  
-    
+    </div>
     <div class="form-actions">
         <a class="btn btn-danger" href="@Url.Action("MigrateWorldDetails", "Migration")">Migrate
             World</a>
@@ -248,4 +260,12 @@
         </tr>
     </tfoot>
 </table>
+<div class="modal hide" id="processingModal">
+    <div class="modal-header">
+        <h3>Migrating</h3>
+    </div>
+    <div class="modal-body">
+        <p>Migrating matches. Please wait...</p>
+    </div>
+</div>
 </form>

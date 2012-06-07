@@ -151,5 +151,21 @@ namespace WhoScored.Migration
             }
             return entity;
         }
+
+        public void MigrateMatchDetails(int matchId)
+        {
+            var matchDetailsRaw = new MatchDetails(_protectedResourceUrl)
+                                      {
+                                          MatchID = matchId,
+                                          MatchEvents = true
+                                      };
+
+            var request = new WhoScoredRequest();
+            string response = request.MakeRequest(matchDetailsRaw.GetHattrickFileAccessorAbsoluteUri());
+            var matchDetails = CHPP.MatchDetails.Serializer.HattrickData.Deserialize(response);
+
+            var dbSevice = new WhoScoredRepository();
+            dbSevice.SaveMatchDetails(matchDetails.Match);
+        }
     }
 }
