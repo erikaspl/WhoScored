@@ -145,5 +145,13 @@ namespace WhoScored.Controllers
             },
             JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult StartMigrateMatchDetails(List<int> matches)
+        {
+            Guid operationId = Guid.NewGuid();
+
+            var migrationService = new MigrationDomainService();
+            return Json(operationId);
+        }
     }
 }
