@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WhoScored.Db;
 using WhoScored.Db.Mongo;
@@ -146,12 +147,34 @@ namespace WhoScored.Controllers
             JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult StartMigrateMatchDetails(List<int> matches)
+        public async Task<ActionResult> StartMigrateMatchDetails(int seriesId, int season)
         {
             Guid operationId = Guid.NewGuid();
+            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId, season);
+
+            await MigrateMatches(seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(), operationId);
+
+            return Json(operationId);
+
+        }
+
+        private readonly Dictionary<Guid, int> _migrationStatus = new Dictionary<Guid, int>();
+        public async Task MigrateMatches(List<int> matches, Guid operationId)
+        {
+            if (!_migrationStatus.ContainsKey(operationId))
+            {
+                _migrationStatus.Add(operationId, 0);
+            }
+            int matchesLeft = matches.Count;
+            int totalMatches = matches.Count;
 
             var migrationService = new MigrationDomainService();
-            return Json(operationId);
-        }
+            foreach (var matchId in matches)
+            {
+                //migrationService.MigrateMatchDetails(matchId);
+                matchesLeft--;
+                _migrationStatus[operationId] = matchesLeft/totalMatches*100;
+            }            
+        }       
     }
 }
