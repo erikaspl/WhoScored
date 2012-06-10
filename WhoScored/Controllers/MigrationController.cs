@@ -147,19 +147,29 @@ namespace WhoScored.Controllers
             JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<ActionResult> StartMigrateMatchDetails(int seriesId, int season)
+        public async Task<ActionResult> StartMigrateMatchDetails(int seriesId, int season, string operationId)
         {
-            Guid operationId = Guid.NewGuid();
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId, season);
+            if (!string.IsNullOrEmpty(operationId))
+            {
+                var seasonSummary =
+                    _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId, season);
 
-            await MigrateMatches(seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(), operationId);
+                await
+                    MigrateMatches(
+                        seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(),
+                        operationId);
 
-            return Json(operationId);
+                return Json(operationId);
+            }
+            else
+            {
+                return Json(false);
+            }
 
         }
 
-        private readonly Dictionary<Guid, int> _migrationStatus = new Dictionary<Guid, int>();
-        public async Task MigrateMatches(List<int> matches, Guid operationId)
+        private readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
+        public async Task MigrateMatches(List<int> matches, string operationId)
         {
             if (!_migrationStatus.ContainsKey(operationId))
             {
@@ -172,9 +182,22 @@ namespace WhoScored.Controllers
             foreach (var matchId in matches)
             {
                 //migrationService.MigrateMatchDetails(matchId);
+                System.Threading.Thread.Sleep(500);
+
                 matchesLeft--;
                 _migrationStatus[operationId] = matchesLeft/totalMatches*100;
             }            
-        }       
+        }
+
+        public ActionResult GetMigrationStatus(string operationId)
+        {
+            int status = 100; //initial status complete
+            if (!string.IsNullOrEmpty(operationId) && _migrationStatus.ContainsKey(operationId))
+            {
+                status = _migrationStatus[operationId];
+            }
+            return Json(status);
+        }
+
     }
 }

@@ -5,29 +5,58 @@
 <script type="text/javascript">
 
     var oFixturesListTable;
-
+    
+    function S4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+ 
+    function guidGenerator() {
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
+   
     function migrateMatchDetails(matchId) {
 
         $('#processingModal').modal('show');
         $.ajax({
-                url: "@Url.Action("MigrateMatchDetails", "Migration")",
+            url: "@Url.Action("MigrateMatchDetails", "Migration")",
+            type: "POST",
+            data:
+                {
+                    matchId: matchId
+                },
+            dataType: 'json',
+            traditional: true,
+            success: function() {
+                $('#processingModal').modal('hide');
+                oFixturesListTable.fnDraw();
+            }
+        });
+    }
+
+    var matchMigrationInterval;
+        function checkMatchMigrationStatus(operationId) {
+            $.ajax({
+                url: "@Url.Action("GetMigrationStatus", "Migration")",
                 type: "POST",
                 data:
                     {
-                        matchId: matchId
+                        matchId: operationId
                     },
                 dataType: 'json',
                 traditional: true,
-                success: function() {
-                    $('#processingModal').modal('hide');
-                    oFixturesListTable.fnDraw();
+                success: function(result) {
+                    if (result > 100) {
+                        $('#migrationProgressModal').modal('hide');
+                        clearInterval(matchMigrationInterval);
+                    } else {
+                        $('#migrationProgressBar').width(result + "%");
+                      }
                 }
-        });
-        
-    }
+            });
+        }
 
-    $(document).ready(function() {
-        
+        $(document).ready(function() {
+                  
         var series = null;
         var season = null;
 
@@ -40,7 +69,8 @@
         $.extend( $.fn.dataTableExt.oStdClasses, {
             "sWrapper": "dataTables_wrapper form-inline"
         } );
-        
+            
+       
         //Attach cascading behavior to the orderID select element.
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
@@ -88,20 +118,29 @@
         });
 
         $('#migrateMatches').click(function() {
-            
+
             var series = $('#seriesSelect').val();
             var season = $('#seasonSelect').val();
-
+            var guid= guidGenerator();
+            
+            $('#migrationProgressModal').modal('show');
+            matchMigrationInterval = setInterval(checkMatchMigrationStatus(guid), 1000);
+            
             $.ajax({
                     url: "@Url.Action("StartMigrateMatchDetails", "Migration")",
                     type: "POST",
                     data:
                         {
                             seriesId: series,
-                            season: season
+                            season: season,
+                            operationId: guid
                         },
                     dataType: 'json',
-                    traditional: true
+                    traditional: true,
+                    success: function(result) {
+                        $('#migrationProgressModal').modal('hide');
+                        clearInterval(matchMigrationInterval);
+                    }
                 }
             );
         }
@@ -284,10 +323,24 @@
 </table>
 <div class="modal hide" id="processingModal">
     <div class="modal-header">
-        <h3>Migrating</h3>
+        <h3>
+            Migrating</h3>
     </div>
     <div class="modal-body">
-        <p>Migrating matches. Please wait...</p>
+        <p>
+            Migrating matches. Please wait...</p>
+    </div>
+</div>
+<div class="modal hide" id="migrationProgressModal">
+    <div class="modal-header">
+        <h3>
+            Migrating</h3>
+    </div>
+    <div class="modal-body">
+        <div class="progress">
+            <div class="bar" id="migrationProgressBar" style="width: 0%;">
+            </div>
+        </div>
     </div>
 </div>
 </form>
