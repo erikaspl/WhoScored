@@ -154,6 +154,11 @@ namespace WhoScored.Controllers
                 var seasonSummary =
                     _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId, season);
 
+                if (!_migrationStatus.ContainsKey(operationId))
+                {
+                    _migrationStatus.Add(operationId, 0);
+                }
+
                 await
                     MigrateMatches(
                         seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(),
@@ -168,13 +173,9 @@ namespace WhoScored.Controllers
 
         }
 
-        private readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
+        private static readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
         public async Task MigrateMatches(List<int> matches, string operationId)
         {
-            if (!_migrationStatus.ContainsKey(operationId))
-            {
-                _migrationStatus.Add(operationId, 0);
-            }
             int matchesLeft = matches.Count;
             int totalMatches = matches.Count;
 
@@ -185,13 +186,13 @@ namespace WhoScored.Controllers
                 System.Threading.Thread.Sleep(500);
 
                 matchesLeft--;
-                _migrationStatus[operationId] = matchesLeft/totalMatches*100;
+                _migrationStatus[operationId] = 100 - (matchesLeft % totalMatches);
             }            
         }
 
         public ActionResult GetMigrationStatus(string operationId)
         {
-            int status = 100; //initial status complete
+            int status = 0; //initial status complete
             if (!string.IsNullOrEmpty(operationId) && _migrationStatus.ContainsKey(operationId))
             {
                 status = _migrationStatus[operationId];

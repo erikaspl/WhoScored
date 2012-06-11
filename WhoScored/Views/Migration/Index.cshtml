@@ -40,7 +40,7 @@
                 type: "POST",
                 data:
                     {
-                        matchId: operationId
+                        operationId: operationId
                     },
                 dataType: 'json',
                 traditional: true,
@@ -124,7 +124,10 @@
             var guid= guidGenerator();
             
             $('#migrationProgressModal').modal('show');
-            matchMigrationInterval = setInterval(checkMatchMigrationStatus(guid), 1000);
+            
+            setTimeout(function() {
+                matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 10000);
+            }, 500);
             
             $.ajax({
                     url: "@Url.Action("StartMigrateMatchDetails", "Migration")",
