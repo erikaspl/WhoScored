@@ -33,7 +33,12 @@
         });
     }
 
-    var matchMigrationInterval;
+    function closeMigrationProgressModal() {
+        $('#migrationProgressModal').modal('hide');
+        oFixturesListTable.fnDraw();
+    }
+
+        var matchMigrationInterval;
         function checkMatchMigrationStatus(operationId) {
             $.ajax({
                 url: "@Url.Action("GetMigrationStatus", "Migration")",
@@ -45,13 +50,8 @@
                 dataType: 'json',
                 traditional: true,
                 success: function(result) {
-                    if (result > 100) {
-                        $('#migrationProgressModal').modal('hide');
-                        clearInterval(matchMigrationInterval);
-                    } else {
                         $('#migrationProgressBar').width(result + "%");
-                      }
-                }
+                      }                
             });
         }
 
@@ -123,11 +123,14 @@
             var season = $('#seasonSelect').val();
             var guid= guidGenerator();
             
+            $('#migrationProgressBar').width("0%");
+            $('#migrating').show();
+            $('#migrationSuccess').hide();
+            $('#migrationFailed').hide();
+            $('#migrationProgressModalClose').hide();
             $('#migrationProgressModal').modal('show');
             
-            setTimeout(function() {
-                matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 10000);
-            }, 500);
+            matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 1000);
             
             $.ajax({
                     url: "@Url.Action("StartMigrateMatchDetails", "Migration")",
@@ -140,14 +143,36 @@
                         },
                     dataType: 'json',
                     traditional: true,
-                    success: function(result) {
-                        $('#migrationProgressModal').modal('hide');
+                    success: function() {
+                            $('#migrationProgressBar').width("100%");
+                            $('#migrating').hide();
+                            $('#migrationSuccess').show();
+                            $('#migrationProgressModalClose').show();
+                    },
+                    error: function() {
+                            $('#migrating').hide();
+                            $('#migrationFailed').show();
+                            $('#migrationProgressModalClose').show();
+                    },
+                    
+                    complete: function() {                        
                         clearInterval(matchMigrationInterval);
+                        $.ajax({
+                            url: "@Url.Action("CompleteMigrateMatchDetails", "Migration")",
+                            type: "POST",
+                            data:
+                                {
+                                    operationId: guid
+                                },
+                            dataType: 'json',
+                            traditional: true
+                        });
                     }
                 }
             );
         }
         );
+            
 
         $('#seriesSelect').change(function() {
             series = $('#seriesSelect').val();
@@ -335,9 +360,15 @@
     </div>
 </div>
 <div class="modal hide" id="migrationProgressModal">
-    <div class="modal-header">
-        <h3>
-            Migrating</h3>
+    <div class="alert alert-info" id="migrating">
+        <strong>Migrating selected matches...</strong>
+    </div>
+    <div class="alert alert-success hide" id="migrationSuccess">
+        <button class="close" id="migrationProgressModalClose" type="button" onclick="closeMigrationProgressModal();">x</button>
+        <strong>Migration complete!</strong>
+    </div>
+    <div class="alert alert-error hide" id="migrationFailed">
+        <strong>Migration Failed!</strong>
     </div>
     <div class="modal-body">
         <div class="progress">

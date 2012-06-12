@@ -183,10 +183,10 @@ namespace WhoScored.Controllers
             foreach (var matchId in matches)
             {
                 //migrationService.MigrateMatchDetails(matchId);
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(500);             
 
                 matchesLeft--;
-                _migrationStatus[operationId] = 100 - (matchesLeft % totalMatches);
+                _migrationStatus[operationId] = 100 - Convert.ToInt32(Math.Round(matchesLeft / (decimal)totalMatches * 100, 0));
             }            
         }
 
@@ -198,6 +198,14 @@ namespace WhoScored.Controllers
                 status = _migrationStatus[operationId];
             }
             return Json(status);
+        }
+
+        public void CompleteMigrateMatchDetails(string operationId)
+        {
+            if (!string.IsNullOrEmpty(operationId) && _migrationStatus.ContainsKey(operationId))
+            {
+                _migrationStatus.Remove(operationId);
+            }
         }
 
     }
