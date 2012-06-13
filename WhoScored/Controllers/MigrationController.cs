@@ -182,8 +182,7 @@ namespace WhoScored.Controllers
             var migrationService = new MigrationDomainService();
             foreach (var matchId in matches)
             {
-                //migrationService.MigrateMatchDetails(matchId);
-                System.Threading.Thread.Sleep(500);             
+                migrationService.MigrateMatchDetails(matchId);
 
                 matchesLeft--;
                 _migrationStatus[operationId] = 100 - Convert.ToInt32(Math.Round(matchesLeft / (decimal)totalMatches * 100, 0));

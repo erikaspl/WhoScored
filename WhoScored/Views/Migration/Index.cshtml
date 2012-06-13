@@ -69,7 +69,6 @@
         $.extend( $.fn.dataTableExt.oStdClasses, {
             "sWrapper": "dataTables_wrapper form-inline"
         } );
-            
        
         //Attach cascading behavior to the orderID select element.
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
@@ -144,10 +143,13 @@
                     dataType: 'json',
                     traditional: true,
                     success: function() {
-                            $('#migrationProgressBar').width("100%");
+                        $('#migrationProgressBar').width("100%");
+                        setTimeout(function() {
                             $('#migrating').hide();
                             $('#migrationSuccess').show();
                             $('#migrationProgressModalClose').show();
+                        }, 1000);
+                            
                     },
                     error: function() {
                             $('#migrating').hide();
