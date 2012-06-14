@@ -38,28 +38,104 @@
         oFixturesListTable.fnDraw();
     }
 
-        var matchMigrationInterval;
-        function checkMatchMigrationStatus(operationId) {
-            $.ajax({
-                url: "@Url.Action("GetMigrationStatus", "Migration")",
-                type: "POST",
-                data:
-                    {
-                        operationId: operationId
-                    },
-                dataType: 'json',
-                traditional: true,
-                success: function(result) {
-                        $('#migrationProgressBar').width(result + "%");
-                      }                
-            });
-        }
+    var series = null;
+    var season = null;
+
+    function setFixturesDataTable() {
+       
+         series = $('#seriesSelect').val();
+         season = $('#seasonSelect').val();
+         if (season != null && series != null) {
+                        $.ajax({
+                            url: "@Url.Action("ShowFixtures", "Migration")",
+                            type: "POST",
+                            data:
+                                {
+                                    seriesId: series,
+                                    season: season
+                                },
+                            dataType: 'json',
+                            traditional: true,
+                            success: function(data) {
+                                if (data == false) {
+                                    $("#fixturesAlert").show();
+                                    $('#example_wrapper').hide();
+                                }
+                                else {
+                                    $('#example').show();
+                                    $('#example_wrapper').show();
+                                    $("#fixturesAlert").hide();
+                                    $("#fixturesMigrationSuccess").hide();
+                                    $("#fixturesMigrationFailure").hide();
+
+                                    oFixturesListTable = $('#example').dataTable({
+                                        "bRetrieve": true,
+                                        "bServerSide": true,
+                                        "bPaginate": false,
+                                        "bLengthChange": false,
+                                        "sAjaxSource": "Migration/AjaxHandler",
+                                        "bProcessing": true,
+                                        "fnServerData": function ( sSource, aoData, fnCallback ) {
+
+                                            aoData.push({ "name": "season", "value": season });
+                                            aoData.push({ "name": "seriesId", "value": series });
+
+                                            $.ajax({
+                                                "dataType": 'json',
+                                                "type": "POST",
+                                                "url": sSource,
+                                                "data": aoData,
+                                                "success": fnCallback
+                                            });
+                                        },
+                                        "aoColumns": [
+                                            {
+                                                "sName": "MatchID",                                        
+                                                "bSearchable": false,
+                                                "bSortable": false,
+                                                "fnRender": function(oObj) {
+                                                    if (oObj.aData[5] == 'False') {
+                                                        return '<button class="btn btn-primary btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
+                                              
+                                                    }
+                                                    else {
+                                                        return 'Match migrated';
+                                                    }
+                                                }
+                                            },
+                                            { "sName": "MatchDate" },
+                                            { "sName": "MatchRound" },
+                                            { "sName": "HomeTeamName" },
+                                            { "sName": "AwayTeamName" }                                
+                                        ]
+                                    });
+
+                                    oFixturesListTable.fnDraw();
+                                }
+                            }
+                        });
+                    }
+    }
+
+    var matchMigrationInterval;
+    function checkMatchMigrationStatus(operationId) {
+        $.ajax({
+            url: "@Url.Action("GetMigrationStatus", "Migration")",
+            type: "POST",
+            data:
+                {
+                    operationId: operationId
+                },
+            dataType: 'json',
+            traditional: true,
+            success: function(result) {
+                    $('#migrationProgressBar').width(result + "%");
+                    }                
+        });
+    }
 
         $(document).ready(function() {
                   
-        var series = null;
-        var season = null;
-
         $('#processingModal').modal({
             keyboard: false,
             backdrop: false,
@@ -174,82 +250,14 @@
             );
         }
         );
-            
 
+        $('#seasonSelect').change(function() {
+
+            setFixturesDataTable();
+        });
+                      
         $('#seriesSelect').change(function() {
-            series = $('#seriesSelect').val();
-            season = $('#seasonSelect').val();
-
-            if (season != null && series != null) {
-                $.ajax({
-                    url: "@Url.Action("ShowFixtures", "Migration")",
-                    type: "POST",
-                    data:
-                        {
-                            seriesId: series,
-                            season: season
-                        },
-                    dataType: 'json',
-                    traditional: true,
-                    success: function(data) {
-                        if (data == false) {
-                            $("#fixturesAlert").show();
-                            $('#example_wrapper').hide();
-                        }
-                        else {
-                            $('#example').show();
-                            $('#example_wrapper').show();
-                            $("#fixturesAlert").hide();
-                            $("#fixturesMigrationSuccess").hide();
-                            $("#fixturesMigrationFailure").hide();
-
-                            oFixturesListTable = $('#example').dataTable({
-                                "bRetrieve": true,
-                                "bServerSide": true,
-                                "bPaginate": false,
-                                "bLengthChange": false,
-                                "sAjaxSource": "Migration/AjaxHandler",
-                                "bProcessing": true,
-                                "fnServerData": function ( sSource, aoData, fnCallback ) {
-
-                                    aoData.push({ "name": "season", "value": season });
-                                    aoData.push({ "name": "seriesId", "value": series });
-
-                                    $.ajax({
-                                        "dataType": 'json',
-                                        "type": "POST",
-                                        "url": sSource,
-                                        "data": aoData,
-                                        "success": fnCallback
-                                    });
-                                },
-                                "aoColumns": [
-                                    {
-                                        "sName": "MatchID",                                        
-                                        "bSearchable": false,
-                                        "bSortable": false,
-                                        "fnRender": function(oObj) {
-                                            if (oObj.aData[5] == 'False') {
-                                                return '<button class="btn btn-primary btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
-                                              
-                                            }
-                                            else {
-                                                return 'Match migrated';
-                                            }
-                                        }
-                                    },
-                                    { "sName": "MatchDate" },
-                                    { "sName": "MatchRound" },
-                                    { "sName": "HomeTeamName" },
-                                    { "sName": "AwayTeamName" }                                
-                                ]
-                            });
-
-                            oFixturesListTable.fnDraw();
-                        }
-                    }                    
-                });
-            }
+            setFixturesDataTable();
         });
     });
 </script>
