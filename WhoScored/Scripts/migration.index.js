@@ -1,4 +1,13 @@
-﻿var oFixturesListTable;
+﻿var migration = { };
+var controllers;
+migration.index =
+    {
+        initUrl: function (controllerUrl) {
+            controllers = controllerUrl;           
+        }
+    };
+
+var oFixturesListTable;
     
 function S4() {
 return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -12,7 +21,7 @@ function migrateMatchDetails(matchId) {
 
     $('#processingModal').modal('show');
     $.ajax({
-        url: '@Url.Action("MigrateMatchDetails", "Migration")',
+        url: controllers.migrateMatchDetails,
         type: "POST",
         data:
             {
@@ -21,8 +30,10 @@ function migrateMatchDetails(matchId) {
         dataType: 'json',
         traditional: true,
         success: function() {
-            $('#processingModal').modal('hide');
             oFixturesListTable.fnDraw();
+        },
+        complete: function() {
+            $('#processingModal').modal('hide');
         }
     });
 }
@@ -36,12 +47,11 @@ var series = null;
 var season = null;
 
 function setFixturesDataTable() {
-       
         series = $('#seriesSelect').val();
         season = $('#seasonSelect').val();
         if (season != null && series != null) {
                     $.ajax({
-                        url: '@Url.Action("ShowFixtures", "Migration")',
+                        url: controllers.showFixtures,
                         type: "POST",
                         data:
                             {
@@ -114,7 +124,7 @@ function setFixturesDataTable() {
 var matchMigrationInterval;
 function checkMatchMigrationStatus(operationId) {
     $.ajax({
-        url: '@Url.Action("GetMigrationStatus", "Migration")',
+        url: controllers.getMigrationStatus,
         type: "POST",
         data:
             {
@@ -135,6 +145,12 @@ function MigrationDocumentReady() {
         show: false
     });
 
+    $('#migrateFixturesModal').modal({
+        keyboard: false,
+        backdrop: false,
+        show: false
+    });
+
     $.extend( $.fn.dataTableExt.oStdClasses, {
         "sWrapper": "dataTables_wrapper form-inline"
     } );
@@ -147,7 +163,7 @@ function MigrationDocumentReady() {
         var series = $('#seriesSelect').val();
 
         $.ajax({
-            url: '@Url.Action("MigrateSeriesDetails", "Migration")',
+            url: controllers.migrateSeriesDetails,
             type: "POST",
             async: false,
             data:
@@ -163,8 +179,10 @@ function MigrationDocumentReady() {
         var series = $('#seriesSelect').val();
         var season = $('#seasonSelect').val();
 
+        $('#migrateFixturesModal').modal('show');
+
         $.ajax({
-            url: '@Url.Action("MigrateSeriesFixtures", "Migration")',
+            url: controllers.migrateSeriesFixtures,
             type: "POST",
             data:
                 {
@@ -177,11 +195,15 @@ function MigrationDocumentReady() {
                 if (result == true) {
                     $("#fixturesMigrationSuccess").show();
                     $("#fixturesMigrationFailure").hide();
+                    setFixturesDataTable();
                 } else {
                     $("#fixturesMigrationFailure").show();
                     $("#fixturesMigrationSuccess").hide();
                 }
-            }
+            },                
+            complete: function() {
+                $('#migrateFixturesModal').modal('hide');                
+            }            
         });
     });
 
@@ -201,7 +223,7 @@ function MigrationDocumentReady() {
         matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 1000);
             
         $.ajax({
-                url: '@Url.Action("StartMigrateMatchDetails", "Migration")',
+                url: controllers.startMigrateMatchDetails,
                 type: "POST",
                 data:
                     {
@@ -229,7 +251,7 @@ function MigrationDocumentReady() {
                 complete: function() {                        
                     clearInterval(matchMigrationInterval);
                     $.ajax({
-                        url: '@Url.Action("CompleteMigrateMatchDetails", "Migration")',
+                        url: controllers.completeMigrateMatchDetails,
                         type: "POST",
                         data:
                             {

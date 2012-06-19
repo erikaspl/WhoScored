@@ -5,7 +5,21 @@
 @section JavaScript
 {
     <script type="text/javascript" src="@Url.Content("~/Scripts/migration.index.js")"> </script>
+    <script type="text/javascript" >
+        var MigrationViewUrl = { showFixtures: "@Url.Action("ShowFixtures", "Migration")",
+                                 migrateMatchDetails: "@Url.Action("MigrateMatchDetails", "Migration")",
+                                 getMigrationStatus: "@Url.Action("GetMigrationStatus", "Migration")",
+                                 migrateSeriesDetails: "@Url.Action("MigrateSeriesDetails", "Migration")",
+                                 migrateSeriesFixtures: "@Url.Action("MigrateSeriesFixtures", "Migration")",
+                                 startMigrateMatchDetails: "@Url.Action("StartMigrateMatchDetails", "Migration")",
+                                 completeMigrateMatchDetails: "@Url.Action("CompleteMigrateMatchDetails", "Migration")"};
+
+        migration.index.initUrl(MigrationViewUrl);
+        
+
+    </script>
     <script type="text/javascript">
+        
         $(document).ready(function() {
             MigrationDocumentReady();
         });
@@ -110,17 +124,28 @@
         </tr>
     </tfoot>
 </table>
-<div class="modal hide" id="processingModal">
+    <div class="modal hide" id="processingModal">
+        <div class="modal-header">
+            <h3>
+                Migrating</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                Migrating matches. Please wait...</p>
+        </div>
+    </div>
+    
+    <div class="modal hide" id="migrateFixturesModal">
     <div class="modal-header">
-        <h3>
-            Migrating</h3>
+        <h3>Migrating</h3>
     </div>
     <div class="modal-body">
         <p>
-            Migrating matches. Please wait...</p>
+            Migrating fixtures. Please wait...</p>
     </div>
 </div>
-<div class="modal hide" id="migrationProgressModal">
+
+    <div class="modal hide" id="migrationProgressModal">
     <div class="alert alert-info" id="migrating">
         <strong>Migrating selected matches...</strong>
     </div>
