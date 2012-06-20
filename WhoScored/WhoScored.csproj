@@ -95,13 +95,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JQueryDataTableParamModel.cs" />
+    <Compile Include="Controllers\LeagueController.cs" />
     <Compile Include="Controllers\MigrationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MatchDetails.cs" />
-    <Compile Include="Models\MigrationModel.cs" />
+    <Compile Include="Models\WorldDetailsModel.cs" />
     <Compile Include="Models\SeriesDetailsModels.cs" />
     <Compile Include="Models\SettingsModels.cs" />
     <Compile Include="Models\WorldDetailsModels.cs" />
@@ -251,6 +252,9 @@
   <ItemGroup>
     <Content Include="oAuth.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\League\Index.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -268,7 +272,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>32086</DevelopmentServerPort>
+          <DevelopmentServerPort>12791</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -5,9 +5,10 @@ using System.Web;
 
 namespace WhoScored.Models
 {
-    public class MigrationModel
+    public class WorldDetailsModel
     {
         public Settings Settings { get; set; }
         public List<WorldDetails> WorldDetails { get; set; }
+        public string SelectedCountry { get; set; }
     }
 }

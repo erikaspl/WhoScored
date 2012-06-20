@@ -21,7 +21,7 @@ namespace WhoScored.Controllers
         {
             var worldDetails = _repository.GetWorldDetails<WorldDetails>();
             var settings = _repository.GetSettings<Settings>();
-            var migrationViewData = new MigrationModel { WorldDetails = worldDetails, Settings = settings };
+            var migrationViewData = new WorldDetailsModel { WorldDetails = worldDetails, Settings = settings };
 
             return View(migrationViewData);
         }

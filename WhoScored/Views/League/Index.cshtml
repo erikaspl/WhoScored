@@ -1,0 +1,61 @@
+﻿@model WhoScored.Models.WorldDetailsModel
+@{
+    ViewBag.Title = "League";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
+        $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
+
+        var countryId = $("countryId").val;
+
+        $.ajax({
+            type: 'POST',
+            url: "/Migration/AsyncSeriesSelect",
+            data:
+                {
+                    countryId: countryId
+                },
+            dataType: 'json',
+            traditional: true,
+            success: function (data) {
+                var options = $("#seriesSelect");
+                $.each(result, function() {
+                    options.append($("<option />").val(this.Value).text(this.Text));
+                });
+            }
+        });
+    });
+
+</script>
+
+<div class="page-header">
+    <h1>League</h1>
+</div>
+<div class="container-fluid">
+<div class="row-fluid">
+    <div class="span3">
+        <label class="control-label" for="countryId">Country</label>
+        <div class="controls">
+            <select id="countryId" name="countryId" >
+                @foreach (var country in Model.WorldDetails.Where(c => c.LeagueInWhoScored).OrderBy(c => c.EnglishName))
+                {
+                    <option value="@country.LeagueID" >@country.EnglishName</option>
+                }
+            </select>
+        </div>
+        <label class="control-label" for="seasonSelect">Season</label>
+        <div class="controls">
+            <select id="seasonSelect" name="seasonSelect"></select>
+        </div>
+        <label class="control-label" for="seriesSelect">Series</label>
+        <div class="controls">
+            <select id="seriesSelect" name="seriesSelect"></select>
+        </div>
+    </div>
+    <div class="span9">5</div>
+</div>
+</div>
