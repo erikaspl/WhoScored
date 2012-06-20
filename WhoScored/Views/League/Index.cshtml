@@ -10,7 +10,25 @@
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
-        var countryId = $("countryId").val;
+        var countryId = $('#countryId').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "/Migration/AsyncSeasonSelect",
+            data:
+                {
+                    countryId: countryId
+                },
+            dataType: 'json',
+            traditional: true,
+            success: function (result) {
+                var options = $("#seasonSelect");
+                $.each(result, function () {
+                    options.append($("<option />").val(this.Value).text(this.Text));
+                });
+                options.removeAttr("disabled");
+            }
+        });
 
         $.ajax({
             type: 'POST',
@@ -21,11 +39,12 @@
                 },
             dataType: 'json',
             traditional: true,
-            success: function (data) {
+            success: function (result) {
                 var options = $("#seriesSelect");
-                $.each(result, function() {
+                $.each(result, function () {
                     options.append($("<option />").val(this.Value).text(this.Text));
                 });
+                options.removeAttr("disabled");
             }
         });
     });
