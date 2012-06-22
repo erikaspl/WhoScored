@@ -18,14 +18,15 @@ function guidGenerator() {
 }
    
 function migrateMatchDetails(matchId) {
-
+    season = $('#seasonSelect').val();
     $('#processingModal').modal('show');
     $.ajax({
         url: controllers.migrateMatchDetails,
         type: "POST",
         data:
             {
-                matchId: matchId
+                matchId: matchId,
+                season: season
             },
         dataType: 'json',
         traditional: true,

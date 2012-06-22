@@ -7,6 +7,8 @@ namespace WhoScored.Models
 
     public class MatchDetails : IMatch
     {
+        public string MatchSeason { get; set; }
+
         public string MatchID { get; set; }
 
         public string MatchType { get; set; }

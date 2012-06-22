@@ -105,10 +105,10 @@ namespace WhoScored.Controllers
             return Json(true);
         }
 
-        public ActionResult MigrateMatchDetails(int matchId)
+        public ActionResult MigrateMatchDetails(int matchId, int season)
         {
             var migrationService = new MigrationDomainService();
-            migrationService.MigrateMatchDetails(matchId);
+            migrationService.MigrateMatchDetails(matchId, season);
 
             return Json(true);
         }
@@ -162,7 +162,7 @@ namespace WhoScored.Controllers
                 await
                     MigrateMatches(
                         seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(),
-                        operationId);
+                        season, operationId);
 
                 return Json(operationId);
             }
@@ -174,7 +174,7 @@ namespace WhoScored.Controllers
         }
 
         private static readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
-        public async Task MigrateMatches(List<int> matches, string operationId)
+        public async Task MigrateMatches(List<int> matches, int season, string operationId)
         {
             int matchesLeft = matches.Count;
             int totalMatches = matches.Count;
@@ -182,7 +182,7 @@ namespace WhoScored.Controllers
             var migrationService = new MigrationDomainService();
             foreach (var matchId in matches)
             {
-                migrationService.MigrateMatchDetails(matchId);
+                migrationService.MigrateMatchDetails(matchId, season);
 
                 matchesLeft--;
                 _migrationStatus[operationId] = 100 - Convert.ToInt32(Math.Round(matchesLeft / (decimal)totalMatches * 100, 0));

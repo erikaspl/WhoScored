@@ -11,6 +11,9 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
     public partial class HattrickDataMatch : IMatch
     {
         [XmlIgnore]
+        public string MatchSeason { get; set; }
+
+        [XmlIgnore]
         public IMatchTeam MatchHomeTeam
         {
             get { return HomeTeam.First(); }

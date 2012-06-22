@@ -152,7 +152,7 @@ namespace WhoScored.Migration
             return entity;
         }
 
-        public void MigrateMatchDetails(int matchId)
+        public void MigrateMatchDetails(int matchId, int season)
         {
             var matchDetailsRaw = new MatchDetails(_protectedResourceUrl)
                                       {
@@ -163,6 +163,8 @@ namespace WhoScored.Migration
             var request = new WhoScoredRequest();
             string response = request.MakeRequest(matchDetailsRaw.GetHattrickFileAccessorAbsoluteUri());
             var matchDetails = CHPP.MatchDetails.Serializer.HattrickData.Deserialize(response);
+
+            matchDetails.Match.First().MatchSeason = season.ToString();
 
             var dbSevice = new WhoScoredRepository();
             dbSevice.SaveMatchDetails(matchDetails.Match);
