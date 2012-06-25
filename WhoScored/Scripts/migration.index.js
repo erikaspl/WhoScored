@@ -208,61 +208,63 @@ function MigrationDocumentReady() {
         });
     });
 
-    $('#migrateMatches').click(function() {
+    $('#migrateMatches').click(function () {
 
         var series = $('#seriesSelect').val();
         var season = $('#seasonSelect').val();
-        var guid= guidGenerator();
-            
+        var leagueId = $('#seriesSelect').val();
+        var guid = guidGenerator();
+
         $('#migrationProgressBar').width("0%");
         $('#migrating').show();
         $('#migrationSuccess').hide();
         $('#migrationFailed').hide();
         $('#migrationProgressModalClose').hide();
         $('#migrationProgressModal').modal('show');
-            
-        matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 1000);
-            
+
+        matchMigrationInterval = setInterval(function () { checkMatchMigrationStatus(guid); }, 1000);
+
         $.ajax({
-                url: controllers.startMigrateMatchDetails,
-                type: "POST",
-                data:
+            url: controllers.startMigrateMatchDetails,
+            type: "POST",
+            data:
                     {
                         seriesId: series,
                         season: season,
+                        leagueId : leagueId,
                         operationId: guid
                     },
-                dataType: 'json',
-                traditional: true,
-                success: function() {
-                    $('#migrationProgressBar').width("100%");
-                    setTimeout(function() {
-                        $('#migrating').hide();
-                        $('#migrationSuccess').show();
-                        $('#migrationProgressModalClose').show();
-                    }, 1000);
-                            
-                },
-                error: function() {
-                        $('#migrating').hide();
-                        $('#migrationFailed').show();
-                        $('#migrationProgressModalClose').show();
-                },
-                    
-                complete: function() {                        
-                    clearInterval(matchMigrationInterval);
-                    $.ajax({
-                        url: controllers.completeMigrateMatchDetails,
-                        type: "POST",
-                        data:
+            dataType: 'json',
+            traditional: true,
+            success: function () {
+                $('#migrationProgressBar').width("100%");
+                setTimeout(function () {
+                    $('#migrating').hide();
+                    $('#migrationSuccess').show();
+                    $('#migrationProgressModalClose').show();
+                }, 1000);
+
+            },
+            error: function () {
+                $('#migrating').hide();
+                $('#migrationFailed').show();
+                $('#migrationProgressModalClose').show();
+            },
+
+            complete: function () {
+                clearInterval(matchMigrationInterval);
+                $.ajax({
+                    url: controllers.completeMigrateMatchDetails,
+                    type: "POST",
+                    data:
                             {
                                 operationId: guid
                             },
-                        dataType: 'json',
-                        traditional: true
-                    });
-                }
+                    dataType: 'json',
+                    traditional: true
+                });
             }
+        }
         );
     }
     );

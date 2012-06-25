@@ -9,6 +9,8 @@ namespace WhoScored.Models
     {
         public string MatchSeason { get; set; }
 
+        public string LeagueLevelUnitID { get; set; }
+
         public string MatchID { get; set; }
 
         public string MatchType { get; set; }
