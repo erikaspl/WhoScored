@@ -152,7 +152,7 @@ namespace WhoScored.Migration
             return entity;
         }
 
-        public void MigrateMatchDetails(int matchId, int season, int leagueId)
+        public void MigrateMatchDetails(int matchId, int matchRound, int season, int leagueId)
         {
             var matchDetailsRaw = new MatchDetails(_protectedResourceUrl)
                                       {
@@ -166,6 +166,7 @@ namespace WhoScored.Migration
 
             matchDetails.Match.First().MatchSeason = season.ToString();
             matchDetails.Match.First().LeagueLevelUnitID = leagueId.ToString();
+            matchDetails.Match.First().MatchRound = matchRound;
 
             var dbSevice = new WhoScoredRepository();
             dbSevice.SaveMatchDetails(matchDetails.Match);

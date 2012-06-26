@@ -105,10 +105,10 @@ namespace WhoScored.Controllers
             return Json(true);
         }
 
-        public ActionResult MigrateMatchDetails(int matchId, int season, int leagueId)
+        public ActionResult MigrateMatchDetails(int matchId, int matchRound, int season, int leagueId)
         {
             var migrationService = new MigrationDomainService();
-            migrationService.MigrateMatchDetails(matchId, season, leagueId);
+            migrationService.MigrateMatchDetails(matchId, matchRound, season, leagueId);
 
             return Json(true);
         }
@@ -159,9 +159,9 @@ namespace WhoScored.Controllers
                     _migrationStatus.Add(operationId, 0);
                 }
 
-                await
-                    MigrateMatches(
-                        seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).Select(m => m.MatchID).ToList(),
+                var matchDetails = seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).ToList();
+
+                await MigrateMatches(matchDetails,
                         season, leagueId, operationId);
 
                 return Json(operationId);
@@ -174,15 +174,15 @@ namespace WhoScored.Controllers
         }
 
         private static readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
-        public async Task MigrateMatches(List<int> matches, int season, int leagueId, string operationId)
+        public async Task MigrateMatches(List<IMatchSummary> matches, int season, int leagueId, string operationId)
         {
             int matchesLeft = matches.Count;
             int totalMatches = matches.Count;
 
             var migrationService = new MigrationDomainService();
-            foreach (var matchId in matches)
+            foreach (var match in matches)
             {
-                migrationService.MigrateMatchDetails(matchId, season, leagueId);
+                migrationService.MigrateMatchDetails(match.MatchID, match.MatchRound, season, leagueId);
 
                 matchesLeft--;
                 _migrationStatus[operationId] = 100 - Convert.ToInt32(Math.Round(matchesLeft / (decimal)totalMatches * 100, 0));
