@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace WhoScored.Db.Mongo
+﻿namespace WhoScored.Model
 {
     public class SeriesStandingsTeamEntity
     {

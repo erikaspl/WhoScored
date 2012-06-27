@@ -513,7 +513,7 @@ namespace WhoScored.Db.Mongo
 			
 			                    if (value.HomeGoals < value.AwayGoals){
 				                    awayTeam.TotalPoints += 3;
-				                    awayTeam.HomePoints += 3;
+				                    awayTeam.AwayPoints += 3;
 				                    awayTeam.Won += 1;
 				                    homeTeam.Lost += 1;
 			                    }	
@@ -541,12 +541,12 @@ namespace WhoScored.Db.Mongo
             string reduce = SeriesStandingsReduce();
             string finalize = SeriesStandingsFinalize();
 
-            var query = new QueryDocument("LeagueLevelUnitID", seriesId);
+            var query = new QueryDocument("MatchSeason", season.ToString()) {{"LeagueLevelUnitID", seriesId.ToString()}};
 
             var options = new MapReduceOptionsBuilder();
             options.SetOutput(MapReduceOutput.Inline);
             options.SetFinalize(finalize);
-            //options.SetQuery(query);
+            options.SetQuery(query);
 
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
@@ -554,24 +554,27 @@ namespace WhoScored.Db.Mongo
             var results = collection.MapReduce(map, reduce, options);
 
             var tealList = new List<SeriesStandingsTeamEntity>();
-            var result = results.InlineResults.First();
+            var result = results.InlineResults.FirstOrDefault();
 
-            tealList.AddRange(result["value"].AsBsonDocument["teams"].AsBsonDocument.Elements.ToList().
-                Select(element => new SeriesStandingsTeamEntity
-                {
-                    TeamId = element.Value.AsBsonDocument["TeamId"].ToString(), 
-                    TeamName = element.Value.AsBsonDocument["TeamName"].ToString(), 
-                    GoalsScored = element.Value.AsBsonDocument["GoalsScored"].ToInt32(), 
-                    GoalsConceded = element.Value.AsBsonDocument["GoalsConceded"].ToInt32(), 
-                    GoalDifference = element.Value.AsBsonDocument["GoalDifference"].ToInt32(), 
-                    HomePoints = element.Value.AsBsonDocument["HomePoints"].ToInt32(),
-                    AwayPoints = element.Value.AsBsonDocument["AwayPoints"].ToInt32(), 
-                    TotalPoints = element.Value.AsBsonDocument["TotalPoints"].ToInt32(), 
-                    Won = element.Value.AsBsonDocument["Won"].ToInt32(), 
-                    Lost = element.Value.AsBsonDocument["Lost"].ToInt32(), 
-                    Drawn = element.Value.AsBsonDocument["Drawn"].ToInt32(), 
-                    Played = element.Value.AsBsonDocument["Played"].ToInt32()
-                }));
+            if (result != null)
+            {
+                tealList.AddRange(result["value"].AsBsonDocument["teams"].AsBsonDocument.Elements.ToList().
+                    Select(element => new SeriesStandingsTeamEntity
+                    {
+                        TeamId = element.Value.AsBsonDocument["TeamId"].ToString(),
+                        TeamName = element.Value.AsBsonDocument["TeamName"].ToString(),
+                        GoalsScored = element.Value.AsBsonDocument["GoalsScored"].ToInt32(),
+                        GoalsConceded = element.Value.AsBsonDocument["GoalsConceded"].ToInt32(),
+                        GoalDifference = element.Value.AsBsonDocument["GoalDifference"].ToInt32(),
+                        HomePoints = element.Value.AsBsonDocument["HomePoints"].ToInt32(),
+                        AwayPoints = element.Value.AsBsonDocument["AwayPoints"].ToInt32(),
+                        TotalPoints = element.Value.AsBsonDocument["TotalPoints"].ToInt32(),
+                        Won = element.Value.AsBsonDocument["Won"].ToInt32(),
+                        Lost = element.Value.AsBsonDocument["Lost"].ToInt32(),
+                        Drawn = element.Value.AsBsonDocument["Drawn"].ToInt32(),
+                        Played = element.Value.AsBsonDocument["Played"].ToInt32()
+                    }));
+            }
 
             return tealList.OrderByDescending(t => t.TotalPoints).ThenByDescending(t => t.GoalDifference).ToList();
         }

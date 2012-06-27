@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="IWhoScoredRepository.cs" />
     <Compile Include="Mongo\Connection\MongoConnector.cs" />
-    <Compile Include="Mongo\SeriesStandings.cs" />
     <Compile Include="Mongo\WhoScoredRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
