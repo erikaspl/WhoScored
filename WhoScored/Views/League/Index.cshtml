@@ -6,9 +6,22 @@
 
 <script type="text/javascript">
 
+    function updateLeagueText() {
+        $(".selectedLeague").text(this.country + ' / ' + this.series);
+    }
+
+    var selectedLeague   = { };
     $(document).ready(function () {
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
+
+        $("#seriesSelect,#countryId").change(function () {
+            selectedLeague.country = $('#countryId').val();
+            selectedLeague.series = $('#seriesSelect').val();
+            $(selectedLeague).trigger('leagueUpdated');
+        });
+
+        $(selectedLeague).bind('leagueUpdated', updateLeagueText);
 
         var countryId = $('#countryId').val();
 
@@ -52,7 +65,7 @@
 </script>
 
 <div class="page-header">
-    <h1>League</h1>
+    <h1><span class="selectedLeague">League</span></h1>
 </div>
 <div class="container-fluid">
 <div class="row-fluid">
