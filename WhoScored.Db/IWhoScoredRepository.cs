@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WhoScored.Db.Mongo;
 using WhoScored.Model;
 
 namespace WhoScored.Db
@@ -49,5 +50,7 @@ namespace WhoScored.Db
         List<T> GetMatchDetails<T>() where T : class, IMatch;
 
         void DropMatchDetails();
+
+        List<SeriesStandingsTeamEntity> GetSeriesStandings(int seriesId, int season);
     }
 }

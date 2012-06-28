@@ -270,7 +270,6 @@ function MigrationDocumentReady() {
     );
 
     $('#seasonSelect').change(function() {
-
         setFixturesDataTable();
     });
                       

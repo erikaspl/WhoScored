@@ -23,5 +23,28 @@ namespace WhoScored.Controllers
             return View(worldDetailsViewData);
         }
 
+        public ActionResult TeamStandings(jQueryDataTableParamModel param)
+        {
+            var seriesStandings = _repository.GetSeriesStandings(param.SeriesId, param.Season);
+
+            var result = from c in seriesStandings
+                         select new[]
+                                 {
+                                     Convert.ToString(c.TeamId), c.TeamName,
+                                     c.Played.ToString(), c.Won.ToString(), c.Drawn.ToString(), c.Lost.ToString(),
+                                     c.GoalsScored.ToString(), c.GoalsConceded.ToString(), c.GoalDifference.ToString(),
+                                     c.TotalPoints.ToString()
+                                 };
+
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = seriesStandings.Count,
+                iTotalDisplayRecords = seriesStandings.Count, 
+                aaData = result
+            },
+            JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

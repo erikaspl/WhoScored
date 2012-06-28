@@ -17,6 +17,9 @@ namespace WhoScored.CHPP.MatchDetails.Serializer
         public string LeagueLevelUnitID { get; set; }
 
         [XmlIgnore]
+        public int MatchRound { get; set; }
+
+        [XmlIgnore]
         public IMatchTeam MatchHomeTeam
         {
             get { return HomeTeam.First(); }

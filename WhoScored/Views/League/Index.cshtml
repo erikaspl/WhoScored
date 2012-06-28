@@ -6,11 +6,81 @@
 
 <script type="text/javascript">
 
+    var oteamStandingsTable;
+
+    function setTeamStandingsTable() {
+        series = $('#seriesSelect').val();
+        season = $('#seasonSelect').val();
     function updateLeagueText() {
         $(".selectedLeague").text(this.country + ' / ' + this.series);
     }
 
     var selectedLeague   = { };
+
+        if (season != null && series != null) {
+            $.ajax({
+                url: "@Url.Action("ShowFixtures", "Migration")",
+                type: "POST",
+                data:
+                    {
+                        seriesId: series,
+                        season: season
+                    },
+                dataType: 'json',
+                traditional: true,
+                success: function(data) {
+                    if (data == false) {
+                                $("#noTeamStandingsAlert").show();
+                                $('#teamStandings_wrapper').hide();
+                    }else {
+                        $('#teamStandings').show();
+                        $('#teamStandings_wrapper').show();
+                        $("#noTeamStandingsAlert").hide();
+                        
+
+                        oteamStandingsTable = $('#teamStandings').dataTable({
+                            "bFilter": false,
+                            "bRetrieve": true,
+                            "bServerSide": true,
+                            "bPaginate": false,
+                            "bLengthChange": false,
+                            "sAjaxSource": "League/TeamStandings",
+                            "bProcessing": true,
+                            "fnServerData": function (sSource, aoData, fnCallback) {
+
+                                aoData.push({ "name": "season", "value": season });
+                                aoData.push({ "name": "seriesId", "value": series });
+
+                                $.ajax({
+                                    "dataType": 'json',
+                                    "type": "POST",
+                                    "url": sSource,
+                                    "data": aoData,
+                                    "success": fnCallback
+                                });
+                            },
+                            "aoColumns": [
+                                        { "sName": "TeamId", "sWidth": "5%"  },
+                                        { "sName": "TeamName", "sWidth": "45%" },
+                                        { "sName": "Played", "sWidth": "10px"  },
+                                        { "sName": "Won","sWidth": "10px" },
+                                        { "sName": "Drawn","sWidth": "10px" },
+                                        { "sName": "Lost","sWidth": "10px" },
+                                        { "sName": "GoalsScored","sWidth": "10px" },
+                                        { "sName": "GoalsConceded","sWidth": "10px" },
+                                        { "sName": "GoalDifference","sWidth": "10px" },
+                                        { "sName": "TotalPoints","sWidth": "10px" }
+                                    ]
+                        });                       
+                    }
+                }
+            });
+        }
+    }
+
+
+
+
     $(document).ready(function () {
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
@@ -58,8 +128,21 @@
                     options.append($("<option />").val(this.Value).text(this.Text));
                 });
                 options.removeAttr("disabled");
+                setTeamStandingsTable();
             }
         });
+        
+    $('#seasonSelect').change(function() {
+        setTeamStandingsTable();
+        oteamStandingsTable.fnDraw();
+    });
+                      
+    $('#seriesSelect').change(function() {
+        setTeamStandingsTable();
+        oteamStandingsTable.fnDraw();
+    });
+
+        
     });
 
 </script>
@@ -88,6 +171,28 @@
             <select id="seriesSelect" name="seriesSelect"></select>
         </div>
     </div>
-    <div class="span9">5</div>
+    <div class="span9">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered hide" id="teamStandings" width="100%">
+            <thead>
+                <tr>
+                    <th>R</th>
+                    <th>Team</th>
+                    <th>P</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <div id="noTeamStandingsAlert" class="alert alert-error hide">No team standings available.</div>
+    </div>
 </div>
 </div>
