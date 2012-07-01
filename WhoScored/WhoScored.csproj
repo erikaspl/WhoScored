@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\AsyncCtpLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\Binaries\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Core">
       <HintPath>..\packages\Glimpse.0.87\lib\net40\Glimpse.Core.dll</HintPath>
     </Reference>
@@ -115,6 +118,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <None Include="Content\vertical-buttons.less" />
     <Content Include="Content\DT_bootstrap.css" />
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -188,6 +192,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\less.js" />
     <Content Include="Scripts\migration.index.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\whoscored.js" />
