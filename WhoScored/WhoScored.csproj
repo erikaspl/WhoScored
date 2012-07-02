@@ -226,6 +226,7 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
