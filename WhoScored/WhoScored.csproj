@@ -227,6 +227,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Web.config" />
+    <None Include="Content\who-scored.less">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

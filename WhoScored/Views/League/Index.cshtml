@@ -158,7 +158,7 @@
                 </select>
             </div>
         </div>
-        <div class="span9">
+        <div class="span9 centered-text">
             <div class="btn-group" id="matchRound" data-toggle="buttons-radio">
                 <button class="btn">
                     1</button>
@@ -188,57 +188,65 @@
                     13</button>
                 <button class="btn">
                     14</button>
-            </div>            
-            <br />
-            
-            <div class="btn-group-vertical" data-toggle="buttons-radio">
-                <button type="button" class="btn">Top</button>
-                <button type="button" class="btn">Middle</button>
-                <button type="button" class="btn">Bottom</button>
+            </div>  
+        </div> 
+            <div class="span0">
+                <div class="btn-group-vertical" data-toggle="buttons-radio">
+                    <button type="button" class="btn">30</button>
+                    <button type="button" class="btn">29</button>
+                    <button type="button" class="btn">27</button>
+                    <button type="button" class="btn">26</button>
+                    <button type="button" class="btn">25</button>
+                    <button type="button" class="btn">24</button>
+                    <button type="button" class="btn">23</button>
+                    <button type="button" class="btn">22</button>
+                    <button type="button" class="btn">...</button>
+                </div>
             </div>
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
-                id="teamStandings" width="100%">
-                <thead>
-                    <tr>
-                        <th>
-                            R
-                        </th>
-                        <th>
-                            Team
-                        </th>
-                        <th>
-                            P
-                        </th>
-                        <th>
-                            W
-                        </th>
-                        <th>
-                            D
-                        </th>
-                        <th>
-                            L
-                        </th>
-                        <th>
-                            GF
-                        </th>
-                        <th>
-                            GA
-                        </th>
-                        <th>
-                            GD
-                        </th>
-                        <th>
-                            Pts
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                </tfoot>
-            </table>
-            <div id="noTeamStandingsAlert" class="alert alert-error hide">
-                No team standings available.</div>
-        </div>
-    </div>
+            <div class="span8">
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
+                       id="teamStandings" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                R
+                            </th>
+                            <th>
+                                Team
+                            </th>
+                            <th>
+                                P
+                            </th>
+                            <th>
+                                W
+                            </th>
+                            <th>
+                                D
+                            </th>
+                            <th>
+                                L
+                            </th>
+                            <th>
+                                GF
+                            </th>
+                            <th>
+                                GA
+                            </th>
+                            <th>
+                                GD
+                            </th>
+                            <th>
+                                Pts
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        <div id="noTeamStandingsAlert" class="alert alert-error hide">
+            No team standings available.</div>
+        </div>    
 </div>
