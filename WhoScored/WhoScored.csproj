@@ -196,7 +196,9 @@
     <Content Include="Scripts\migration.index.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\whoscored.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -226,7 +228,9 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\Web.config" />
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Content\who-scored.less">
       <Compile>True</Compile>
       <Minify>True</Minify>
