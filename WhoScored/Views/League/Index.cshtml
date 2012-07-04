@@ -68,26 +68,36 @@
     }
 
     function SetSeasonButtons(firstSeasonToShow) {
-        var totalSeasons = $.storage.get("totalSeasons");
+        var totalSeasons = $.storage.get("totalSeasons");   
         var nextSeasonToShow;
         
         if (totalSeasons === firstSeasonToShow) {
             $("#button-1").attr('value', firstSeasonToShow);
+            $("#button-1").html(firstSeasonToShow);
             nextSeasonToShow = parseInt(firstSeasonToShow) - 1;
         }else {
             $("#button-1").attr('value', '...');
+            $("#button-1").html('...');
             nextSeasonToShow = parseInt(firstSeasonToShow);
         }
 
-        for (var i = 2; i < 9; i++) {
+        for (var i = 2; i < 8; i++) {
             var buttonId = "#button-" + i;
             if (nextSeasonToShow > 0) {
                 $(buttonId).show();
                 $(buttonId).attr('value', nextSeasonToShow);
+                $(buttonId).html(nextSeasonToShow);
                 nextSeasonToShow = nextSeasonToShow - 1;
             }else {
                 $(buttonId).hide();
             }
+        }
+
+        $.storage.set("nextSeasonToShow", nextSeasonToShow);
+
+        if (nextSeasonToShow > 0) {
+            $("#button-8").attr('value', '...');
+            $("#button-8").html('...');
         }
     }
 
@@ -145,6 +155,11 @@
             }
         });
 
+        $('#button-8').click(function() {
+            SetSeasonButtons($.storage.get("nextSeasonToShow"));
+        });
+            
+        
         $('#seasonSelect').change(function () {
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
@@ -223,7 +238,7 @@
             </div>
             </div> 
         <div class="span0">
-                <div class="btn-group-vertical" data-toggle="buttons-radio">
+                <div class="btn-group-vertical" id="seasonButtons" data-toggle="buttons-radio">
                     <button type="button" id="button-1" class="btn btn-success"></button>
                     <button type="button" id="button-2" class="btn btn-success"></button>
                     <button type="button" id="button-3" class="btn btn-success"></button>
