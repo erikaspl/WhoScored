@@ -10,5 +10,6 @@ namespace WhoScored.Models
         public Settings Settings { get; set; }
         public List<WorldDetails> WorldDetails { get; set; }
         public string SelectedCountry { get; set; }
+        public int CurrentSeason { get; set; }
     }
 }

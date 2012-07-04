@@ -18,9 +18,17 @@ namespace WhoScored.Controllers
             const string selectedCountry = "Lithuania";
             var worldDetails = _repository.GetWorldDetails<WorldDetails>();
             var settings = _repository.GetSettings<Settings>();
-            var worldDetailsViewData = new WorldDetailsModel { WorldDetails = worldDetails, Settings = settings, SelectedCountry = selectedCountry };
+            var currentSeason = GetCurrentSeason(
+                settings.GlobalSeason, worldDetails.First(c => c.EnglishName == selectedCountry).SeasonOffset);
+            var worldDetailsViewData = new WorldDetailsModel { WorldDetails = worldDetails, Settings = settings, 
+                SelectedCountry = selectedCountry, CurrentSeason = currentSeason};
 
             return View(worldDetailsViewData);
+        }
+
+        private int GetCurrentSeason(int globalSeason, int contrySeasonOffset)
+        {
+            return globalSeason + contrySeasonOffset;
         }
 
         public ActionResult TeamStandings(jQueryDataTableParamModel param)

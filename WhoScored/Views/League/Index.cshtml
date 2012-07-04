@@ -6,6 +6,7 @@
 <script type="text/javascript">
 
     var oteamStandingsTable;
+    var selectedSeason;
 
     function updateLeagueText() {
         $(".selectedLeague").text(this.country + ' / ' + this.series);
@@ -13,6 +14,7 @@
 
     var selectedLeague = {};
 
+    $.storage = new $.store();
 
     function setTeamStandingsTable() {
         series = $('#seriesSelect').val();
@@ -65,9 +67,36 @@
         $(selectedLeague).trigger('leagueUpdated');
     }
 
+    function SetSeasonButtons(firstSeasonToShow) {
+        var totalSeasons = $.storage.get("totalSeasons");
+        var nextSeasonToShow;
+        
+        if (totalSeasons === firstSeasonToShow) {
+            $("#button-1").attr('value', firstSeasonToShow);
+            nextSeasonToShow = parseInt(firstSeasonToShow) - 1;
+        }else {
+            $("#button-1").attr('value', '...');
+            nextSeasonToShow = parseInt(firstSeasonToShow);
+        }
+
+        for (var i = 2; i < 9; i++) {
+            var buttonId = "#button-" + i;
+            if (nextSeasonToShow > 0) {
+                $(buttonId).show();
+                $(buttonId).attr('value', nextSeasonToShow);
+                nextSeasonToShow = nextSeasonToShow - 1;
+            }else {
+                $(buttonId).hide();
+            }
+        }
+    }
+
     $(document).ready(function () {
         $("#seriesSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeriesSelect');
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
+
+        $.storage.set("totalSeasons", '@(Model.CurrentSeason)');
+        SetSeasonButtons('@(Model.CurrentSeason)');
 
 
         $("#seriesSelect,#countryId").change(function () {
@@ -119,6 +148,7 @@
         $('#seasonSelect').change(function () {
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
+            $.storage.set("selectedSeason", this.val());
         });
 
         $('#seriesSelect').change(function () {
@@ -194,14 +224,14 @@
             </div> 
         <div class="span0">
                 <div class="btn-group-vertical" data-toggle="buttons-radio">
-                    <button type="button" class="btn btn-success">30</button>
-                    <button type="button" class="btn btn-success">29</button>
-                    <button type="button" class="btn btn-success">27</button>
-                    <button type="button" class="btn btn-success">26</button>
-                    <button type="button" class="btn btn-success">25</button>
-                    <button type="button" class="btn btn-success">24</button>
-                    <button type="button" class="btn btn-success">23</button>
-                    <button type="button" class="btn btn-success">...</button>
+                    <button type="button" id="button-1" class="btn btn-success"></button>
+                    <button type="button" id="button-2" class="btn btn-success"></button>
+                    <button type="button" id="button-3" class="btn btn-success"></button>
+                    <button type="button" id="button-4" class="btn btn-success"></button>
+                    <button type="button" id="button-5" class="btn btn-success"></button>
+                    <button type="button" id="button-6" class="btn btn-success"></button>
+                    <button type="button" id="button-7" class="btn btn-success"></button>
+                    <button type="button" id="button-8" class="btn btn-success"></button>
                 </div>
         </div>
             <div class="span8">
