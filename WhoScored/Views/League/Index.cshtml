@@ -67,38 +67,71 @@
         $(selectedLeague).trigger('leagueUpdated');
     }
 
-    function SetSeasonButtons(firstSeasonToShow) {
-        var totalSeasons = $.storage.get("totalSeasons");   
-        var nextSeasonToShow;
-        
-        if (totalSeasons === firstSeasonToShow) {
-            $("#button-1").attr('value', firstSeasonToShow);
-            $("#button-1").html(firstSeasonToShow);
-            nextSeasonToShow = parseInt(firstSeasonToShow) - 1;
-        }else {
-            $("#button-1").attr('value', '...');
-            $("#button-1").html('...');
-            nextSeasonToShow = parseInt(firstSeasonToShow);
-        }
+    function NavUpButtonClick(firstSeasonToShow) {
+        var totalSeasons = $.storage.get("totalSeasons");
+        var nextSeasonToShow = parseInt(firstSeasonToShow);
 
-        for (var i = 2; i < 8; i++) {
+        for (var i = 6; i > 0; i--) {
             var buttonId = "#button-" + i;
-            if (nextSeasonToShow > 0) {
+            if (nextSeasonToShow <= totalSeasons) {
                 $(buttonId).show();
                 $(buttonId).attr('value', nextSeasonToShow);
                 $(buttonId).html(nextSeasonToShow);
-                nextSeasonToShow = nextSeasonToShow - 1;
+                nextSeasonToShow = nextSeasonToShow + 1;
+                $.storage.set("nextToShowUp", nextSeasonToShow);
             }else {
                 $(buttonId).hide();
             }
         }
 
-        $.storage.set("nextSeasonToShow", nextSeasonToShow);
+        $.storage.set("nextToShowDown", $('#button-6').val() - 1);
+        $("#button-nav-down").show();
+        $('#button-7').hide();
+
+        if (nextSeasonToShow < totalSeasons) {
+            $("#button-nav-up").show();
+        } else {
+            $("#button-nav-up").hide();
+        }
+    }
+
+    function NavDownButtonClick(firstSeasonToShow) {
+        var totalSeasons = $.storage.get("totalSeasons");
+        var nextSeasonToShow = parseInt(firstSeasonToShow);
+        var first;
+
+        if (totalSeasons === firstSeasonToShow) {
+            $("#button-nav-up").hide();
+            $("#button-1").show();
+            first = 1;
+        } else {
+            $("#button-nav-up").show();
+            $("#button-1").hide();
+            first = 2;
+        }       
+
+        for (var i = first; i < 8; i++) {
+            var buttonId = "#button-" + i;
+            if (nextSeasonToShow > 0) {
+                $(buttonId).show();
+                $(buttonId).attr('value', nextSeasonToShow);
+                $(buttonId).html(nextSeasonToShow);
+                nextSeasonToShow = nextSeasonToShow -1;
+                $.storage.set("nextToShowDown", nextSeasonToShow);
+            }else {
+                $(buttonId).hide();
+            }
+        }
+
+        var firstButtonId = '#button-' + first;
+        $.storage.set("nextToShowUp", $(firstButtonId).val());
 
         if (nextSeasonToShow > 0) {
-            $("#button-8").attr('value', '...');
-            $("#button-8").html('...');
+            $("#button-nav-down").show();
+        }else {
+            $("#button-nav-down").hide();
         }
+            
     }
 
     $(document).ready(function () {
@@ -106,7 +139,7 @@
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
         $.storage.set("totalSeasons", '@(Model.CurrentSeason)');
-        SetSeasonButtons('@(Model.CurrentSeason)');
+        NavDownButtonClick('@(Model.CurrentSeason)', -1);
 
 
         $("#seriesSelect,#countryId").change(function () {
@@ -155,8 +188,12 @@
             }
         });
 
-        $('#button-8').click(function() {
-            SetSeasonButtons($.storage.get("nextSeasonToShow"));
+        $('#button-nav-down').click(function () {
+            NavDownButtonClick($.storage.get("nextToShowDown"));
+        });
+
+        $('#button-nav-up').click(function() {
+            NavUpButtonClick($.storage.get("nextToShowUp"));
         });
             
         
@@ -238,16 +275,17 @@
             </div>
             </div> 
         <div class="span0">
-                <div class="btn-group-vertical" id="seasonButtons" data-toggle="buttons-radio">
-                    <button type="button" id="button-1" class="btn btn-success"></button>
-                    <button type="button" id="button-2" class="btn btn-success"></button>
-                    <button type="button" id="button-3" class="btn btn-success"></button>
-                    <button type="button" id="button-4" class="btn btn-success"></button>
-                    <button type="button" id="button-5" class="btn btn-success"></button>
-                    <button type="button" id="button-6" class="btn btn-success"></button>
-                    <button type="button" id="button-7" class="btn btn-success"></button>
-                    <button type="button" id="button-8" class="btn btn-success"></button>
-                </div>
+            <button type="button" id="button-nav-up" class="btn btn-success nav-btn">...</button>            
+            <div class="btn-group-vertical" id="seasonButtons" data-toggle="buttons-radio">
+                <button type="button" id="button-1" class="btn btn-success"></button>                
+                <button type="button" id="button-2" class="btn btn-success"></button>
+                <button type="button" id="button-3" class="btn btn-success"></button>
+                <button type="button" id="button-4" class="btn btn-success"></button>
+                <button type="button" id="button-5" class="btn btn-success"></button>
+                <button type="button" id="button-6" class="btn btn-success"></button>
+                <button type="button" id="button-7" class="btn btn-success"></button>                    
+            </div>
+            <button type="button" id="button-nav-down" class="btn btn-success nav-btn">...</button>
         </div>
             <div class="span8">
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
