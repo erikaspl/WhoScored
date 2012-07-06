@@ -70,10 +70,20 @@
     function NavUpButtonClick(firstSeasonToShow) {
         var totalSeasons = $.storage.get("totalSeasons");
         var nextSeasonToShow = parseInt(firstSeasonToShow);
-
-        for (var i = 6; i > 0; i--) {
+        var nextDownButtonId = 6;
+        if ((totalSeasons - nextSeasonToShow - 6) < 0) {
+            nextSeasonToShow = totalSeasons - 6;
+        }
+        for (var i = 7; i > 0; i--) {
             var buttonId = "#button-" + i;
-            if (nextSeasonToShow <= totalSeasons) {
+            var showButton = true;
+            if (i === 1) {
+                if (nextSeasonToShow != totalSeasons) {
+                    showButton = false;
+                }
+            }
+
+            if (nextSeasonToShow <= totalSeasons && showButton) {
                 $(buttonId).show();
                 $(buttonId).attr('value', nextSeasonToShow);
                 $(buttonId).html(nextSeasonToShow);
@@ -84,30 +94,36 @@
             }
         }
 
-        $.storage.set("nextToShowDown", $('#button-6').val() - 1);
-        $("#button-nav-down").show();
-        $('#button-7').hide();
-
         if (nextSeasonToShow < totalSeasons) {
-            $("#button-nav-up").show();
+            $("#button-nav-up").show();            
         } else {
             $("#button-nav-up").hide();
+            nextDownButtonId = 7;
         }
+
+        $.storage.set("nextToShowDown", $('#button-' + nextDownButtonId).val() - 1);
+        $("#button-nav-down").show();
     }
 
     function NavDownButtonClick(firstSeasonToShow) {
         var totalSeasons = $.storage.get("totalSeasons");
         var nextSeasonToShow = parseInt(firstSeasonToShow);
         var first;
+        
+        if (nextSeasonToShow < 6) {
+            nextSeasonToShow = 6;
+        }
 
         if (totalSeasons === firstSeasonToShow) {
             $("#button-nav-up").hide();
             $("#button-1").show();
             first = 1;
+            $.storage.set("nextToShowUp", totalSeasons);
         } else {
             $("#button-nav-up").show();
             $("#button-1").hide();
             first = 2;
+            $.storage.set("nextToShowUp", nextSeasonToShow + 1);
         }       
 
         for (var i = first; i < 8; i++) {
@@ -122,16 +138,40 @@
                 $(buttonId).hide();
             }
         }
-
-        var firstButtonId = '#button-' + first;
-        $.storage.set("nextToShowUp", $(firstButtonId).val());
-
+      
         if (nextSeasonToShow > 0) {
             $("#button-nav-down").show();
         }else {
             $("#button-nav-down").hide();
         }
+    }
+
+    function UnselectSeasonButtons() {
+        $('#seasonButtons button').each(function () {
+            $(this).removeClass('active');
+        });
+    }
+
+    function SelectSeasonButton(season) {
+        UnselectSeasonButtons();
+
+        var nextToShowDown = $.storage.get("nextToShowDown");
+        var nextToShowUp = $.storage.get("nextToShowUp");
+
+        if (nextToShowDown >= season) {
+            NavDownButtonClick(season);
+        }
+
+        if (nextToShowUp <= season) {
+            NavUpButtonClick(season);
+        }
             
+
+        $('#seasonButtons button').each(function () {
+            if ($(this).val() === season) {
+                $(this).addClass('active');    
+            }            
+        });
     }
 
     $(document).ready(function () {
@@ -139,7 +179,8 @@
         $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
         $.storage.set("totalSeasons", '@(Model.CurrentSeason)');
-        NavDownButtonClick('@(Model.CurrentSeason)', -1);
+        NavDownButtonClick('@(Model.CurrentSeason)');
+        SelectSeasonButton('@(Model.CurrentSeason)');
 
 
         $("#seriesSelect,#countryId").change(function () {
@@ -189,21 +230,29 @@
         });
 
         $('#button-nav-down').click(function () {
+            UnselectSeasonButtons();
             NavDownButtonClick($.storage.get("nextToShowDown"));
         });
 
-        $('#button-nav-up').click(function() {
+        $('#button-nav-up').click(function () {
+            UnselectSeasonButtons();
             NavUpButtonClick($.storage.get("nextToShowUp"));
         });
-            
-        
+
+
         $('#seasonSelect').change(function () {
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
-            $.storage.set("selectedSeason", this.val());
+            SelectSeasonButton($(this).val());
         });
 
         $('#seriesSelect').change(function () {
+            setTeamStandingsTable();
+            oteamStandingsTable.fnDraw();
+        });
+
+        $('#seasonButtons button').click(function () {
+            $('#seasonSelect').val($(this).val());
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
         });
