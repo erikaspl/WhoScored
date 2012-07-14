@@ -51,6 +51,7 @@ namespace WhoScored.Db
 
         void DropMatchDetails();
 
-        List<SeriesStandingsTeamEntity> GetSeriesStandings(int seriesId, int season);
+        List<ISeriesStandingsTeamEntity> GetSeriesStandingsWithResults(int seriesId, int season, int matchRound);
+        
     }
 }

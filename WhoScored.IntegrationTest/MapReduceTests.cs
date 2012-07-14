@@ -14,7 +14,7 @@ namespace WhoScored.IntegrationTest
         public void GetSeriesStandings_TestExecution()
         {
             var repository = new WhoScoredRepository();
-            var result = repository.GetSeriesStandings(29747, 30);
+            var result = repository.GetSeriesStandingsWithResults(29747, 30, 14);
 
         }
     }

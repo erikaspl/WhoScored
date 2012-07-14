@@ -9,6 +9,7 @@ using MongoDB.Driver.Builders;
 using WhoScored.Db.Connection;
 using WhoScored.Model;
 using MongoDB.Driver.Linq;
+using WhoScored.Model.Implementation;
 
 namespace WhoScored.Db.Mongo
 {
@@ -535,13 +536,23 @@ namespace WhoScored.Db.Mongo
                 }";
         }
 
-        public List<SeriesStandingsTeamEntity> GetSeriesStandings(int seriesId, int season)
+        public List<ISeriesStandingsTeamEntity> GetSeriesStandingsWithResults(int seriesId, int season, int matchRound)
+        {
+            var standings = GetSeriesStandings(seriesId, season, matchRound);
+            SetTeamResults(seriesId, season, matchRound, standings);
+            return standings;
+        }
+
+        private List<ISeriesStandingsTeamEntity> GetSeriesStandings(int seriesId, int season, int matchRound)
         {
             string map = SeriesStandingsMap();
             string reduce = SeriesStandingsReduce();
             string finalize = SeriesStandingsFinalize();
 
-            var query = new QueryDocument("MatchSeason", season.ToString()) {{"LeagueLevelUnitID", seriesId.ToString()}};
+            var query = Query.And(
+                Query.EQ("LeagueLevelUnitID", seriesId.ToString()), 
+                Query.EQ("MatchSeason", season.ToString()),
+                Query.LTE("MatchRound", matchRound));
 
             var options = new MapReduceOptionsBuilder();
             options.SetOutput(MapReduceOutput.Inline);
@@ -575,8 +586,178 @@ namespace WhoScored.Db.Mongo
                         Played = element.Value.AsBsonDocument["Played"].ToInt32()
                     }));
             }
+            
+            var sortedList = tealList.OrderByDescending(t => t.TotalPoints).ThenByDescending(t => t.GoalDifference).ToList();
 
-            return tealList.OrderByDescending(t => t.TotalPoints).ThenByDescending(t => t.GoalDifference).ToList();
+            int counter = 1;
+            sortedList.ForEach(x => x.Position = counter++);
+            return sortedList.Cast<ISeriesStandingsTeamEntity>().ToList();
+        }
+
+        private string TeamResultsMap()
+        {
+            return
+                @"function Map() {
+	                emit({SeriesId : this.LeagueLevelUnitID, Season: this.MatchSeason},
+	                {	
+		                'Season': this.MatchSeason,
+		                'HomeTeamID': this.MatchHomeTeam.HomeTeamID,
+		                'HomeTeamName': this.MatchHomeTeam.HomeTeamName,
+		                'HomeGoals': this.MatchHomeTeam.HomeGoals,
+		                'AwayTeamID': this.MatchAwayTeam.AwayTeamID,
+		                'AwayTeamName': this.MatchAwayTeam.AwayTeamName,
+		                'AwayGoals': this.MatchAwayTeam.AwayGoals,
+		                'MatchRound': this.MatchRound
+	                });
+                }";
+        }
+
+        private string TeamResultReduce()
+        {
+            return
+                @"function Reduce(key, values) {
+	                var teamForm = new Object();
+	
+	                values.forEach(function(value) {	
+		                var homeTeam;
+		                if (value.HomeTeamID in teamForm){
+			                homeTeam = teamForm[value.HomeTeamID];
+		                }else{
+			                homeTeam = {
+					                TeamId:value.HomeTeamID,
+					                TeamName:value.HomeTeamName,
+					                TeamProgress: {}
+			                }
+			                teamForm[value.HomeTeamID] = homeTeam;	
+		                }
+		
+		                var awayTeam;
+		                if (value.AwayTeamID in teamForm){
+			                awayTeam = teamForm[value.AwayTeamID];
+		                }else{
+			                awayTeam = {
+					                TeamId:value.AwayTeamID,
+					                TeamName:value.AwayTeamName,
+					                TeamProgress: {}
+			                }
+			                teamForm[value.AwayTeamID] = awayTeam;	
+		                }
+		                var homeResult;
+		                if (value.HomeGoals === value.AwayGoals){
+			                homeTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'d'
+			                };
+			                awayTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'D'
+			                };				
+		                }
+			
+		                if (value.HomeGoals > value.AwayGoals){
+			                homeTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'w'
+			                };
+			                awayTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'L'
+			                };
+		                }
+		
+		                if (value.HomeGoals < value.AwayGoals){
+			                homeTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'l'
+			                };
+			                awayTeam.TeamProgress[value.MatchRound] = {
+                                MatchRound:value.MatchRound,
+				                HomeTeamName: value.HomeTeamName,
+				                HomeTeamGoals: value.HomeGoals,
+				                AwayTeamName: value.AwayTeamName,
+				                AwayTeamGoals: value.AwayGoals,
+				                Result:'W'
+			                };
+		                }		
+	                });
+	
+	                var reduced = {teams :[]};
+	                reduced.teams = teamForm;
+	
+	                return reduced;
+                }";
+        }
+
+        private string TeamResultFinalize()
+        {
+            return @"
+                function Finalize(key, reduced) {
+	                return reduced;
+                }";
+        }
+
+        private void SetTeamResults(int seriesId, int season, int matchRound, List<ISeriesStandingsTeamEntity> seriesStandings)
+        {
+            string map = TeamResultsMap();
+            string reduce = TeamResultReduce();
+            string finalize = TeamResultFinalize();
+
+            var query = Query.And(
+                Query.EQ("LeagueLevelUnitID", seriesId.ToString()),
+                Query.EQ("MatchSeason", season.ToString()),
+                Query.LTE("MatchRound", matchRound));
+
+            var options = new MapReduceOptionsBuilder();
+            options.SetOutput(MapReduceOutput.Inline);
+            options.SetFinalize(finalize);
+            options.SetQuery(query);
+
+            var database = MongoConnector.GetDatabase();
+            var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
+
+            var results = collection.MapReduce(map, reduce, options);
+
+            var result = results.InlineResults.FirstOrDefault();
+
+
+            foreach (var teamEntity in seriesStandings)
+            {
+                ISeriesStandingsTeamEntity entity = teamEntity;
+                var teamStandings =
+                    result["value"].AsBsonDocument["teams"].AsBsonDocument.Elements.ToList().First(
+                        e => e.Value.AsBsonDocument["TeamId"].ToString() == entity.TeamId).ToBsonDocument()["Value"].
+                        AsBsonDocument["TeamProgress"].AsBsonDocument.Elements.ToList();
+
+                entity.Results.AddRange(teamStandings.OrderBy(r => r.Value.AsBsonDocument["MatchRound"].ToInt32()).Select(element => new TeamMatchResultEntity
+                                                                            {
+                                                                                MatchRound = element.Value.AsBsonDocument["MatchRound"].ToInt32(),
+                                                                                HomeTeamName = element.Value.AsBsonDocument["HomeTeamName"].ToString(),
+                                                                                HomeTeamGoals = element.Value.AsBsonDocument["HomeTeamGoals"].ToString(),
+                                                                                AwayTeamName = element.Value.AsBsonDocument["AwayTeamName"].ToString(),
+                                                                                AwayTeamGoals = element.Value.AsBsonDocument["AwayTeamGoals"].ToString(),
+                                                                                ResultSymbol = element.Value.AsBsonDocument["Result"].ToString()
+                                                                            }));
+            }
         }
 
         #endregion

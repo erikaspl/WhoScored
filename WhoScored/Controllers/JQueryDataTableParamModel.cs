@@ -42,4 +42,6 @@ public class jQueryDataTableParamModel
     public int SeriesId { get; set; }
 
     public int Season { get; set; }
+
+    public int MatchRound { get; set; }
 }

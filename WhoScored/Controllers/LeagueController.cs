@@ -13,6 +13,8 @@ namespace WhoScored.Controllers
     {
         readonly IWhoScoredRepository _repository = new WhoScoredRepository();
 
+        private const int DEFAULT_MATCH_ROUND = 14;
+
         public ActionResult Index()
         {
             const string selectedCountry = "Lithuania";
@@ -33,15 +35,21 @@ namespace WhoScored.Controllers
 
         public ActionResult TeamStandings(jQueryDataTableParamModel param)
         {
-            var seriesStandings = _repository.GetSeriesStandings(param.SeriesId, param.Season);
+            int matchRound = param.MatchRound;
+            if (matchRound <= 0)
+            {
+                matchRound = DEFAULT_MATCH_ROUND;
+            }
+
+            var seriesStandings = _repository.GetSeriesStandingsWithResults(param.SeriesId, param.Season, matchRound);
 
             var result = from c in seriesStandings
                          select new[]
                                  {
-                                     Convert.ToString(c.TeamId), c.TeamName,
+                                     Convert.ToString(c.Position), c.TeamName,
                                      c.Played.ToString(), c.Won.ToString(), c.Drawn.ToString(), c.Lost.ToString(),
                                      c.GoalsScored.ToString(), c.GoalsConceded.ToString(), c.GoalDifference.ToString(),
-                                     c.TotalPoints.ToString()
+                                     c.TotalPoints.ToString(), c.Form
                                  };
 
             return Json(new

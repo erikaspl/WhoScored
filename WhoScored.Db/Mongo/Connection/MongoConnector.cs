@@ -10,6 +10,7 @@
         {
             var server = CreateServer();
             string databaseName = ConfigurationManager.AppSettings["MongoDatabaseName"];
+
             return server.GetDatabase(databaseName);
         }
 

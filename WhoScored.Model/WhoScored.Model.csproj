@@ -49,8 +49,11 @@
     <Compile Include="IMatchScorers.cs" />
     <Compile Include="IMatchSummary.cs" />
     <Compile Include="IMatchTeam.cs" />
+    <Compile Include="ISeriesStandingsTeamEntity.cs" />
+    <Compile Include="ITeamMatchResultEntity.cs" />
     <Compile Include="Implementation\SeriesFixturesSummaryEntity.cs" />
     <Compile Include="Implementation\SeriesStandings.cs" />
+    <Compile Include="Implementation\TeamMatchResultEntity.cs" />
     <Compile Include="ISeriesFixtures.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="IWorldDetails.cs" />

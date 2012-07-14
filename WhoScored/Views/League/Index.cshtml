@@ -1,24 +1,30 @@
 ﻿@model WhoScored.Models.WorldDetailsModel
 @{
     ViewBag.Title = "League";
+    ViewBag.Active = "League";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript">
 
     var oteamStandingsTable;
     var selectedSeason;
+    var selectedSeries;
+    var defaultMatchRound = 14;
+    var selectedRound = defaultMatchRound;
 
     function updateLeagueText() {
         $(".selectedLeague").text(this.country + ' / ' + this.series);
     }
 
+   
     var selectedLeague = {};
-
+    var teamStandingSelection = {};    
     $.storage = new $.store();
+    
 
     function setTeamStandingsTable() {
-        series = $('#seriesSelect').val();
-        season = $('#seasonSelect').val();
+        var series = $('#seriesSelect').val();
+        var season = $('#seasonSelect').val();
 
         if (season != null && series != null) {
 
@@ -31,10 +37,12 @@
                 "bLengthChange": false,
                 "sAjaxSource": "League/TeamStandings",
                 "bProcessing": false,
+                "bAutoWidth": false,
                 "fnServerData": function (sSource, aoData, fnCallback) {
 
-                    aoData.push({ "name": "season", "value": season });
-                    aoData.push({ "name": "seriesId", "value": series });
+                    aoData.push({ "name": "season", "value": selectedSeason });
+                    aoData.push({ "name": "seriesId", "value": selectedSeries });
+                    aoData.push({ "name": "MatchRound", "value": selectedRound });
 
                     $.ajax({
                         "dataType": 'json',
@@ -45,16 +53,17 @@
                     });
                 },
                 "aoColumns": [
-                    { "sName": "TeamId", "sWidth": "5%" },
-                    { "sName": "TeamName", "sWidth": "45%" },
-                    { "sName": "Played", "sWidth": "10px" },
-                    { "sName": "Won", "sWidth": "10px" },
-                    { "sName": "Drawn", "sWidth": "10px" },
-                    { "sName": "Lost", "sWidth": "10px" },
-                    { "sName": "GoalsScored", "sWidth": "10px" },
-                    { "sName": "GoalsConceded", "sWidth": "10px" },
-                    { "sName": "GoalDifference", "sWidth": "10px" },
-                    { "sName": "TotalPoints", "sWidth": "10px" }
+                    { "sName": "Position", "sWidth": "8px", "sClass": "dtCell" },
+                    { "sName": "TeamName", "sWidth": "120px", "sClass": "dtCell" },
+                    { "sName": "Played", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "Won", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "Drawn", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "Lost", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "GoalsScored", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "GoalsConceded", "sWidth": "15px", "sClass": "dtCell" },
+                    { "sName": "GoalDifference", "sWidth": "20px", "sClass": "dtCell" },
+                    { "sName": "TotalPoints", "sWidth": "15px", "sClass": "dtCell dtCellBold" },
+                    { "sName": "Form", "sWidth": "50px", "sClass": "dtCell dtCellBold" }
                 ]
             });
         }
@@ -152,6 +161,15 @@
         });
     }
 
+    function UnselectRoundButtons() {
+        $('#matchRoundButtons button').each(function () {
+            $(this).removeClass('active');
+        });
+        selectedRound = defaultMatchRound;
+    }
+
+    var selectedValue;
+
     function SelectSeasonButton(season) {
         UnselectSeasonButtons();
 
@@ -170,7 +188,7 @@
         $('#seasonButtons button').each(function () {
             if ($(this).val() === season) {
                 $(this).addClass('active');    
-            }            
+            }
         });
     }
 
@@ -224,8 +242,12 @@
                     options.append($("<option />").val(this.Value).text(this.Text));
                 });
                 options.removeAttr("disabled");
-                setTeamStandingsTable();
                 UpdateSelectedSeriesHeader();
+
+                selectedSeason = $('#seasonSelect').val();
+                selectedSeries = $('#seriesSelect').val();
+                selectedRound = defaultMatchRound;
+                setTeamStandingsTable();
             }
         });
 
@@ -241,18 +263,36 @@
 
 
         $('#seasonSelect').change(function () {
+            SelectSeasonButton($(this).val());
+
+            selectedSeason = $(this).val();
+            selectedSeries = $('#seriesSelect').val();
+            UnselectRoundButtons();
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
-            SelectSeasonButton($(this).val());
         });
 
         $('#seriesSelect').change(function () {
+            selectedSeason = $('#seasonSelect').val();
+            selectedSeries = $(this).val();
+            UnselectRoundButtons();
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
         });
 
         $('#seasonButtons button').click(function () {
-            $('#seasonSelect').val($(this).val());
+            selectedSeason = $(this).val();
+            selectedSeries = $('#seriesSelect').val();
+            $('#seasonSelect').val(selectedSeason);
+            UnselectRoundButtons();
+            setTeamStandingsTable();
+            oteamStandingsTable.fnDraw();
+        });
+
+        $('#matchRoundButtons button').click(function () {
+            selectedSeason = $('#seasonSelect').val();
+            selectedSeries = $('#seriesSelect').val();
+            selectedRound = $(this).val();
             setTeamStandingsTable();
             oteamStandingsTable.fnDraw();
         });
@@ -263,9 +303,8 @@
     <h1>
         <span class="selectedLeague">League</span></h1>
 </div>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span3">
+<div class="container">
+        <div class="span2">
             <label class="control-label" for="countryId">
                 Country</label>
             <div class="controls">
@@ -291,50 +330,50 @@
         </div>
         <div class="span9">
             <div class="btn-group-centered">
-            <div class="btn-group" id="matchRound" data-toggle="buttons-radio">
-                <button class="btn btn-primary">
+            <div class="btn-group" id="matchRoundButtons" data-toggle="buttons-radio">
+                <button class="btn btn-primary" id="round-btn-1" name="round" value="1">
                     1</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-2" name="round" value="2">
                     2</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-3" name="round" value="3">
                     3</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-4" name="round" value="4">
                     4</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-5" name="round" value="5">
                     5</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-6" name="round" value="6">
                     6</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-7" name="round" value="7">
                     7</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-8" name="round" value="8">
                     8</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-9" name="round" value="9">
                     9</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-10" name="round" value="10">
                     10</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-11" name="round" value="11">
                     11</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-12" name="round" value="12">
                     12</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-13" name="round" value="13">
                     13</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="round-btn-14" name="round" value="14">
                     14</button>
             </div>  
             </div>
             </div> 
-        <div class="span0">
-            <button type="button" id="button-nav-up" class="btn btn-success nav-btn">...</button>            
+        <div class="span1 btn-group-centered">            
             <div class="btn-group-vertical" id="seasonButtons" data-toggle="buttons-radio">
-                <button type="button" id="button-1" class="btn btn-success"></button>                
-                <button type="button" id="button-2" class="btn btn-success"></button>
-                <button type="button" id="button-3" class="btn btn-success"></button>
-                <button type="button" id="button-4" class="btn btn-success"></button>
-                <button type="button" id="button-5" class="btn btn-success"></button>
-                <button type="button" id="button-6" class="btn btn-success"></button>
-                <button type="button" id="button-7" class="btn btn-success"></button>                    
+                <button type="button" id="button-nav-up" class="btn btn-success nav-btn">...</button>
+                <button type="button" id="button-1" class="btn btn-success nav-btn"></button>                
+                <button type="button" id="button-2" class="btn btn-success nav-btn"></button>
+                <button type="button" id="button-3" class="btn btn-success nav-btn"></button>
+                <button type="button" id="button-4" class="btn btn-success nav-btn"></button>
+                <button type="button" id="button-5" class="btn btn-success nav-btn"></button>
+                <button type="button" id="button-6" class="btn btn-success nav-btn"></button>
+                <button type="button" id="button-7" class="btn btn-success nav-btn"></button>                                
+                <button type="button" id="button-nav-down" class="btn btn-success nav-btn">...</button>
             </div>
-            <button type="button" id="button-nav-down" class="btn btn-success nav-btn">...</button>
         </div>
             <div class="span8">
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
@@ -371,6 +410,9 @@
                             <th>
                                 Pts
                             </th>
+                            <th>
+                                Form
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -382,4 +424,3 @@
         <div id="noTeamStandingsAlert" class="alert alert-error hide">
             No team standings available.</div>
         </div>    
-</div>
