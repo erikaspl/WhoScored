@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.IntegrationTest",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Model", "WhoScored.Model\WhoScored.Model.csproj", "{512EBB5A-1430-449E-8A7A-D2E441FC7488}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Db.UnitTest", "WhoScored.Db.UnitTest\WhoScored.Db.UnitTest.csproj", "{B606B5E6-2586-4D66-9749-3D6EE45EE520}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = WhoScored.vsmdi
@@ -71,6 +73,10 @@ Global
 		{512EBB5A-1430-449E-8A7A-D2E441FC7488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{512EBB5A-1430-449E-8A7A-D2E441FC7488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{512EBB5A-1430-449E-8A7A-D2E441FC7488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B606B5E6-2586-4D66-9749-3D6EE45EE520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B606B5E6-2586-4D66-9749-3D6EE45EE520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B606B5E6-2586-4D66-9749-3D6EE45EE520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B606B5E6-2586-4D66-9749-3D6EE45EE520}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

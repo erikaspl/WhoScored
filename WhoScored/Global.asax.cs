@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace WhoScored
 {
-    using WhoScored.Controllers;
-    using WhoScored.Db.Mongo;
-    using WhoScored.Migration;
-    using WhoScored.Model;
-    using WhoScored.Models;
+    using Migration;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801

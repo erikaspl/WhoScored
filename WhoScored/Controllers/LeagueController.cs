@@ -9,6 +9,8 @@ using WhoScored.Models;
 
 namespace WhoScored.Controllers
 {
+    using WhoScored.Model;
+
     public class LeagueController : Controller
     {
         readonly IWhoScoredRepository _repository = new WhoScoredRepository();
@@ -27,6 +29,8 @@ namespace WhoScored.Controllers
 
             return View(worldDetailsViewData);
         }
+
+
 
         private int GetCurrentSeason(int globalSeason, int contrySeasonOffset)
         {
@@ -49,7 +53,7 @@ namespace WhoScored.Controllers
                                      Convert.ToString(c.Position), c.TeamName,
                                      c.Played.ToString(), c.Won.ToString(), c.Drawn.ToString(), c.Lost.ToString(),
                                      c.GoalsScored.ToString(), c.GoalsConceded.ToString(), c.GoalDifference.ToString(),
-                                     c.TotalPoints.ToString(), c.Form
+                                     c.TotalPoints.ToString(), GetForm(c.Results)
                                  };
 
             return Json(new
@@ -62,5 +66,23 @@ namespace WhoScored.Controllers
             JsonRequestBehavior.AllowGet);
         }
 
+        private string GetForm(IEnumerable<ITeamMatchResult> results)
+        {
+            string form = string.Empty;
+            results.OrderBy(r => r.MatchRound).Skip(Math.Max(0, results.Count() - 10)).Take(10).ToList().ForEach(r => form += GetResultLink(r));
+            return form;
+        }
+
+        private string GetResultLink(ITeamMatchResult result)
+        {
+            return string.Format("<a class='rez-box {0}' href='#' title='{1} {2}-{3} {4}'>{0}</a>", result.ResultSymbol,
+                result.HomeTeamName, result.HomeTeamGoals, result.AwayTeamGoals, result.AwayTeamName );
+        }
+
+        public ActionResult SeriesResults(int seriesId, int season)
+        {
+            var seriesResults = _repository.GetSeriesResults(seriesId, season);
+            return Json(seriesResults.GroupBy(r => r.MatchRound).ToDictionary(r => r.Key.ToString(), v => v.ToList()));
+        }
     }
 }

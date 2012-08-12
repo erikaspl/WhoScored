@@ -20,7 +20,15 @@ namespace WhoScored.Models
 
         public bool LeagueInWhoScored { get; set; }
 
-        public List<int> SeriesIdList { get; set; }
-
+        private List<int> _seriesIdList = new List<int>();
+        public List<int> SeriesIdList
+        {
+            get { return _seriesIdList; }
+            set
+            {
+                if (value != null)
+                    _seriesIdList = value;
+            }
+        }
     }
 }

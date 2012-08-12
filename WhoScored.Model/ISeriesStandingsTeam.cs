@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WhoScored.Model
 {
-    public interface ISeriesStandingsTeamEntity
+    public interface ISeriesStandingsTeam
     {
         int Position { get; set; }
         string TeamId { get; set; }
@@ -20,8 +20,7 @@ namespace WhoScored.Model
         int Lost { get; set; }
         int Drawn { get; set; }
         int Played { get; set; }
-        string Form { get; }
 
-        List<ITeamMatchResultEntity> Results { get; set; }
+        List<ITeamMatchResult> Results { get; set; }
     }
 }

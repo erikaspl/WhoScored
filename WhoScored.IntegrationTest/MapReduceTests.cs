@@ -7,10 +7,11 @@ using WhoScored.Db.Mongo;
 
 namespace WhoScored.IntegrationTest
 {
-    [TestClass]
+    [TestClass]    
     public class MapReduceTests
     {
         [TestMethod]
+        [DeploymentItem("Mongo/MapReduce/TeamForm")]
         public void GetSeriesStandings_TestExecution()
         {
             var repository = new WhoScoredRepository();

@@ -4,7 +4,7 @@ namespace WhoScored.Model
 {
     using System.Linq;
 
-    public class SeriesStandingsTeamEntity : ISeriesStandingsTeamEntity
+    public class SeriesStandingsTeamEntity : ISeriesStandingsTeam
     {
         public int Position { get; set; }
         public string TeamId { get; set; }
@@ -20,16 +20,8 @@ namespace WhoScored.Model
         public int Drawn { get; set; }
         public int Played { get; set; }
 
-        public string Form { 
-            get
-            {
-                string form = string.Empty;
-                _results.OrderBy(r => r.MatchRound).ToList().ForEach(r => form += r.ResultSymbol);
-                return form;
-            }
-        }
-        private List<ITeamMatchResultEntity> _results = new List<ITeamMatchResultEntity>();
-        public List<ITeamMatchResultEntity> Results
+        private List<ITeamMatchResult> _results = new List<ITeamMatchResult>();
+        public List<ITeamMatchResult> Results
         {
             get { return _results; }
             set { _results = value; }

@@ -46,11 +46,13 @@
     <Compile Include="IMatchBookings.cs" />
     <Compile Include="IMatchEventList.cs" />
     <Compile Include="IMatchInjuries.cs" />
+    <Compile Include="IMatchResult.cs" />
     <Compile Include="IMatchScorers.cs" />
     <Compile Include="IMatchSummary.cs" />
     <Compile Include="IMatchTeam.cs" />
-    <Compile Include="ISeriesStandingsTeamEntity.cs" />
-    <Compile Include="ITeamMatchResultEntity.cs" />
+    <Compile Include="Implementation\MatchResultEntity.cs" />
+    <Compile Include="ISeriesStandingsTeam.cs" />
+    <Compile Include="ITeamMatchResult.cs" />
     <Compile Include="Implementation\SeriesFixturesSummaryEntity.cs" />
     <Compile Include="Implementation\SeriesStandings.cs" />
     <Compile Include="Implementation\TeamMatchResultEntity.cs" />

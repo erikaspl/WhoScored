@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WhoScored.Db.Mongo;
 using WhoScored.Model;
 
 namespace WhoScored.Db
@@ -14,6 +10,8 @@ namespace WhoScored.Db
         void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails;
 
         List<T> GetWorldDetails<T>() where T : class, IWorldDetails;
+
+        List<T> GetActiveCountries<T>() where T : class, IWorldDetails;
 
         T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails;
 
@@ -51,7 +49,11 @@ namespace WhoScored.Db
 
         void DropMatchDetails();
 
-        List<ISeriesStandingsTeamEntity> GetSeriesStandingsWithResults(int seriesId, int season, int matchRound);
-        
+        List<ISeriesStandingsTeam> GetSeriesStandingsWithResults(int seriesId, int season, int matchRound);
+
+        List<IMatchResult> GetSeriesResults(int seriesId, int season);
+
+        List<IMatchResult> GetSeriesResults(int seriesId, int season, int matchRound);
+
     }
 }

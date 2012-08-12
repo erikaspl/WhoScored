@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="IWhoScoredRepository.cs" />
     <Compile Include="Mongo\Connection\MongoConnector.cs" />
+    <Compile Include="FileReader\EmbededFileReader.cs" />
+    <Compile Include="FileReader\IFileReader.cs" />
+    <Compile Include="Mongo\MapReduce\WhoScoredMapReduce.cs" />
     <Compile Include="Mongo\WhoScoredRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,7 +73,22 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Mongo\MapReduce\SeriesStandings\map.js" />
+    <EmbeddedResource Include="Mongo\MapReduce\SeriesStandings\reduce.js" />
+    <EmbeddedResource Include="Mongo\MapReduce\SeriesStandings\finalize.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mongo\MapReduce\TeamForm\finalize.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mongo\MapReduce\TeamForm\reduce.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mongo\MapReduce\TeamForm\map.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -28,4 +28,6 @@ WhoScored.IntegrationTest/bin/
 WhoScored.IntegrationTest/obj/
 WhoScored.Model/bin
 WhoScored.Model/obj/
+WhoScored.Db.UnitTest/bin/
+WhoScored.Db.UnitTest/obj/
 WhoScored.6.1.ReSharper.user

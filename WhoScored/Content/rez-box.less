@@ -1,0 +1,56 @@
+﻿@symbol-color: #FFFFFF;
+@win-color: #54C408;
+@draw-color:#B8B8B8;
+@lose-color: #FC540D;
+@rez-box-radius: 2px;
+
+.rez-box.w  {
+    background-color: @win-color;
+}
+
+.rez-box.W {
+    background-color: @win-color;
+}
+
+.rez-box.d  {
+    background-color: @draw-color;
+}
+
+.rez-box.D {
+    background-color: @draw-color;
+}
+
+.rez-box.l  {
+    background-color: @lose-color;
+}
+
+.rez-box.L {
+    background-color: @lose-color;
+}
+
+@rez-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+
+.rez-box {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    width: 1.5em;
+    color: @symbol-color;
+    vertical-align: bottom;
+    border-radius: @rez-box-radius;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+    box-shadow: @rez-box-shadow;
+	-moz-box-shadow: @rez-box-shadow;
+	-webkit-box-shadow: @rez-box-shadow;
+}
+
+a {
+    color: #008BDF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+	color: #FFFFFF;
+}

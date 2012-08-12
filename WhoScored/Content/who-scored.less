@@ -1,4 +1,7 @@
-﻿.btn-group-centered {
+﻿.hiddenButton {
+    visibility: hidden;
+}
+.btn-group-centered {
     text-align: center;
 }
 
@@ -33,7 +36,7 @@ div.btn-group {
 }
 
 table.dataTable td {
-    padding: 1px 1px 2px 12px;
+    padding: 1px 1px 2px 8px;
 }
 
 table.dataTable thead th {
@@ -42,4 +45,60 @@ table.dataTable thead th {
 
 td.dtCellCentered {
 	text-align: center;
+}
+
+td.dtCellNoPadding {
+	padding: 1px 1px 2px 4px;
+}
+
+.result-row {
+	display: inline-block;
+	text-align: center;
+}
+
+@result-team-width:120px;
+@result-team-padding:5px;
+@result-radius: 2px;
+@result-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+
+.result-row .home-team{
+	float: left;
+	width: @result-team-width;
+	text-align: right;
+	padding: @result-team-padding;
+}
+
+.result-row .away-team{
+	float: right;
+	width: @result-team-width;
+	text-align: left;
+	padding: @result-team-padding;
+}
+
+tr.match-result-row td{
+	border: 0px;
+	padding-top: 5px;
+}
+
+.score {
+	display: inline-block;
+	width: 35px;
+	text-align: center;
+	background-color: #8F8F8F;
+    color: #FFFFFF;
+	font-weight: bold;
+    padding: 0 0.3em;
+	margin-bottom: 0.3em;
+    white-space: nowrap;
+	border-radius: @result-radius;
+	background-image: -moz-linear-gradient(center top , #8F8F8F, #3C3D3C);
+}
+
+.odd {
+	background-color: #F9F9F9;
+}
+
+
+.even {
+	background-color: #FFFFFF;
 }
