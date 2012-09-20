@@ -16,9 +16,10 @@ return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 function guidGenerator() {
     return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }
-   
-function migrateMatchDetails(matchId) {
+
+function migrateMatchDetails(matchId, matchRound) {
     season = $('#seasonSelect').val();
+    series = $('#seriesSelect').val();
     $('#processingModal').modal('show');
     $.ajax({
         url: controllers.migrateMatchDetails,
@@ -26,7 +27,9 @@ function migrateMatchDetails(matchId) {
         data:
             {
                 matchId: matchId,
-                season: season
+                season: season,
+                matchRound: matchRound,
+                leagueId: series
             },
         dataType: 'json',
         traditional: true,
@@ -100,7 +103,7 @@ function setFixturesDataTable() {
                                             "bSortable": false,
                                             "fnRender": function(oObj) {
                                                 if (oObj.aData[5] == 'False') {
-                                                    return '<button class="btn btn-primary btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ')">Migrate</button>'
+                                                    return '<button class="btn btn-primary btn-mini" type="button" onclick="migrateMatchDetails(' + oObj.aData[0] + ', ' + oObj.aData[2] + ')">Migrate</button>'
                                               
                                                 }
                                                 else {
@@ -161,7 +164,7 @@ function MigrationDocumentReady() {
     $("#seasonSelect").CascadingDropDown("#countryId", '/Migration/AsyncSeasonSelect');
 
     $('#migrateSeries').click(function() {
-        var series = $('#seriesSelect').val();
+        var country = $('#countryId').val();
 
         $.ajax({
             url: controllers.migrateSeriesDetails,
@@ -169,7 +172,7 @@ function MigrationDocumentReady() {
             async: false,
             data:
                 {
-                    seriesId: series
+                    countryId: country
                 },
             dataType: 'json',
             traditional: true
@@ -208,7 +211,7 @@ function MigrationDocumentReady() {
         });
     });
 
-    $('#migrateMatches').click(function () {
+    $('#migrateMatches').click(function() {
 
         var series = $('#seriesSelect').val();
         var season = $('#seasonSelect').val();
@@ -222,52 +225,61 @@ function MigrationDocumentReady() {
         $('#migrationProgressModalClose').hide();
         $('#migrationProgressModal').modal('show');
 
-        matchMigrationInterval = setInterval(function () { checkMatchMigrationStatus(guid); }, 1000);
+        matchMigrationInterval = setInterval(function() { checkMatchMigrationStatus(guid); }, 1000);
 
         $.ajax({
-            url: controllers.startMigrateMatchDetails,
-            type: "POST",
-            data:
+                url: controllers.startMigrateMatchDetails,
+                type: "POST",
+                data:
                     {
                         seriesId: series,
                         season: season,
-                        leagueId : leagueId,
+                        leagueId: leagueId,
                         operationId: guid
                     },
-            dataType: 'json',
-            traditional: true,
-            success: function () {
-                $('#migrationProgressBar').width("100%");
-                setTimeout(function () {
+                dataType: 'json',
+                traditional: true,
+                success: function() {
+                    $('#migrationProgressBar').width("100%");
+                    setTimeout(function() {
+                        $('#migrating').hide();
+                        $('#migrationSuccess').show();
+                        $('#migrationProgressModalClose').show();
+                    }, 1000);
+
+                },
+                error: function() {
                     $('#migrating').hide();
-                    $('#migrationSuccess').show();
+                    $('#migrationFailed').show();
                     $('#migrationProgressModalClose').show();
-                }, 1000);
+                },
 
-            },
-            error: function () {
-                $('#migrating').hide();
-                $('#migrationFailed').show();
-                $('#migrationProgressModalClose').show();
-            },
-
-            complete: function () {
-                clearInterval(matchMigrationInterval);
-                $.ajax({
-                    url: controllers.completeMigrateMatchDetails,
-                    type: "POST",
-                    data:
+                complete: function() {
+                    clearInterval(matchMigrationInterval);
+                    $.ajax({
+                        url: controllers.completeMigrateMatchDetails,
+                        type: "POST",
+                        data:
                             {
                                 operationId: guid
                             },
-                    dataType: 'json',
-                    traditional: true
-                });
+                        dataType: 'json',
+                        traditional: true
+                    });
+                }
             }
-        }
         );
-    }
-    );
+    });
+
+    $("#resetDatabase").click(function () {
+        $.ajax({
+            url: controllers.resetDatabase,
+            type: "POST",
+            dataType: 'json',
+            traditional: true
+        });
+    });
+
 
     $('#seasonSelect').change(function() {
         setFixturesDataTable();

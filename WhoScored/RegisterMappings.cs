@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WhoScored
+﻿namespace WhoScored
 {
     using WhoScored.Db.Mongo;
     using WhoScored.Model;
@@ -15,12 +10,12 @@ namespace WhoScored
         {
             WhoScoredRepository.MapLeagueDetails<SeriesDetails>();
 
-            WhoScoredRepository.MapMatchDetails<MatchDetails, MatchArena, MatchTeam, MatchScorers,
+            WhoScoredRepository.MapMatchDetails<MatchDetails, Models.MatchArena, Models.MatchTeam, MatchScorers,
                 MatchBookings, MatchInjuries, MatchEventList>();
 
             WhoScoredRepository.MapSeriesFixtures<SeriesFixturesSummaryEntity, MatchSummaryEntity>();
-            WhoScoredRepository.MapSettings<Settings>();
-            WhoScoredRepository.MapWorldDetails<WorldDetails>();
+            WhoScoredRepository.MapSettings<Models.Settings>();
+            WhoScoredRepository.MapWorldDetails<CountryDetails>();
         }
     }
 }

@@ -40,6 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Match.cs" />
+    <Compile Include="Entities\MatchArena.cs" />
+    <Compile Include="Entities\MatchBooking.cs" />
+    <Compile Include="Entities\MatchEvent.cs" />
+    <Compile Include="Entities\MatchInjury.cs" />
+    <Compile Include="Entities\MatchScorer.cs" />
+    <Compile Include="Entities\MatchTeam.cs" />
+    <Compile Include="Entities\Series.cs" />
+    <Compile Include="Entities\SeriesFixture.cs" />
+    <Compile Include="Entities\CountrySeriesId.cs" />
+    <Compile Include="Entities\Setting.cs" />
+    <Compile Include="Entities\Team.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IMatchArena.cs" />
     <Compile Include="ILeagueDetails.cs" />
@@ -58,9 +71,15 @@
     <Compile Include="Implementation\TeamMatchResultEntity.cs" />
     <Compile Include="ISeriesFixtures.cs" />
     <Compile Include="ISettings.cs" />
-    <Compile Include="IWorldDetails.cs" />
+    <Compile Include="ICountryDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ICountryRepository.cs" />
+    <Compile Include="Repositories\IMatchRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ISeriesRepository.cs" />
+    <Compile Include="Repositories\ISettingsRepository.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

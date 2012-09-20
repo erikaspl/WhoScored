@@ -37,6 +37,7 @@
     <Reference Include="DevDefined.OAuth">
       <HintPath>..\Binaries\DevDefined.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -47,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MigrateToNhibernateDomainService.cs" />
     <Compile Include="MigrationDomainService.cs" />
+    <Compile Include="MigrationDomainServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WhoScoredRequest.cs" />
   </ItemGroup>

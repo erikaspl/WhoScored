@@ -20,11 +20,11 @@ namespace WhoScored.Controllers
         public ActionResult Index()
         {
             const string selectedCountry = "Lithuania";
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>();
-            var settings = _repository.GetSettings<Settings>();
+            var worldDetails = _repository.GetWorldDetails<CountryDetails>();
+            var settings = _repository.GetSettings<Models.Settings>();
             var currentSeason = GetCurrentSeason(
                 settings.GlobalSeason, worldDetails.First(c => c.EnglishName == selectedCountry).SeasonOffset);
-            var worldDetailsViewData = new WorldDetailsModel { WorldDetails = worldDetails, Settings = settings, 
+            var worldDetailsViewData = new WorldDetailsModel { WorldDetails = new List<ICountryDetails>(), Settings = new Settings(), 
                 SelectedCountry = selectedCountry, CurrentSeason = currentSeason};
 
             return View(worldDetailsViewData);

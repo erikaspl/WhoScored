@@ -28,7 +28,7 @@
     <div class="span9">
         <div class="btn-group-centered">
             <div class="btn-group" id="matchRoundButtons" data-toggle="buttons-radio" data-bind="foreach: rounds">
-                <button class="btn btn-primary" data-bind="text: title, css: {active: selected }, click: $parent.selectRound"></button>
+                <button class="btn btn-primary" data-bind="text: title, enable: enabled, css: {active: selected}, click: $parent.selectRound"></button>
             </div>
         </div>
     </div>

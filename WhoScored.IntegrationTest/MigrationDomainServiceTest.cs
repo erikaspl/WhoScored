@@ -140,7 +140,7 @@ namespace WhoScored.IntegrationTest
 
             Thread.Sleep(1000);
 
-            var worldDetails = repository.GetWorldDetails<WorldDetails>();
+            var worldDetails = repository.GetWorldDetails<CountryDetails>();
 
             int newNumberOfLevels = 100;
             string newEnglishName = "newEnglishName";
@@ -153,7 +153,7 @@ namespace WhoScored.IntegrationTest
 
             repository.SaveWorldDetails(lithData);
 
-            worldDetails = repository.GetWorldDetails<WorldDetails>();
+            worldDetails = repository.GetWorldDetails<CountryDetails>();
             lithData = worldDetails.Where(w => w.EnglishName == newEnglishName).First();
 
             Assert.AreEqual(lithData.EnglishName, newEnglishName);

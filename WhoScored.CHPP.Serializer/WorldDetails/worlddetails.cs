@@ -8,7 +8,7 @@ namespace WhoScored.CHPP.WorldDetails.Serializer
 {
     using System.Xml.Serialization;
 
-    public partial class HattrickDataLeagueListLeague : IWorldDetails
+    public partial class HattrickDataLeagueListLeague : ICountryDetails
 	{
         [XmlIgnore]
         public bool LeagueInWhoScored { get; set; }

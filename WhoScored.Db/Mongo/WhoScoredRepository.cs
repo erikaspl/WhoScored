@@ -16,19 +16,19 @@ namespace WhoScored.Db.Mongo
     {
         #region Mongo Mappings
 
-        public static void MapWorldDetails<T>() where T : class, IWorldDetails
+        public static void MapWorldDetails<T>() where T : class, ICountryDetails
         {
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
                 BsonClassMap map = BsonClassMap.RegisterClassMap<T>(cm => cm.MapIdProperty("LeagueID"));
-                foreach (var property in typeof(IWorldDetails).GetProperties())
+                foreach (var property in typeof(ICountryDetails).GetProperties())
                 {
                     map.MapProperty(property.Name);
                 }
             }
         }
 
-        public static void MapSettings<T>() where T : class, ISettings
+        public static void MapSettings<T>()
         {
             if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
@@ -147,7 +147,7 @@ namespace WhoScored.Db.Mongo
         /// Updates records if they already exist.
         /// </summary>
         /// <param name="worldDetails">List of world details.</param>
-        public void SaveWorldDetails<T>(List<T> worldDetails)  where T : class, IWorldDetails
+        public void SaveWorldDetails<T>(List<T> worldDetails)  where T : class, ICountryDetails
         {
             var database = MongoConnector.GetDatabase();
             
@@ -164,7 +164,7 @@ namespace WhoScored.Db.Mongo
         /// Updates records if they already exist.
         /// </summary>
         /// <param name="worldDetail"></param>
-        public void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails
+        public void SaveWorldDetails<T>(T worldDetail) where T : class, ICountryDetails
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(WORLD_DETAILS_COLLECTION_NAME);
@@ -177,7 +177,7 @@ namespace WhoScored.Db.Mongo
         /// Gets all world details records
         /// </summary>
         /// <returns></returns>
-        public List<T> GetWorldDetails<T>() where T : class, IWorldDetails
+        public List<T> GetWorldDetails<T>() where T : class, ICountryDetails
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
@@ -187,7 +187,7 @@ namespace WhoScored.Db.Mongo
             return result;
         }
 
-        public List<T> GetActiveCountries<T>() where T : class, IWorldDetails
+        public List<T> GetActiveCountries<T>() where T : class, ICountryDetails
         {
             var query = Query.EQ("LeagueInWhoScored", true);
             var database = MongoConnector.GetDatabase();
@@ -199,7 +199,7 @@ namespace WhoScored.Db.Mongo
         }
 
 
-        public T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails
+        public T GetWorldDetails<T>(int countryId) where T : class, ICountryDetails
         {
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection<T>(WORLD_DETAILS_COLLECTION_NAME);
@@ -216,7 +216,7 @@ namespace WhoScored.Db.Mongo
         public void DropWorldDetails()
         {
             var database = MongoConnector.GetDatabase();
-            var collection = database.GetCollection<IWorldDetails>(WORLD_DETAILS_COLLECTION_NAME);
+            var collection = database.GetCollection<ICountryDetails>(WORLD_DETAILS_COLLECTION_NAME);
 
             collection.Drop();
         }
@@ -435,7 +435,7 @@ namespace WhoScored.Db.Mongo
             return standings;
         }
 
-        private List<ISeriesStandingsTeam> GetSeriesStandings(int seriesId, int season, int matchRound)
+        public List<ISeriesStandingsTeam> GetSeriesStandings(int seriesId, int season, int matchRound)
         {
             var query = Query.And(
                 Query.EQ("LeagueLevelUnitID", seriesId.ToString()), 
@@ -528,7 +528,8 @@ namespace WhoScored.Db.Mongo
         {
             var query = Query.And(
                 Query.EQ("LeagueLevelUnitID", seriesId.ToString()),
-                Query.EQ("MatchSeason", season.ToString()));
+                Query.EQ("MatchSeason", season.ToString()),
+                Query.NE("FinishedDate", BsonNull.Value));
 
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
@@ -547,7 +548,8 @@ namespace WhoScored.Db.Mongo
             var query = Query.And(
                 Query.EQ("LeagueLevelUnitID", seriesId.ToString()),
                 Query.EQ("MatchSeason", season.ToString()),
-                Query.EQ("MatchRound", matchRound));
+                Query.EQ("MatchRound", matchRound),
+                Query.NE("FinishedDate", BsonNull.Value));
 
             var database = MongoConnector.GetDatabase();
             var collection = database.GetCollection(MATCH_DETAILS_COLLECTION_NAME);
@@ -565,6 +567,7 @@ namespace WhoScored.Db.Mongo
         {
             return new MatchResultEntity
                        {
+                           MatchId = bsonResult["_id"].ToInt32(),
                            MatchRound = bsonResult["MatchRound"].ToInt32(),
                            HomeTeamID = bsonResult["MatchHomeTeam"].AsBsonDocument["TeamID"].ToInt32(),
                            HomeTeamName = bsonResult["MatchHomeTeam"].AsBsonDocument["TeamName"].ToString(),

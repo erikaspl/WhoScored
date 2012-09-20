@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FB3087A7-3859-49A8-8FAC-B0E75865554B}"
+	ProjectSection(SolutionItems) = preProject
+		WhoScored.Services.slnbldr = WhoScored.Services.slnbldr
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Services.Contract", "WhoScored.Services.Contract\WhoScored.Services.Contract.csproj", "{B01CB914-0D7B-49FD-A4C2-4EE087EB2B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Services.InternalMessages", "WhoScored.Services.InternalMessages\WhoScored.Services.InternalMessages.csproj", "{A3B19ED8-167E-4001-BAFC-BCFDAA2C8028}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{757D61A3-CE02-4A7C-9166-E9A51A16C5BE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoScored.Services.Migration.Host", "WhoScored.Services.Migration.Host\WhoScored.Services.Migration.Host.csproj", "{1EFA5911-5CEE-4231-9727-D93619E70B9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B01CB914-0D7B-49FD-A4C2-4EE087EB2B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01CB914-0D7B-49FD-A4C2-4EE087EB2B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01CB914-0D7B-49FD-A4C2-4EE087EB2B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01CB914-0D7B-49FD-A4C2-4EE087EB2B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B19ED8-167E-4001-BAFC-BCFDAA2C8028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B19ED8-167E-4001-BAFC-BCFDAA2C8028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B19ED8-167E-4001-BAFC-BCFDAA2C8028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B19ED8-167E-4001-BAFC-BCFDAA2C8028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFA5911-5CEE-4231-9727-D93619E70B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFA5911-5CEE-4231-9727-D93619E70B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFA5911-5CEE-4231-9727-D93619E70B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFA5911-5CEE-4231-9727-D93619E70B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

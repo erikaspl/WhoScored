@@ -6,7 +6,8 @@ using System.Text;
 namespace WhoScored.Model.Implementation
 {
     public class MatchResultEntity : IMatchResult
-    {        
+    {
+        public int MatchId { get; set; }
         public int MatchRound { get; set; }
         public int HomeTeamID { get; set; }
         public string HomeTeamName { get; set; }

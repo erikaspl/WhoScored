@@ -1,67 +1,97 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using WhoScored.Db;
-using WhoScored.Db.Mongo;
+using NHibernate;
+using WhoScored.Db.Postgres;
+using WhoScored.Db.Postgres.Repositories;
 using WhoScored.Migration;
 using WhoScored.Model;
+using WhoScored.Model.Repositories;
 using WhoScored.Models;
+using Settings = WhoScored.Model.Settings;
 
 
 namespace WhoScored.Controllers
 {
-    public class MigrationController : Controller
+    public class MigrationController : WhoScoredControllerBase
     {
-        readonly IWhoScoredRepository _repository = new WhoScoredRepository();
+        private const int CURRENT_SEASON = 49;
+
+        private readonly ISession _session;
+
+        private readonly CountryRepository _countryRepository;
+        private readonly SettingsRepository _settingsRepository;
+        private readonly SeriesRepository _seriesRepository;
+
+        public MigrationController(ISession session)
+        {
+            _session = session;
+            _countryRepository = new CountryRepository(_session);
+            _settingsRepository = new SettingsRepository(_session);
+            _seriesRepository = new SeriesRepository(_session);
+        }
 
         public ActionResult Index()
         {
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>();
-            var settings = _repository.GetSettings<Settings>();
-            var migrationViewData = new WorldDetailsModel { WorldDetails = worldDetails, Settings = settings };
+            var countries = _countryRepository.GetAll().ToList();
+            var settings = _settingsRepository.GetAll().First();
+            var migrationViewData = new WorldDetailsModel { WorldDetails = GetContryDetailsModel(countries), Settings = settings };
 
             return View(migrationViewData);
         }
 
-        public ActionResult AsyncSeriesSelect(string countryId)
+        public ActionResult ResetDatabase()
+        {
+            _settingsRepository.ResetDatabase();
+
+            var settings = new Model.Settings
+                               {
+                                   GlobalSeason = CURRENT_SEASON
+                               };
+
+            _settingsRepository.Save(settings);
+
+            return Json(new WorldDetailsModel { WorldDetails = new List<ICountryDetails>(), Settings = settings });
+        }
+
+        public ActionResult AsyncSeriesSelect(int countryId)
         {
             var leagues = new List<SelectListItem>();
-            var seriesFullDetails = _repository.GetSeriesDetails<SeriesDetails>(countryId);
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
+            var seriesFullDetails = _seriesRepository.GetAllSeriesForCountry(countryId);
+            var country = _countryRepository.GetCountryByHtId(countryId);
 
-            foreach (int seriesId in worldDetails.SeriesIdList)
+            foreach (var series in country.Series)
             {
-                if (seriesFullDetails.Select(s => s.LeagueLevelUnitID).Contains(seriesId))
+                if (seriesFullDetails.Select(s => s.HtSeriesId).Contains(series.HtSeriesId))
                 {
-                    var item = seriesFullDetails.First(s => s.LeagueLevelUnitID == seriesId);
+                    var item = seriesFullDetails.First(s => s.HtSeriesId == series.HtSeriesId);
                     leagues.Add(new SelectListItem
                                     {
                                         Text = item.LeagueLevelUnitName,
-                                        Value = item.LeagueLevelUnitID.ToString()
+                                        Value = item.HtSeriesId.ToString()
                                     });
                 }
                 else
                 {
                     leagues.Add(new SelectListItem
                                     {
-                                        Text = seriesId.ToString(),
-                                        Value = seriesId.ToString()
+                                        Text = series.HtSeriesId.ToString(),
+                                        Value = series.HtSeriesId.ToString()
                                     });
                 }
             }
 
-            return Json(leagues);
+            return Json(leagues.OrderBy(l => l.Value));
         }
 
-        public ActionResult AsyncSeasonSelect(string countryId)
+        public ActionResult AsyncSeasonSelect(int countryId)
         {
             var seasons = new List<SelectListItem>();
 
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
-            var settings = _repository.GetSettings<Settings>();
+            var worldDetails = _countryRepository.GetCountryByHtId(countryId);
+            var settings = _settingsRepository.GetAll().First();
 
             int numberOfSeasons = settings.GlobalSeason + worldDetails.SeasonOffset;
 
@@ -73,41 +103,34 @@ namespace WhoScored.Controllers
             return Json(seasons);
         }
 
-        public ActionResult ShowFixtures(List<int> seriesId, int season)
+        public ActionResult ShowFixtures(List<int> seriesId, short season)
         {
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId.First(), season);
-
-            if (seasonSummary != null)
-            {
-                return Json(true);
-            }
-
-            return Json(false);
+            return Json(_seriesRepository.HasFixtures(seriesId.First(), season));
         }
 
         public void MigrateWorldDetails()
         {
-            var migrationService = new MigrationDomainService();
+            var migrationService = new MigrateToNhibernateDomainService(_session);
             migrationService.MigrateWorldDetails();
         }
 
-        public void MigrateSeriesDetails(List<int> seriesId)
+        public void MigrateSeriesDetails(int countryId)
         {
-            var migrationService = new MigrationDomainService();
-            migrationService.MigrateLeagueDetails(seriesId);
+            var migrationService = new MigrateToNhibernateDomainService(_session);
+            migrationService.MigrateLeagueDetails(countryId);
         }
 
         public ActionResult MigrateSeriesFixtures(int seriesId, int season)
         {
-            var migrationService = new MigrationDomainService();
-            migrationService.MigrateFixtures(new List<int>{seriesId}, season);
+            var migrationService = new MigrateToNhibernateDomainService(_session);
+            migrationService.MigrateFixtures(seriesId, season);
 
             return Json(true);
         }
 
         public ActionResult MigrateMatchDetails(int matchId, int matchRound, int season, int leagueId)
         {
-            var migrationService = new MigrationDomainService();
+            var migrationService = new MigrateToNhibernateDomainService(_session);
             migrationService.MigrateMatchDetails(matchId, matchRound, season, leagueId);
 
             return Json(true);
@@ -115,18 +138,18 @@ namespace WhoScored.Controllers
 
         public ActionResult AjaxHandler(jQueryDataTableParamModel param)
         {
-            var seasonSummary = _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(param.SeriesId, param.Season);
+            var seasonSummary = _seriesRepository.GetSeriesFixtureForSeason(param.SeriesId, param.Season);
 
-            IEnumerable<IMatchSummary> filteredMatches;
+            IEnumerable<SeriesFixture> filteredMatches;
 
             if (!string.IsNullOrEmpty(param.sSearch))
             {
-                filteredMatches = seasonSummary.Matches.Where(m => m.HomeTeamName.ToLower().Contains(param.sSearch.ToLower())
-                                                                   || m.AwayTeamName.ToLower().Contains(param.sSearch.ToLower()));
+                filteredMatches = seasonSummary.Where(m => m.HomeTeam.TeamName.ToLower().Contains(param.sSearch.ToLower())
+                                                                   || m.AwayTeam.TeamName.ToLower().Contains(param.sSearch.ToLower()));
             }
             else
             {
-                filteredMatches = seasonSummary.Matches;
+                filteredMatches = seasonSummary;
             }
 
             var displayedMatches = filteredMatches.OrderByDescending(m => m.MatchRound);
@@ -134,14 +157,14 @@ namespace WhoScored.Controllers
             var result = from c in displayedMatches
                          select new[]
                                  {
-                                     Convert.ToString(c.MatchID), c.MatchDate.ToString("dd/MM/yyyy"),
-                                     c.MatchRound.ToString(), c.HomeTeamName, c.AwayTeamName, c.IsMatchMigrated.ToString()
+                                     Convert.ToString(c.HtMatchId), c.MatchDate.ToString("dd/MM/yyyy"),
+                                     c.MatchRound.ToString(), c.HomeTeam.TeamName, c.AwayTeam.TeamName, c.IsMatchMigrated.ToString()
                                  };
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = seasonSummary.Matches.Count,
-                iTotalDisplayRecords = seasonSummary.Matches.Count,                
+                iTotalRecords = seasonSummary.Count,
+                iTotalDisplayRecords = seasonSummary.Count,                
                 aaData = result
             },
             JsonRequestBehavior.AllowGet);
@@ -152,14 +175,14 @@ namespace WhoScored.Controllers
             if (!string.IsNullOrEmpty(operationId))
             {
                 var seasonSummary =
-                    _repository.GetSeriesFixturesSummary<SeriesFixturesSummaryEntity, MatchDetails>(seriesId, season);
+                    _seriesRepository.GetSeriesFixtureForSeason(seriesId, season);
 
                 if (!_migrationStatus.ContainsKey(operationId))
                 {
                     _migrationStatus.Add(operationId, 0);
                 }
 
-                var matchDetails = seasonSummary.Matches.Where(m => m.IsMatchMigrated == false).ToList();
+                var matchDetails = seasonSummary.Where(m => m.IsMatchMigrated == false).ToList();
 
                 await MigrateMatches(matchDetails,
                         season, leagueId, operationId);
@@ -174,15 +197,15 @@ namespace WhoScored.Controllers
         }
 
         private static readonly Dictionary<string, int> _migrationStatus = new Dictionary<string, int>();
-        public async Task MigrateMatches(List<IMatchSummary> matches, int season, int leagueId, string operationId)
+        public async Task MigrateMatches(List<SeriesFixture> matches, int season, int leagueId, string operationId)
         {
             int matchesLeft = matches.Count;
             int totalMatches = matches.Count;
 
-            var migrationService = new MigrationDomainService();
+            var migrationService = new MigrateToNhibernateDomainService(_session);
             foreach (var match in matches)
             {
-                migrationService.MigrateMatchDetails(match.MatchID, match.MatchRound, season, leagueId);
+                migrationService.MigrateMatchDetails(match.HtMatchId, match.MatchRound, season, leagueId);
 
                 matchesLeft--;
                 _migrationStatus[operationId] = 100 - Convert.ToInt32(Math.Round(matchesLeft / (decimal)totalMatches * 100, 0));

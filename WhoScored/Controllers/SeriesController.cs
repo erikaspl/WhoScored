@@ -1,24 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using WhoScored.Db;
-using WhoScored.Db.Mongo;
+using WhoScored.Db.Postgres.Repositories;
 using WhoScored.Model;
 using WhoScored.Models;
 
+
 namespace WhoScored.Controllers
 {
-    public class SeriesController : Controller
+    using NHibernate;
+
+    using Db.Postgres;
+
+    public class SeriesController : WhoScoredControllerBase
     {
-        readonly IWhoScoredRepository _repository = new WhoScoredRepository();
+        private readonly CountryRepository _countryRepository;
+        private readonly SettingsRepository _settingsRepository;
+        private readonly SeriesRepository _seriesRepository;
 
         private const int DEFAULT_MATCH_ROUND = 14;
 
         public ActionResult Index()
         {
             return View();
+        }
+
+        public SeriesController(ISession session)
+        {
+            _countryRepository = new CountryRepository(session);
+            _settingsRepository = new SettingsRepository(session);
+            _seriesRepository = new SeriesRepository(session);
         }
 
         private int GetCurrentSeason(int globalSeason, int contrySeasonOffset)
@@ -29,14 +40,14 @@ namespace WhoScored.Controllers
         public ActionResult WorldDetails()
         {
             const string selectedCountry = "Lithuania";
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>();
-            
-            var settings = _repository.GetSettings<Settings>();
+            var countries = _countryRepository.GetAll().ToList();
+
+            var settings = _settingsRepository.GetAll().First();
             var currentSeason = GetCurrentSeason(
-                settings.GlobalSeason, worldDetails.First(c => c.EnglishName == selectedCountry).SeasonOffset);
+                settings.GlobalSeason, countries.First(c => c.EnglishName == selectedCountry).SeasonOffset);
             var worldDetailsViewData = new WorldDetailsModel
             {
-                WorldDetails = worldDetails.OrderBy(w => w.EnglishName).ToList(),
+                WorldDetails = GetContryDetailsModel(countries.OrderBy(w => w.EnglishName).ToList()),
                 Settings = settings,
                 SelectedCountry = selectedCountry,
                 CurrentSeason = currentSeason
@@ -45,11 +56,11 @@ namespace WhoScored.Controllers
             return Json(worldDetailsViewData);
         }
 
-        public ActionResult SeasonAndSeriesListForCountry(string countryId)
+        public ActionResult SeasonAndSeriesListForCountry(int countryId)
         {
-            var seriesFullDetails = _repository.GetSeriesDetails<SeriesDetails>(countryId);
-            var worldDetails = _repository.GetWorldDetails<WorldDetails>(int.Parse(countryId));
-            var settings = _repository.GetSettings<Settings>();
+            var seriesFullDetails = _seriesRepository.GetAllSeriesForCountry(countryId).ToList();
+            var worldDetails = _countryRepository.GetCountryByHtId(countryId);
+            var settings = _settingsRepository.GetAll().First();
 
             var series = GetSeriesForCountry(worldDetails, seriesFullDetails);
             var seasons = GetSeasonsForCountry(worldDetails, settings);
@@ -57,36 +68,36 @@ namespace WhoScored.Controllers
             return Json(new { Series = series, Seasons = seasons });
         }
 
-        private List<SelectListItem> GetSeriesForCountry(WorldDetails worldDetails, List<SeriesDetails> seriesFullDetails)
+        private List<SelectListItem> GetSeriesForCountry(Country country, IList<Series> seriesFullDetails)
         {
             var leagues = new List<SelectListItem>();
-            foreach (int seriesId in worldDetails.SeriesIdList)
+            foreach (var series in country.SupportedSeriesId)
             {
-                if (seriesFullDetails.Select(s => s.LeagueLevelUnitID).Contains(seriesId))
+                if (seriesFullDetails.Select(s => s.HtSeriesId).Contains(series.HtSeriesId))
                 {
-                    var item = seriesFullDetails.First(s => s.LeagueLevelUnitID == seriesId);
+                    var item = seriesFullDetails.First(s => s.HtSeriesId == series.HtSeriesId);
                     leagues.Add(new SelectListItem
                                     {
                                         Text = item.LeagueLevelUnitName,
-                                        Value = item.LeagueLevelUnitID.ToString()
+                                        Value = item.HtSeriesId.ToString()
                                     });
                 }
                 else
                 {
                     leagues.Add(new SelectListItem
                                     {
-                                        Text = seriesId.ToString(),
-                                        Value = seriesId.ToString()
+                                        Text = series.HtSeriesId.ToString(),
+                                        Value = series.HtSeriesId.ToString()
                                     });
                 }
             }
             return leagues;
         }
 
-        private List<SelectListItem> GetSeasonsForCountry(WorldDetails worldDetails, Settings settings)
+        private List<SelectListItem> GetSeasonsForCountry(Country country, Model.Settings settings)
         {
             var seasons = new List<SelectListItem>();           
-            int numberOfSeasons = settings.GlobalSeason + worldDetails.SeasonOffset;
+            int numberOfSeasons = settings.GlobalSeason + country.SeasonOffset;
 
             for (int i = numberOfSeasons; i >= 1; i--)
             {
@@ -96,31 +107,31 @@ namespace WhoScored.Controllers
             return seasons;
         }
 
-        public ActionResult TeamStandings(int? seriesId, int season, int? matchRound)
+        //public ActionResult TeamStandings(int? seriesId, int season, int? matchRound)
+        //{
+        //    if (!seriesId.HasValue)
+        //    {
+        //        return Json(new List<int>());
+        //    }
+
+        //    if (matchRound.GetValueOrDefault(0) <= 0)
+        //    {
+        //        matchRound = DEFAULT_MATCH_ROUND;
+        //    }
+
+        //    return Json(_repository.GetSeriesStandings(seriesId.Value, season, matchRound.Value));
+        //}
+
+        public ActionResult SeriesResults(int seriesId, short season, short matchRound)
         {
-            if (!seriesId.HasValue)
-            {
-                return Json(new List<int>());
-            }
-
-            if (matchRound.GetValueOrDefault(0) <= 0)
-            {
-                matchRound = DEFAULT_MATCH_ROUND;
-            }
-
-            return Json(_repository.GetSeriesStandingsWithResults(seriesId.Value, season, matchRound.Value));
-        }
-
-        public ActionResult SeriesResults(int seriesId, int season, int matchRound)
-        {
-            var seriesResults = _repository.GetSeriesResults(seriesId, season, matchRound);
+            var seriesResults = _seriesRepository.GetSeriesResults(seriesId, season, matchRound);
             return Json(seriesResults);
         }
 
-        public ActionResult SeriesResults(int seriesId, int season)
+        public ActionResult AllSeriesResults(int seriesId, short season)
         {
-            var seriesResults = _repository.GetSeriesResults(seriesId, season);
-            return Json(seriesResults.GroupBy(r => r.MatchRound).ToDictionary(r => r.Key.ToString(), v => v.ToList()));
+            var seriesResults = _seriesRepository.GetSeriesResults(seriesId, season);
+            return Json(seriesResults);
         }
     }
 }

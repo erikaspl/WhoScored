@@ -5,15 +5,15 @@ namespace WhoScored.Db
 {
     public interface IWhoScoredRepository
     {
-        void SaveWorldDetails<T>(List<T> worldDetails) where T : class, IWorldDetails;
+        void SaveWorldDetails<T>(List<T> worldDetails) where T : class, ICountryDetails;
 
-        void SaveWorldDetails<T>(T worldDetail) where T : class, IWorldDetails;
+        void SaveWorldDetails<T>(T worldDetail) where T : class, ICountryDetails;
 
-        List<T> GetWorldDetails<T>() where T : class, IWorldDetails;
+        List<T> GetWorldDetails<T>() where T : class, ICountryDetails;
 
-        List<T> GetActiveCountries<T>() where T : class, IWorldDetails;
+        List<T> GetActiveCountries<T>() where T : class, ICountryDetails;
 
-        T GetWorldDetails<T>(int countryId) where T : class, IWorldDetails;
+        T GetWorldDetails<T>(int countryId) where T : class, ICountryDetails;
 
         void DropWorldDetails();
 
@@ -50,6 +50,8 @@ namespace WhoScored.Db
         void DropMatchDetails();
 
         List<ISeriesStandingsTeam> GetSeriesStandingsWithResults(int seriesId, int season, int matchRound);
+
+        List<ISeriesStandingsTeam> GetSeriesStandings(int seriesId, int season, int matchRound);
 
         List<IMatchResult> GetSeriesResults(int seriesId, int season);
 

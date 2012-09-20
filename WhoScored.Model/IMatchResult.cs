@@ -7,6 +7,7 @@ namespace WhoScored.Model
 {
     public interface IMatchResult
     {
+        int MatchId { get; set; }
         int MatchRound { get; set; }
         int HomeTeamID { get; set; }
         string HomeTeamName { get; set; }

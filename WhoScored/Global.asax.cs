@@ -1,8 +1,13 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Ninject.Web.Common;
+using WhoScored.App_Start;
+using WhoScored.Db.Postgres;
 
 namespace WhoScored
 {
+    using System.Web.Optimization;
+
     using Migration;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -36,6 +41,7 @@ namespace WhoScored
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
